@@ -1,0 +1,7 @@
+{
+    "status" : ["ok", "wrong"],
+    "nombre" : "x",  
+    "apellidos" : "x",
+    "username" : "x",
+    "email" : "x"
+}

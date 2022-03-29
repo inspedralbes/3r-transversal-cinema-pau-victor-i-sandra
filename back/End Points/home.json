@@ -1,0 +1,17 @@
+{
+    "sesiones": [
+        {
+            "idSesion": "x",
+            "fecha": "x",
+            "hora": "x",
+            "vip": "x",
+            "diaEspectador": "x",
+            "peli": {
+                "idPeli": "x",
+                "nombrePeli": "x",
+                "anoPeli": "x",
+                "imgPeli": "x"
+            }
+        }
+    ]
+}

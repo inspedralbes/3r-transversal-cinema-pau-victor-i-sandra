@@ -1,0 +1,10 @@
+{
+    "idUsuari": "x",
+    "idSesion": "x",
+    "entradas": 3,
+    "butacasReservadas": {
+        "b1": "x",
+        "b2": "x",
+        "b3": "x"
+    }
+}
