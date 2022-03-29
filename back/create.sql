@@ -16,6 +16,7 @@ CREATE TABLE usuari
 (
     idUsuario int(8) AUTO_INCREMENT PRIMARY KEY,
     nombre varchar(50),
+    password varchar(20),
     apellidos varchar(70),
     username varchar(50),
     email varchar(50)
