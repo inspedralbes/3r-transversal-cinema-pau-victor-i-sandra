@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagament</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="pagament.css">
+</head>
+
+<body>
+    
+    <!-- HEADER -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Titol</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <main>
+
+        <!-- Botó enrrere -->
+        <a href="seleccionar_butaques.html" class="btn btn-primary btn_back"><i class="bi bi-arrow-left"></i></a>
+
+
+        <div class="container">
+
+            <!-- Resum compra -->
+            <section>
+                <div class="resum_compra">
+                    <h3>Resum</h3>
+                    <h5 id="nom_peli">Cars</h4>
+                    <p id="data_sesió">30/03/2022</p>
+                    <p id="hora_sesió">20:00h</p>
+                    <p id="butaques"> Butaca 11, butaca 12, butaca 14</p>
+                    <p id="import total">Import total: <span>18,00€</span></p>     
+                </div>
+            </section>
+
+            
+            <!-- Pagament -->
+            <section>
+                <div class="seccio_pagament">
+                    <h3>Pagament</h3>
+                    <h5>Pagar amb tarjeta (iconos visa, mastercard)</h5>
+                    <form class="row g-3">
+                        <div class="col-11">
+                            <label for="num_tarjeta" class="form-label">NºTarjeta:</label>
+                            <input type="text" class="form-control" id="num_tarjeta">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="caducitat" class="form-label">Caducitat:</label>
+                            <input type="email" class="form-control" id="mes_caducitat" placeholder="mm">
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <br>
+                            <input type="email" class="form-control" id="any_caducitat" placeholder="aa">  
+                        </div>
+
+                        <div class="col-9">
+                        <label for="cvv" class="form-label">CVV:</label>
+                        <input type="text" class="form-control" id="inputCVV">
+                        </div>
+                    
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                            Acepto les condicions de compra
+                            </label>
+                        </div>
+
+                        <div class="col-12">
+                            <a href="seleccionar_butaques.html" class="btn btn-secondary">Cancelar</a>
+                            <a href="" class="btn btn-primary">Pagar</a>
+                        </div>
+                    </form> 
+                </div>
+            </section>
+
+
+        </div>
+        
+
+    </main>
+
+
+</body>
+</html>
