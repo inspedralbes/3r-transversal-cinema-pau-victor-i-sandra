@@ -1,17 +1,17 @@
 {
     "sesiones": [
         {
-            "idSesion": "x",
-            "fecha": "x",
-            "hora": "x",
-            "vip": "x",
-            "diaEspectador": "x",
-            "peli": {
-                "idPeli": "x",
-                "nombrePeli": "x",
-                "anoPeli": "x",
-                "imgPeli": "x"
-            }
+            "idSesion": "1",
+            "fecha": "30-03-2022",
+            "hora": "18:00",
+            "vip": "0",
+            "diaEspectador": "0",
+          "peli": {
+            "idPeli": "1",
+            "nombrePeli": "Cars",
+            "anoPeli": "2006",
+            "imgPeli": "https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg"
+          }
         }
     ]
 }
