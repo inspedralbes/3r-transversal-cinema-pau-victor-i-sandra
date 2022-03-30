@@ -9,8 +9,9 @@ Un cop comenceu heu de canviar aquesta explicació amb la corresponent al vostre
 
 
 # Aquest fitxer ha de contenir com a mínim:
- * Nom dels integrants
- * Nom del projecte
- * Petita descripció
+ * Nom dels integrants: Victor, Pau i Sandra
+ * Nom del projecte: "".
+ * Petita descripció: creació d'una aplicacio web que et permet comprar entrades pel cinema.
  * URL de producció (quan la tingueu)
- * Estat: (explicació de en quin punt està)
+ * Estat: fase inicial -> ja tenim el backlog i hem començat a completar tasques!
+ * Backlog: https://freedcamp.com/view/3181588/tasks
