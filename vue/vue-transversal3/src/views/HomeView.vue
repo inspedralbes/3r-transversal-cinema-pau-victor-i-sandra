@@ -1,15 +1,16 @@
 <template>
   <main>
+    <h1>HOMEPAGE</h1>
     <CardPeliDia />
-    <CardPeliGeneral />
+    <ProximasPelis />
   </main>
 </template>
 <script>
-import CardPeliGeneral from "@/components/CardPeliGeneral.vue";
+import ProximasPelis from "@/components/ProximasPelis.vue";
 import CardPeliDia from "@/components/CardPeliDia.vue";
 export default {
   components: {
-    CardPeliGeneral,
+    ProximasPelis,
     CardPeliDia,
   },
 };

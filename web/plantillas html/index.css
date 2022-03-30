@@ -1,0 +1,59 @@
+main{
+    width: 80%;
+    margin: 40px auto;
+}
+
+section{
+    height: auto;
+    border: 1px solid black;
+}
+
+section img{
+    width: 100%;
+}
+
+
+.grid-peliHoy{
+    display: grid; 
+    grid-template-columns: 20% 73%;
+    gap: 7%;
+}
+
+.info-peliHoy{
+    position: relative;
+    border: 1px solid black;
+}
+
+.info-peliHoy a{
+    float: right
+}
+
+.cuenta-atras{
+    position: absolute;
+    border: 1px solid black;
+    background-color: white;
+    width: 500px;
+    height: 60px;
+    left: 700px;
+    top: -30px;
+    z-index: 2;
+}
+
+.cuenta-atras h1{
+    margin: 0;
+}
+
+.proximasPelis{
+    margin-top: 50px;
+}
+
+.grid-proximasPelis{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px
+}
+
+.card-proximasPelis{
+    display: flex;
+    justify-content: center;
+}

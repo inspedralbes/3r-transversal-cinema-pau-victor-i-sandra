@@ -1,0 +1,26 @@
+<script setup>
+import { RouterLink, RouterView } from "vue-router";
+</script>
+<template>
+  <div>
+    <h1>COMPRAR ENTRADES</h1>
+    <CardPeliGeneral />
+    <SeleccionarButaques />
+    <RouterLink class="btn btn-primary" to="/pagament"
+      >Comprar Entrades</RouterLink
+    >
+    <RouterView />
+  </div>
+</template>
+<script>
+import CardPeliGeneral from "@/components/CardPeliGeneral.vue";
+import SeleccionarButaques from "@/components/SeleccionarButaques.vue";
+export default {
+  components: {
+    CardPeliGeneral,
+    SeleccionarButaques,
+  },
+};
+</script>
+
+<style></style>
