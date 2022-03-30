@@ -1,0 +1,36 @@
+main{
+    width: 80%;
+    margin: 40px auto;
+}
+
+section{
+    height: auto;
+    border: 1px solid black;
+}
+
+.grid-seleccionarButacas{
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.mallaButacas{
+    display: grid; 
+    justify-content: center;
+    grid-template-columns: repeat(10, 70px);
+    grid-template-rows: repeat(12, auto);
+    margin: 50px 0;
+    background-color: grey;
+}
+
+.mallaButacas div{
+    display: flex; 
+    justify-content: center;
+}
+
+.mallaButacas img{
+    width: 50%;
+}
+
+.butacas-seleccionarButacas a{
+    float: right;
+}
