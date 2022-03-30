@@ -1,0 +1,25 @@
+main {
+    width: 80%;
+    margin: 40px auto;
+} 
+
+
+
+.container {
+    display: grid;
+    gap: 70px;
+    grid-template-columns: 35% 65%;
+    background-color: #e4f3ff;
+    padding: 10px;
+    margin: 10px;  
+}
+
+
+.resum_compra {
+    background-color: rgb(192, 192, 192);
+    padding: 20px;
+}
+
+#inputCVV {
+    
+}
