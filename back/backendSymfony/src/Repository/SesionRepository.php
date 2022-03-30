@@ -45,6 +45,14 @@ class SesionRepository extends ServiceEntityRepository
         }
     }
 
+    public function selectAll()
+    {
+        return $this->createQueryBuilder('s')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Sesion[] Returns an array of Sesion objects
     //  */
