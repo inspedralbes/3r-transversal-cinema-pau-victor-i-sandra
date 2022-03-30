@@ -1,5 +1,5 @@
 <template>
   <div>
-    <h2>Esto es una peli GENERAL</h2>
+    <h2>RESUMEN DE LA COMPRA</h2>
   </div>
 </template>

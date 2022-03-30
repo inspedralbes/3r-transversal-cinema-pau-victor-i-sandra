@@ -6,8 +6,7 @@ import { RouterLink, RouterView } from "vue-router";
   <header>
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/seleccionarButacas">Comprar Entradas</RouterLink>
+        <RouterLink class="btn btn-primary" to="/">Home</RouterLink>
       </nav>
     </div>
     <RouterView />
