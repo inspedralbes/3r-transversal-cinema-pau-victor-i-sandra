@@ -13,10 +13,6 @@ section{
     grid-template-columns: 30% 70%;
 }
 
-.infoPeli-seleccionarButacas{
-
-}
-
 .mallaButacas{
     display: grid; 
     justify-content: center;
