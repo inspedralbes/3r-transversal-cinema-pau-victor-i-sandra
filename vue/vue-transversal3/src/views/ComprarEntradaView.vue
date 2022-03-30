@@ -3,6 +3,9 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 <template>
   <div>
+    <q-btn flat class="btn btn-secondary" label="Volver" @click="retroceder()"
+      >Volver</q-btn
+    >
     <h1>COMPRAR ENTRADES</h1>
     <CardPeliGeneral />
     <SeleccionarButaques />
@@ -19,6 +22,11 @@ export default {
   components: {
     CardPeliGeneral,
     SeleccionarButaques,
+  },
+  methods: {
+    retroceder() {
+      window.history.back();
+    },
   },
 };
 </script>
