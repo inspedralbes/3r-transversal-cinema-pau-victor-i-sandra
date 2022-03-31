@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from "vue-router";
 <template>
   <header>
     <div class="wrapper">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light header">
         <div class="container-fluid header">
           <RouterLink class="navbar-brand" to="/"><img class="logo" src="./assets/logo2.png" alt="logo del Pedralbes Cinema"></RouterLink>
           <div class="btn-group">
@@ -28,7 +28,7 @@ import { RouterLink, RouterView } from "vue-router";
 <style scoped>
 
   .header {
-        background-color: black;
+        background-color: black !important;
         color: white;
     }
 
