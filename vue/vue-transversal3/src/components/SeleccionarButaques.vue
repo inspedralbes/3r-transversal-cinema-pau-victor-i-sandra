@@ -25,8 +25,7 @@
             <div :key="index" v-for="(butaca, index) in 120">
               
                   <img v-if="estaocupada(butaca)" :src="this.img_ocupada" @click="SeleccionarButaca(butaca)" :id="'b' + (index + 1)" class="img-fluid butaca"/>                         
-                  <img v-if="estalibre(butaca)" :src="this.img_disponible" @click="SeleccionarButaca(butaca)" :id="'b' + (index + 1)" class="img-fluid butaca"/> 
-                               
+                  <img v-if="estalibre(butaca)" :src="this.img_disponible" @click="SeleccionarButaca(butaca)" :id="'b' + (index + 1)" class="img-fluid butaca"/>              
             
             </div>
           </div>
@@ -72,7 +71,7 @@ export default {
 
     SeleccionarButaca: function (numButaca, event) {
         if (this.ocupadas.includes(numButaca)){
-          alert("no puedes escoger una ocupada")
+          alert("no puedes escoger una ocupada" + numButaca)
         }
         else{
             alert(numButaca)
