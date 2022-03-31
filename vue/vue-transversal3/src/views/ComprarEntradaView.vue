@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from "vue-router";
     <q-btn flat class="btn btn-secondary" label="Volver" @click="retroceder()"
       >Volver</q-btn
     >
-    <h1>COMPRAR ENTRADES</h1>
+    <h1>COMPRAR ENTRADES DE LA SESION {{ $route.params.id }}</h1>
     <CardPeliGeneral />
     <SeleccionarButaques />
     <RouterLink class="btn btn-primary" to="/pagament"
