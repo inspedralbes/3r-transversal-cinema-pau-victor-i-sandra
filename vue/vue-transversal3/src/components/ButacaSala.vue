@@ -1,5 +1,3 @@
 <template>
-  <div>
-    <h2>Insertar imagen de butaca</h2>
-  </div>
+    <div class="imagen_butaca"></div>
 </template>

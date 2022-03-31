@@ -8,10 +8,30 @@ section{
     border: 1px solid black;
 }
 
-.grid-seleccionarButacas{
-    display: grid;
-    grid-template-columns: 30% 70%;
+
+@media only screen and (min-width: 1480px) {
+
+    .grid-seleccionarButacas{
+        display: grid;
+        grid-template-columns: 30% 70%;
+        background-color: lightgreen;
+    }
+
+    .infoPeli-seleccionarButacas {
+        width: 100vw;
+    }
+
 }
+
+/*
+@media only screen and (max-width: 1480px) {
+
+    .infoPeli-seleccionarButacas {
+      
+    }
+
+}*/
+
 
 .mallaButacas{
     display: grid; 
@@ -19,7 +39,7 @@ section{
     grid-template-columns: repeat(10, 70px);
     grid-template-rows: repeat(12, auto);
     margin: 50px 0;
-    background-color: grey;
+    background-color: rgb(255, 255, 255);
 }
 
 .mallaButacas div{
@@ -28,7 +48,7 @@ section{
 }
 
 .mallaButacas img{
-    width: 50%;
+    max-width: 55%;
 }
 
 .butacas-seleccionarButacas a{
