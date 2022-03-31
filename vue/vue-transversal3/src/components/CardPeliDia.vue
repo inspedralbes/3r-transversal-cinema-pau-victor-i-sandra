@@ -11,13 +11,18 @@ import { RouterLink, RouterView } from "vue-router";
         alt="Card image cap"
       />
       <div class="card-body">
-        <h5 class="card-title">{{ infoPelicula.peli.nombrePeli }}</h5>
+        <h5 class="card-title">{{ this.infoPelicula.peli.nombrePeli }}</h5>
       </div>
     </div>
     <div>
-      <h5>{{ infoPelicula.fecha }}</h5>
-      <h5>{{ infoPelicula.hora }}</h5>
+      <h5>{{ this.infoPelicula.fecha }}</h5>
+      <h5>{{ this.infoPelicula.hora }}</h5>
     </div>
+
+    <a class="btn btn-primary" :href="'/seleccionarButacas' + this.idSesion"
+      >COMPRAR</a
+    >
+
     <RouterLink class="btn btn-primary" to="/seleccionarButacas"
       >Comprar Entrades</RouterLink
     >
@@ -27,5 +32,8 @@ import { RouterLink, RouterView } from "vue-router";
 <script>
 export default {
   props: ["infoPelicula"],
+  // beforeCreate() {
+  //   console.log(this.infoPelicula);
+  // },
 };
 </script>
