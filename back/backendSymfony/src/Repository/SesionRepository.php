@@ -45,12 +45,25 @@ class SesionRepository extends ServiceEntityRepository
         }
     }
 
-    public function selectAll()
+    public function selectAllbyTodayTill7daysAfter()
     {
         return $this->createQueryBuilder('s')
+            ->where('s.fecha >= :a')
+            ->andWhere('s.fecha  <= :b')
+            ->setParameter('a', date('Y-m-d'))
+            ->setParameter('b', date('Y-m-d', strtotime('+6days')))
+            ->orderBy('s.fecha')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+    }
+
+    public function selectOneSesion($idSesion)
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.id = :idSesion')
+            ->setParameter('idSesion', $idSesion)
+            ->getQuery()
+            ->getResult();
     }
 
     // /**
