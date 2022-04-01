@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <h3 class="text-center">Cars</h3>
     <section class="seleccionarButacas">
       <div class="grid-seleccionarButacas">
@@ -22,13 +21,29 @@
         <div class="butacas-seleccionarButacas">
           <div class="mallaButacas">
             <div :key="index" v-for="(butaca, index) in 120">
-              
-                  <img v-if="estaocupada(butaca)" :src="this.img_ocupada" @click="SeleccionarButaca(butaca,$events)" :id="'b' + (index + 1)" class="img-fluid butaca"/>                         
-                  <img v-if="estalibre(butaca)" :src="this.img_disponible" @click="SeleccionarButaca(butaca,$event)" :id="'b' + (index + 1)" class="img-fluid butaca"/> 
-                  <img v-if="estaseleccionada(butaca)" :src="this.img_seleccionada" @click="SeleccionarButaca(butaca,$event)" :id="'b' + (index + 1)" class="img-fluid butaca"/>             
-            
+              <img
+                v-if="estaocupada(butaca)"
+                :src="this.img_ocupada"
+                @click="SeleccionarButaca(butaca, $events)"
+                :id="'b' + (index + 1)"
+                class="img-fluid butaca"
+              />
+              <img
+                v-if="estalibre(butaca)"
+                :src="this.img_disponible"
+                @click="SeleccionarButaca(butaca, $event)"
+                :id="'b' + (index + 1)"
+                class="img-fluid butaca"
+              />
+              <img
+                v-if="estaseleccionada(butaca)"
+                :src="this.img_seleccionada"
+                @click="SeleccionarButaca(butaca, $event)"
+                :id="'b' + (index + 1)"
+                class="img-fluid butaca"
+              />
             </div>
-          </div> 
+          </div>
         </div>
 
         <div>
@@ -41,13 +56,11 @@
 
 <script>
 export default {
-  components: {
-
-  },
+  components: {},
   data() {
     return {
       ocupadas: [4, 5, 6, 7, 8, 57],
-      seleccionadas: [1,15],
+      seleccionadas: [1, 15],
 
       /* Imagenes tipo butacas */
       img_disponible: "../../src/assets/Butacas/butaca_disponible.png",
@@ -58,48 +71,44 @@ export default {
   },
   methods: {
     // Comprueba si la butaca está ocupada
-    estaocupada: function(n){
+    estaocupada: function (n) {
       return this.ocupadas.includes(n);
     },
 
     // Comprueba si la butaca está disponible
-    estalibre: function(n){
-      return !this.ocupadas.includes(n)&& !(this.seleccionadas.includes(n));
+    estalibre: function (n) {
+      return !this.ocupadas.includes(n) && !this.seleccionadas.includes(n);
     },
 
     // Comprueba si la butaca está seleccionada
-    estaseleccionada: function(n){
+    estaseleccionada: function (n) {
       return this.seleccionadas.includes(n);
     },
 
     SeleccionarButaca: function (numButaca, event) {
-        // si la butaca está ocupada
-        if (this.ocupadas.includes(numButaca)){
-          alert("no puedes escoger una ocupada" + numButaca)
+      // si la butaca está ocupada
+      if (this.ocupadas.includes(numButaca)) {
+        alert("no puedes escoger una ocupada" + numButaca);
+      }
+
+      // Seleccionar butaca y añadirla al array "seleccionadas"
+      // seleccionadas y modifica su imagen (seimpre que no hayan 10 butacas seleccionadas aún)
+      if (
+        !this.ocupadas.includes(numButaca) &&
+        !this.seleccionadas.includes(numButaca)
+      ) {
+        if (this.seleccionadas.length < 10) {
+          this.seleccionadas.push(numButaca);
+          event.target.src = this.img_seleccionada;
+        } else {
+          alert("No puedes seleccionar más de 10 butacas");
         }
+      }
 
-        // Seleccionar butaca y añadirla al array "seleccionadas" 
-        // seleccionadas y modifica su imagen (seimpre que no hayan 10 butacas seleccionadas aún)
-        if (!this.ocupadas.includes(numButaca)&& !(this.seleccionadas.includes(numButaca))) {
-
-          if (this.seleccionadas.length<10) 
-            {
-              this.seleccionadas.push(numButaca);
-              event.target.src=this.img_seleccionada;
-          }else {
-            alert("No puedes seleccionar más de 10 butacas");
-          } 
-        }
-
-        /* Des-seleccionar butacas */
-        if(this.seleccionadas.includes(numButaca)) {
-         
-           
-
-        }
+      /* Des-seleccionar butacas */
+      if (this.seleccionadas.includes(numButaca)) {
+      }
     },
-
-
   },
 };
 </script>

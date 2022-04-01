@@ -1,11 +1,10 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
+
 <template>
   <div>
     <q-btn flat class="btn btn-secondary" label="Volver" @click="retroceder()"
       >Volver</q-btn
     >
+
     <h1>COMPRAR ENTRADES DE LA SESION {{ $route.params.idSesion }}</h1>
     <CardPeliGeneral :peliInfo="peliSeleccionada" />
     <SeleccionarButaques />
@@ -16,6 +15,7 @@ import { RouterLink, RouterView } from "vue-router";
   </div>
 </template>
 <script>
+import { RouterLink, RouterView } from "vue-router";
 import CardPeliGeneral from "@/components/CardPeliGeneral.vue";
 import SeleccionarButaques from "@/components/SeleccionarButaques.vue";
 import { sessioStore } from "../stores/sessioStore";
@@ -43,12 +43,11 @@ export default {
       .then((data) => {
         this.peliSeleccionada = data.sesiones;
         console.log(this.peliSeleccionada);
-        this.sessioStore.set = this.peliSeleccionada;
+        this.sessioStore.set(this.peliSeleccionada);
         console.log(this.peliSeleccionada);
       });
   },
   methods: {
-    ...mapActions(sessioStore, ["set"]),
     retroceder() {
       window.history.back();
     },

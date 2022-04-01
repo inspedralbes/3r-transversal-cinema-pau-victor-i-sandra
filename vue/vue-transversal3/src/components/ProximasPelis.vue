@@ -5,7 +5,8 @@ import { RouterLink, RouterView } from "vue-router";
 export default {
   components: {
     CardPeliGeneral,
-    RouterLink, RouterView
+    RouterLink,
+    RouterView,
   },
   props: ["peliculasInfo"],
   beforeUpdate() {
@@ -14,18 +15,22 @@ export default {
 };
 </script>
 
-
 <template>
   <div>
     <h2>ESTO SON LAS PROXIMAS PELIS</h2>
     <section class="container">
       <div class="row gy-5">
-        <div :key="index" v-for="(peliActual, index) in this.peliculasInfo" class="col col-lg-4">
+        <div
+          :key="index"
+          v-for="(peliActual, index) in this.peliculasInfo"
+          class="col col-lg-4"
+        >
           <CardPeliGeneral :peliInfo="peliActual">
             <RouterLink
               class="btn btn-primary"
               :to="'/seleccionarButacas/' + peliActual.idSesion"
-            >Comprar Entrades</RouterLink>
+              >Comprar Entrades</RouterLink
+            >
             <RouterView />
           </CardPeliGeneral>
         </div>
@@ -38,4 +43,4 @@ export default {
 .card {
   margin: auto;
 }
-</style> 
+</style>

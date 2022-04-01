@@ -1,6 +1,10 @@
 <template>
   <div class="card" style="width: 18rem">
-    <img class="card-img-top" :src="this.peliInfo.peli.imgPeli" alt="Card image cap" />
+    <img
+      class="card-img-top"
+      :src="this.peliInfo.peli.imgPeli"
+      alt="Card image cap"
+    />
     <div class="card-body">
       <h5 class="card-title">{{ this.peliInfo.peli.nombrePeli }}</h5>
       <h5 class="card-title">{{ this.peliInfo.fecha }}</h5>
@@ -16,6 +20,4 @@ export default {
 };
 </script>
 
-
-<style>
-</style>
+<style></style>

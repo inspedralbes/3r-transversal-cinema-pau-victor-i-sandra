@@ -1,9 +1,9 @@
 {
-    "idUsuari": "x",
-    "idSesion": "x",
+    "idUsuari": "5",
+    "idSesion": "2",
     "butacasReservadas": {
-        "b1": "x",
-        "b2": "x",
-        "b3": "x"
+        "b1": "6",
+        "b2": "6",
+        "b3": "6"
     }
 }
