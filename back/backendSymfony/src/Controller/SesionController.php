@@ -2,22 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Sesion;
-use App\Entity\Usuario;
-use App\Entity\Entrada;
-use App\Form\SesionType;
 use App\Repository\EntradaRepository;
 use App\Repository\SesionRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Validator\Constraints\IsNull;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+
 
 class SesionController extends AbstractController
 {
@@ -65,11 +57,15 @@ class SesionController extends AbstractController
 
 
     #[Route('/entradas', name: 'post_entradas_usuario', methods: ['POST'])]
-    public function guardarEntradas(Request $request, EntradaRepository $entradaRepository): JsonResponse
+    public function guardarEntradas(Request $request, EntradaRepository $entradaRepository, SesionRepository $sesionRepository): JsonResponse
     {
         $dataEntradas = $request->request->all();
         if (!empty($dataEntradas) && !$dataEntradas['butacasReservadas'] == "" && !$dataEntradas['idUsuari'] == "" && !$dataEntradas['idSesion'] == "") {
+            $butacasOcupadas = $sesionRepository->findBy(['id' => $dataEntradas['idSesion']])[0]->getButacasOcupadas();
+
             foreach (json_decode($dataEntradas['butacasReservadas']) as $butaca => $precio) {
+                $butacasOcupadas .= ",$butaca";
+                $sesionRepository->guardarButacasOcupadas($butacasOcupadas, $dataEntradas['idSesion']);
                 $entradaRepository->guardarEntradas($dataEntradas['idUsuari'], $dataEntradas['idSesion'], $butaca, $precio);
             }
             return new JsonResponse(['status' => 'Compra realizada!'], Response::HTTP_OK);

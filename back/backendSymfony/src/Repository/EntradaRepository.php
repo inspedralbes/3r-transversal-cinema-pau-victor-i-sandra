@@ -55,7 +55,6 @@ class EntradaRepository extends ServiceEntityRepository
             ";
    
         return $conn->prepare($sql)->executeQuery();
-        ;
     }
 
     public function seleccionarEntradasUsuario($sesion, $usuario)

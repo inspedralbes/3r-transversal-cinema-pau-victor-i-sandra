@@ -66,6 +66,15 @@ class SesionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function guardarButacasOcupadas($butacasOcupadas, $idSesion)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "UPDATE sesion SET butacas_ocupadas = '$butacasOcupadas' WHERE id = $idSesion";
+   
+        $conn->prepare($sql)->executeQuery();
+    }
+
     // /**
     //  * @return Sesion[] Returns an array of Sesion objects
     //  */
