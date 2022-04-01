@@ -1,10 +1,11 @@
 <script>
 import ProximasPelis from "@/components/ProximasPelis.vue";
 import CardPeliDia from "@/components/CardPeliDia.vue";
+//import BD from "../../../../back/End Points/home.json";
 export default {
   data() {
     return {
-      basePeliculas: {},
+      basePeliculas: 0,
     };
   },
   beforeCreate() {
@@ -15,6 +16,10 @@ export default {
         this.basePeliculas = data.sesiones;
       });
   },
+  // beforeCreate() {
+  //   this.basePeliculas = BD;
+  //   console.log(BD);
+  // },
   components: {
     CardPeliDia,
     ProximasPelis,
@@ -24,7 +29,9 @@ export default {
 <template>
   <main>
     <h1>HOMEPAGE</h1>
-    <CardPeliDia :infoPelicula="basePeliculas[0]" />
-    <ProximasPelis :infoPeliculas="basePeliculas" />
+    <div v-if="typeof this.basePeliculas === 'object'">
+      <CardPeliDia :infoPelicula="basePeliculas[0]" />
+      <ProximasPelis :peliculasInfo="basePeliculas.splice(1, 6)" />
+    </div>
   </main>
 </template>

@@ -31,39 +31,8 @@ import { RouterLink, RouterView } from "vue-router";
 </template>
 
 <style scoped>
-<<<<<<< Updated upstream
-
-  .header {
-        background-color: black !important;
-        color: white;
-    }
-
-    .logo {
-        width: 180px;
-    }
-
-    .nav-link {
-        color: #13afed;
-        font-weight: 550;
-    }
-
-    .nav-link:hover {
-        color: #fdcb31;
-
-    }
-
-    .vr {
-        border-left: 2px solid #13afed;
-        position: absolute;
-        left: 53%;
-        height: 20px;
-        top: 10px;
-    }
-
-
-=======
 .header {
-  background-color: black;
+  background-color: black !important;
   color: white;
 }
 
@@ -87,5 +56,4 @@ import { RouterLink, RouterView } from "vue-router";
   height: 20px;
   top: 10px;
 }
->>>>>>> Stashed changes
 </style>

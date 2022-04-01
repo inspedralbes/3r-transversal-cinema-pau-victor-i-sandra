@@ -12,6 +12,32 @@
             "anoPeli": "2006",
             "imgPeli": "https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg"
           }
+        },
+      {
+        "idSesion": "2",
+        "fecha": "31-03-2022",
+        "hora": "20:00",
+        "vip": "0",
+        "diaEspectador": "0",
+        "peli": {
+          "idPeli": "2",
+          "nombrePeli": "Cars",
+          "anoPeli": "2096",
+          "imgPeli": "https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg"
         }
+      },
+      {
+        "idSesion": "3",
+        "fecha": "01-04-2022",
+        "hora": "18:00",
+        "vip": "0",
+        "diaEspectador": "0",
+        "peli": {
+          "idPeli": "3",
+          "nombrePeli": "Cars",
+          "anoPeli": "2406",
+          "imgPeli": "https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg"
+        }
+      }
     ]
 }

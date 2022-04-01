@@ -19,11 +19,15 @@ import { RouterLink, RouterView } from "vue-router";
       <h5>{{ this.infoPelicula.hora }}</h5>
     </div>
 
-    <a class="btn btn-primary" :href="'/seleccionarButacas' + this.idSesion"
+    <!-- <a
+      class="btn btn-primary"
+      :href="'/seleccionarButacas' + this.infoPelicula.idSesion"
       >COMPRAR</a
-    >
+    > -->
 
-    <RouterLink class="btn btn-primary" to="/seleccionarButacas"
+    <RouterLink
+      class="btn btn-primary"
+      :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
       >Comprar Entrades</RouterLink
     >
     <RouterView />
@@ -32,8 +36,8 @@ import { RouterLink, RouterView } from "vue-router";
 <script>
 export default {
   props: ["infoPelicula"],
-  // beforeCreate() {
-  //   console.log(this.infoPelicula);
-  // },
+  created() {
+    console.log(this.infoPelicula);
+  },
 };
 </script>
