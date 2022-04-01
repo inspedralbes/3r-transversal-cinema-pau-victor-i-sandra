@@ -1,3 +1,3 @@
 <template>
-    <div class="imagen_butaca"></div>
+  <div class="imagen_butaca"></div>
 </template>

@@ -23,10 +23,20 @@
         <div class="butacas-seleccionarButacas">
           <div class="mallaButacas">
             <div :key="index" v-for="(butaca, index) in 120">
-              
-                  <img v-if="estaocupada(butaca)" :src="this.img_ocupada" @click="SeleccionarButaca(butaca)" :id="'b' + (index + 1)" class="img-fluid butaca"/>                         
-                  <img v-if="estalibre(butaca)" :src="this.img_disponible" @click="SeleccionarButaca(butaca)" :id="'b' + (index + 1)" class="img-fluid butaca"/>              
-            
+              <img
+                v-if="estaocupada(butaca)"
+                :src="this.img_ocupada"
+                @click="SeleccionarButaca(butaca)"
+                :id="'b' + (index + 1)"
+                class="img-fluid butaca"
+              />
+              <img
+                v-if="estalibre(butaca)"
+                :src="this.img_disponible"
+                @click="SeleccionarButaca(butaca)"
+                :id="'b' + (index + 1)"
+                class="img-fluid butaca"
+              />
             </div>
           </div>
         </div>
@@ -38,9 +48,6 @@
     </section>
   </div>
 </template>
-
-
-
 
 <script>
 import ButacaSala from "@/components/ButacaSala.vue";
@@ -61,27 +68,25 @@ export default {
     };
   },
   methods: {
-    estaocupada: function(n){
+    estaocupada: function (n) {
       return this.ocupadas.includes(n);
     },
 
-    estalibre: function(n){
+    estalibre: function (n) {
       return !this.ocupadas.includes(n);
     },
 
     SeleccionarButaca: function (numButaca, event) {
-        if (this.ocupadas.includes(numButaca)){
-          alert("no puedes escoger una ocupada" + numButaca)
-        }
-        else{
-            alert(numButaca)
-            event.src="this.img_disponible"
-        }
+      if (this.ocupadas.includes(numButaca)) {
+        alert("no puedes escoger una ocupada" + numButaca);
+      } else {
+        alert(numButaca);
+        event.src = "this.img_disponible";
+      }
     },
   },
 };
 </script>
-
 
 <style scoped>
 main {
