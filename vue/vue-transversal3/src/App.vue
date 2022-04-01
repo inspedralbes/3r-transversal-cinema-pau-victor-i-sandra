@@ -7,7 +7,12 @@ import { RouterLink, RouterView } from "vue-router";
     <div class="wrapper">
       <nav class="navbar navbar-expand-lg navbar-light bg-light header">
         <div class="container-fluid header">
-          <RouterLink class="navbar-brand" to="/"><img class="logo" src="./assets/logo.png" alt="logo del Pedralbes Cinema"></RouterLink>
+          <RouterLink class="navbar-brand" to="/"
+            ><img
+              class="logo"
+              src="./assets/logo.png"
+              alt="logo del Pedralbes Cinema"
+          /></RouterLink>
           <div class="btn-group">
             <a class="nav-link active" aria-current="page" href="#"
               >Iniciar sesión</a
@@ -26,33 +31,29 @@ import { RouterLink, RouterView } from "vue-router";
 </template>
 
 <style scoped>
+.header {
+  background-color: black !important;
+  color: white;
+}
 
-  .header {
-        background-color: black !important;
-        color: white;
-    }
+.logo {
+  width: 180px;
+}
 
-    .logo {
-        width: 180px;
-    }
+.nav-link {
+  color: #13afed;
+  font-weight: 550;
+}
 
-    .nav-link {
-        color: #13afed;
-        font-weight: 550;
-    }
+.nav-link:hover {
+  color: #fdcb31;
+}
 
-    .nav-link:hover {
-        color: #fdcb31;
-
-    }
-
-    .vr {
-        border-left: 2px solid #13afed;
-        position: absolute;
-        left: 53%;
-        height: 20px;
-        top: 10px;
-    }
-
-
+.vr {
+  border-left: 2px solid #13afed;
+  position: absolute;
+  left: 53%;
+  height: 20px;
+  top: 10px;
+}
 </style>
