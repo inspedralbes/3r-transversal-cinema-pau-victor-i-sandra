@@ -45,6 +45,30 @@ class EntradaRepository extends ServiceEntityRepository
         }
     }
 
+    public function guardarEntradas($usuario, $sesion, $butaca, $precio)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "
+            INSERT INTO entrada(usuario_id, sesion_id, butaca, precio) 
+            VALUES ($usuario, $sesion, '$butaca', $precio) 
+            ";
+   
+        return $conn->prepare($sql)->executeQuery();
+        ;
+    }
+
+    public function seleccionarEntradasUsuario($sesion, $usuario)
+    {
+        return $this->createQueryBuilder('e')
+        ->where('e.usuario = :usuario')
+        ->setParameter('usuario', $usuario)
+        ->andWhere('e.sesion = :sesion')
+        ->setParameter('sesion', $sesion)
+        ->getQuery()
+        ->getResult();
+    }
+
     // /**
     //  * @return Entrada[] Returns an array of Entrada objects
     //  */

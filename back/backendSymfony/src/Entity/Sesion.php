@@ -13,7 +13,7 @@ class Sesion
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id   ;
+    private $id;
 
     #[ORM\Column(type: 'date', nullable: true)]
     private $fecha;
@@ -48,6 +48,11 @@ class Sesion
     public function __construct()
     {
         $this->entradas = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->id;
     }
 
     public function getId(): ?int

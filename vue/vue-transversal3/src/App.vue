@@ -10,7 +10,7 @@ import { RouterLink, RouterView } from "vue-router";
           <RouterLink class="navbar-brand" to="/"
             ><img
               class="logo"
-              src="./assets/logo2.png"
+              src="./assets/logo.png"
               alt="logo del Pedralbes Cinema"
           /></RouterLink>
           <div class="btn-group">
