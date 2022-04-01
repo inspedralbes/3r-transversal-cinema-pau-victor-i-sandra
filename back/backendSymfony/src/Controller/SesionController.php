@@ -79,7 +79,7 @@ class SesionController extends AbstractController
     }
 
     #[Route('/entradasUsuario', name: 'get_entradas_usuario', methods: ['GET'])]
-    public function devolverEntradas(ManagerRegistry $doctrine, Request $request, EntradaRepository $entradaRepository): JsonResponse
+    public function devolverEntradas(Request $request, EntradaRepository $entradaRepository): JsonResponse
     {
         $dades = $entradaRepository->seleccionarEntradasUsuario($request->query->get('idSesion'), $request->query->get('idUsuario'));
         $entradas = array("entradas" => []);
