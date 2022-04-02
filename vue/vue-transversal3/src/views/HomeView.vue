@@ -8,27 +8,24 @@ export default {
       basePeliculas: 0,
     };
   },
+
+  components: {
+    CardPeliDia,
+    ProximasPelis,
+  },
+
   beforeCreate() {
-    fetch("http://192.168.210.161:8000/sesiones")
+    fetch("http://192.168.1.145:8000/sesiones")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         this.basePeliculas = data.sesiones;
       });
   },
-  // beforeCreate() {
-  //   this.basePeliculas = BD;
-  //   console.log(BD);
-  // },
-  components: {
-    CardPeliDia,
-    ProximasPelis,
-  },
 };
 </script>
 <template>
   <main>
-    <h1>HOMEPAGE</h1>
     <div v-if="typeof this.basePeliculas === 'object'">
       <CardPeliDia :infoPelicula="basePeliculas[0]" />
       <ProximasPelis :peliculasInfo="basePeliculas.splice(1, 6)" />

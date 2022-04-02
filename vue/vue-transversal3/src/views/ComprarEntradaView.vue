@@ -36,7 +36,7 @@ export default {
   beforeCreate() {
     console.log(window.location.href.split("/", 5)[4]);
     fetch(
-      "http://192.168.210.161:8000/sesionEspecifica?idSesion=" +
+      "http://192.168.1.145:8000/sesionEspecifica?idSesion=" +
         window.location.href.split("/", 5)[4]
     )
       .then((response) => response.json())
