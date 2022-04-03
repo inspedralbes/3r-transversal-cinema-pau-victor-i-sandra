@@ -1,5 +1,10 @@
 <script>
+import { sessioStore } from "../stores/sessioStore";
+import { mapStores } from "pinia";
 export default {
+  computed: {
+    ...mapStores(sessioStore),
+  },
   props: ['butacasOcupadas'],
 
   data() {
@@ -60,6 +65,11 @@ export default {
           return butaca != numButaca;
         })
       }
+
+      let piniaData = this.sessioStore.get;
+      piniaData.butacasSeleccionadas = this.seleccionadas;
+      console.log(piniaData);
+      this.sessioStore.set(piniaData);
     },
   },
 };
@@ -177,7 +187,6 @@ export default {
 }
 
 @media only screen and (min-width: 1200px) {
-
   .mallaButacas {
     grid-template-columns: repeat(10, 8.5%);
   }
