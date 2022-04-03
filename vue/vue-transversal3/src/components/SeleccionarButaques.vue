@@ -49,6 +49,7 @@ export default {
         if (this.seleccionadas.length < 10) {
           this.seleccionadas.push(numButaca);
           event.target.src = this.img_seleccionada;
+          this.stringButacas;
         } else {
           alert("No puedes seleccionar más de 10 butacas");
         }
@@ -115,7 +116,11 @@ export default {
         </div>
 
         <div>
-          <h5>Butaques seleccionades</h5>
+          <h5>
+            Butaques seleccionades:
+            <span>{{ this.seleccionadas.join(', ') }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}</span>
+          </h5>
+          <h6>Total: {{ this.seleccionadas.length }} butacas</h6>
         </div>
       </div>
     </section>
