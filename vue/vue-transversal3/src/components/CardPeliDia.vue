@@ -1,34 +1,40 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
-import moment from 'moment';
+import moment from "moment";
 
 export default {
   props: ["infoPelicula"],
   components: {
     RouterLink,
-    RouterView
+    RouterView,
   },
 
   beforeMount() {
     setInterval(() => {
-      let ahora = moment()
-      let horaPeli = moment(this.infoPelicula.hora, "HH:mm:ss")
-      let finPeli = moment(this.infoPelicula.hora, "HH:mm:ss").add(2, 'h') // Add 2h despues de que empieze la peli
-      this.tiempo = (horaPeli > ahora) ? "Faltan " + moment(horaPeli.subtract(1, 'h').valueOf() - ahora.valueOf()).format("HH:mm:ss") : (ahora > horaPeli && finPeli > ahora) ? "En directo" : "Ya vista";
+      let ahora = moment();
+      let horaPeli = moment(this.infoPelicula.hora, "HH:mm:ss");
+      let finPeli = moment(this.infoPelicula.hora, "HH:mm:ss").add(2, "h"); // Add 2h despues de que empieze la peli
+      this.tiempo =
+        horaPeli > ahora
+          ? "Faltan " +
+            moment(
+              horaPeli.subtract(1, "h").valueOf() - ahora.valueOf()
+            ).format("HH:mm:ss")
+          : ahora > horaPeli && finPeli > ahora
+          ? "En directo"
+          : "Ya vista";
     }, 1000);
   },
 
   data() {
     return {
-      tiempo: null
-    }
+      tiempo: null,
+    };
   },
 
   methods: {
-    tiempoRestante: function () {
-
-    }
-  }
+    tiempoRestante: function () {},
+  },
 };
 </script>
 
@@ -42,7 +48,11 @@ export default {
       </div>
       <div class="row g-0">
         <div class="col-md-4">
-          <img :src="this.infoPelicula.peli.imgPeli" class="img-fluid rounded-start" alt="..." />
+          <img
+            :src="this.infoPelicula.peli.imgPeli"
+            class="img-fluid rounded-start"
+            alt="..."
+          />
         </div>
         <div class="col-md-8">
           <div class="card-body">
@@ -54,7 +64,8 @@ export default {
             <RouterLink
               class="btn btn-primary"
               :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
-            >Comprar entradas</RouterLink>
+              >Comprar entradas</RouterLink
+            >
             <RouterView />
           </div>
         </div>
@@ -67,7 +78,11 @@ export default {
       <div class="tiempoRestante">
         <span>{{ this.tiempo }}</span>
       </div>
-      <img class="card-img-top" :src="this.infoPelicula.peli.imgPeli" salt="Card image cap" />
+      <img
+        class="card-img-top"
+        :src="this.infoPelicula.peli.imgPeli"
+        salt="Card image cap"
+      />
       <div class="card-body">
         <div class="row">
           <div class="col-9">
@@ -88,7 +103,8 @@ export default {
             <RouterLink
               class="btn btn-primary"
               :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
-            >Comprar entradas</RouterLink>
+              >Comprar entradas</RouterLink
+            >
             <RouterView />
           </div>
         </div>
@@ -104,8 +120,15 @@ export default {
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Más información sobre esta pelicula</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="exampleModalLabel">
+              Más información sobre esta pelicula
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <p>Sinopsis:</p>
@@ -153,35 +176,35 @@ export default {
 
   .card-horizontal {
     width: 80%;
-    margin: auto
+    margin: auto;
   }
 }
 
 @media only screen and (min-width: 992px) {
   .card-horizontal {
     width: 73%;
-    margin: auto
+    margin: auto;
   }
 }
 
 @media only screen and (min-width: 1200px) {
   .card-horizontal {
     width: 63%;
-    margin: auto
+    margin: auto;
   }
 }
 
 @media only screen and (min-width: 1400px) {
   .card-horizontal {
     width: 53%;
-    margin: auto
+    margin: auto;
   }
 }
 
 @media only screen and (min-width: 1800px) {
   .card-horizontal {
     width: 43%;
-    margin: auto
+    margin: auto;
   }
 }
 

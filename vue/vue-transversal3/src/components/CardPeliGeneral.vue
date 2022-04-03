@@ -14,9 +14,7 @@
 </template>
 <script>
 export default {
-  props: {
-    peliInfo: Object,
-  },
+  props: ["peliInfo"],
 };
 </script>
 
