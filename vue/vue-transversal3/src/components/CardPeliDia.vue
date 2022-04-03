@@ -14,26 +14,20 @@ export default {
       let ahora = moment();
       let horaPeli = moment(this.infoPelicula.hora, "HH:mm:ss");
       let finPeli = moment(this.infoPelicula.hora, "HH:mm:ss").add(2, "h"); // Add 2h despues de que empieze la peli
-      this.tiempo =
-        horaPeli > ahora
-          ? "Faltan " +
-            moment(
-              horaPeli.subtract(1, "h").valueOf() - ahora.valueOf()
-            ).format("HH:mm:ss")
-          : ahora > horaPeli && finPeli > ahora
-          ? "En directo"
-          : "Ya vista";
+      this.tiempo = (horaPeli > ahora) ? "Faltan " + moment(horaPeli.subtract(1, "h").valueOf() - ahora.valueOf()).format("HH:mm:ss") : (ahora > horaPeli && finPeli > ahora) ? "En directo" : "Ya vista";
+      this.disabled = (ahora > finPeli) ? 1 : 0; //Si la peli ya se ha visto, no se pueden comprar entradas...
     }, 1000);
   },
 
   data() {
     return {
       tiempo: null,
+      disabled: 0
     };
   },
 
   methods: {
-    tiempoRestante: function () {},
+    tiempoRestante: function () { },
   },
 };
 </script>
@@ -48,24 +42,24 @@ export default {
       </div>
       <div class="row g-0">
         <div class="col-md-4">
-          <img
-            :src="this.infoPelicula.peli.imgPeli"
-            class="img-fluid rounded-start"
-            alt="..."
-          />
+          <img :src="this.infoPelicula.peli.imgPeli" class="img-fluid rounded-start" alt="..." />
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <h3 class="card-title">{{ this.infoPelicula.peli.nombrePeli }}</h3>
             <div class="card-text">
-              <p><span class="underlined">Sinopsis:</span></p>
-              <p><span class="underlined">Duración:</span></p>
+              <p>
+                <span class="underlined">Sinopsis:</span>
+              </p>
+              <p>
+                <span class="underlined">Duración:</span>
+              </p>
             </div>
             <RouterLink
               class="btn btn-primary"
+              :class="[this.disabled ? 'isDisabled': '']"
               :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
-              >Comprar entradas</RouterLink
-            >
+            >Comprar entradas</RouterLink>
             <RouterView />
           </div>
         </div>
@@ -78,11 +72,7 @@ export default {
       <div class="tiempoRestante">
         <span>{{ this.tiempo }}</span>
       </div>
-      <img
-        class="card-img-top"
-        :src="this.infoPelicula.peli.imgPeli"
-        salt="Card image cap"
-      />
+      <img class="card-img-top" :src="this.infoPelicula.peli.imgPeli" salt="Card image cap" />
       <div class="card-body">
         <div class="row">
           <div class="col-9">
@@ -102,9 +92,9 @@ export default {
           <div class="col">
             <RouterLink
               class="btn btn-primary"
+              :class="[this.disabled ? 'isDisabled': '']"
               :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
-              >Comprar entradas</RouterLink
-            >
+            >Comprar entradas</RouterLink>
             <RouterView />
           </div>
         </div>
@@ -120,15 +110,8 @@ export default {
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Más información sobre esta pelicula
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <h5 class="modal-title" id="exampleModalLabel">Más información sobre esta pelicula</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <p>Sinopsis:</p>
@@ -155,6 +138,11 @@ export default {
   padding: 5px 10px;
   border-radius: 10px;
   background-color: white;
+}
+
+.isDisabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 @media only screen and (min-width: 768px) {
