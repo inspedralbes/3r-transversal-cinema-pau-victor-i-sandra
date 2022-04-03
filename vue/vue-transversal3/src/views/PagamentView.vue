@@ -1,27 +1,10 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
-<template>
-  <main>
-    <q-btn flat class="btn btn-secondary" label="Volver" @click="retroceder()"
-      >Volver</q-btn
-    >
-    <h1>PAGAMENT</h1>
-    <ResumenCompra />
-    <RealitzarPagament />
-    <RouterLink class="btn btn-primary" to="/realitzatpagament"
-      >Pagar</RouterLink
-    >
-    <RouterView />
-  </main>
-</template>
 <script>
 import ResumenCompra from "@/components/ResumenCompra.vue";
-import RealitzarPagament from "@/components/RealitzarPagament.vue";
+import MetodoPago from "@/components/MetodoPago.vue";
 export default {
   components: {
     ResumenCompra,
-    RealitzarPagament,
+    MetodoPago,
   },
   methods: {
     retroceder() {
@@ -30,3 +13,35 @@ export default {
   },
 };
 </script>
+
+
+<template>
+  <main>
+    <button class="btn btn-secondary volver" label="Volver" @click="retroceder()">
+      <i class="bi bi-arrow-left"></i> Atrás
+    </button>
+    <div class="container">
+      <div class="row gx-5">
+        <div class="col-12 text-center titulo-pagament">
+          <h1>Pagament</h1>
+        </div>
+
+        <div class="col-12 col-md-5">
+          <ResumenCompra />
+        </div>
+
+        <div class="col-12 col-md-7">
+          <MetodoPago />
+        </div>
+
+      </div>
+    </div>
+  </main>
+</template>
+
+
+<style>
+.titulo-pagament{
+  margin-bottom: 20px
+}
+</style>

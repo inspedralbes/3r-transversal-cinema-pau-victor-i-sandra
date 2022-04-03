@@ -11,6 +11,7 @@ export default {
     return {
       ocupadas: null,
       seleccionadas: [],
+      precioButacas: 0,
 
       /* Imagenes tipo butacas */
       img_disponible: "../../src/assets/Butacas/butaca_disponible.png",
@@ -67,10 +68,41 @@ export default {
       }
 
       let piniaData = this.sessioStore.get;
+      this.precioEntradas(piniaData);
       piniaData.butacasSeleccionadas = this.seleccionadas;
-      console.log(piniaData);
+      piniaData.precioButacas = this.precioButacas;
       this.sessioStore.set(piniaData);
     },
+
+    precioEntradas: function (piniaData) {
+      let precio = 0;
+      this.seleccionadas.forEach((butaca) => {
+        if (piniaData.diaEspectador) {
+          if (piniaData.vip) {
+            if (butaca >= 'b51' && butaca <= 'b60') { // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
+              precio += 6;
+              console.log()
+            } else {
+              precio += 4;
+            }
+          } else {
+            precio += 4;
+          }
+        } else {
+          if (piniaData.vip) {
+            if (butaca >= 'b51' && butaca <= 'b60') { // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
+              precio += 8;
+            } else {
+              precio += 6;
+            }
+          } else {
+            precio += 6;
+          }
+        }
+      });
+
+      this.precioButacas = precio;
+    }
   },
 };
 </script>
@@ -115,7 +147,7 @@ export default {
           </p>
           <p>
             Total:
-            <span>{{ this.seleccionadas.length }} butacas</span>
+            <span>{{ this.precioButacas }}€</span>
           </p>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <template>
-  <q-btn flat class="btn btn-secondary" label="Volver" @click="retroceder()"
-    >Volver</q-btn
-  >
+  <button class="btn btn-secondary volver" label="Volver" @click="retroceder()">
+    <i class="bi bi-arrow-left"></i> Atrás
+  </button>
   <h1>Realitzat el Pagament</h1>
 </template>
 <script>
