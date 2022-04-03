@@ -1,9 +1,8 @@
 <script>
-import { RouterLink, RouterView } from "vue-router";
 import CardPeliGeneral from "@/components/CardPeliGeneral.vue";
 import SeleccionarButaques from "@/components/SeleccionarButaques.vue";
 import { sessioStore } from "../stores/sessioStore";
-import { mapStores, mapActions } from "pinia";
+import { mapStores } from "pinia";
 export default {
   computed: {
     ...mapStores(sessioStore),
@@ -31,7 +30,6 @@ export default {
         this.peliSeleccionada = data.sesiones;
         console.log(this.peliSeleccionada);
         this.sessioStore.set(this.peliSeleccionada);
-        console.log(this.peliSeleccionada);
       });
   },
 
@@ -48,8 +46,8 @@ export default {
     <q-btn flat class="btn btn-secondary" label="Volver" @click="retroceder()">Volver</q-btn>
 
     <h1>COMPRAR ENTRADES DE LA SESION {{ $route.params.idSesion }}</h1>
-    <CardPeliGeneral :peliInfo="peliSeleccionada" />
-    <SeleccionarButaques />
+    <CardPeliGeneral :peliInfo="this.peliSeleccionada" />
+    <SeleccionarButaques :butacasOcupadas="this.peliSeleccionada.butacasOcupadas"/>
     <RouterLink class="btn btn-primary" to="/pagament">Comprar Entrades</RouterLink>
     <RouterView />
   </div>

@@ -1,66 +1,11 @@
-<template>
-  <div>
-    <h3 class="text-center">Cars</h3>
-    <section class="seleccionarButacas">
-      <div class="grid-seleccionarButacas">
-        <div class="infoPeli-seleccionarButacas">
-          <h2>PELI DIA - componente peli general</h2>
-          <div class="card" style="width: 25rem">
-            <img
-              src="https://pics.filmaffinity.com/Cars-746710621-mmed.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">Cars</h5>
-              <p class="card-text">Demà a les 16:00h</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="butacas-seleccionarButacas">
-          <div class="mallaButacas">
-            <div :key="index" v-for="(butaca, index) in 120">
-              <img
-                v-if="estaocupada(butaca)"
-                :src="this.img_ocupada"
-                @click="SeleccionarButaca(butaca, $events)"
-                :id="'b' + (index + 1)"
-                class="img-fluid butaca"
-              />
-              <img
-                v-if="estalibre(butaca)"
-                :src="this.img_disponible"
-                @click="SeleccionarButaca(butaca, $event)"
-                :id="'b' + (index + 1)"
-                class="img-fluid butaca"
-              />
-              <img
-                v-if="estaseleccionada(butaca)"
-                :src="this.img_seleccionada"
-                @click="SeleccionarButaca(butaca, $event)"
-                :id="'b' + (index + 1)"
-                class="img-fluid butaca"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <h5>Butaques seleccionades</h5>
-        </div>
-      </div>
-    </section>
-  </div>
-</template>
-
 <script>
 export default {
-  components: {},
+  props: ['butacasOcupadas'],
+
   data() {
     return {
-      ocupadas: [4, 5, 6, 7, 8, 57],
-      seleccionadas: [1, 15],
+      ocupadas: null,
+      seleccionadas: [],
 
       /* Imagenes tipo butacas */
       img_disponible: "../../src/assets/Butacas/butaca_disponible.png",
@@ -69,6 +14,13 @@ export default {
       img_vip: "../../src/assets/Butacas/butaca_vip.png",
     };
   },
+
+  beforeMount() {
+    this.ocupadas = this.butacasOcupadas.split(',');
+  },
+
+
+
   methods: {
     // Comprueba si la butaca está ocupada
     estaocupada: function (n) {
@@ -93,10 +45,7 @@ export default {
 
       // Seleccionar butaca y añadirla al array "seleccionadas"
       // seleccionadas y modifica su imagen (seimpre que no hayan 10 butacas seleccionadas aún)
-      if (
-        !this.ocupadas.includes(numButaca) &&
-        !this.seleccionadas.includes(numButaca)
-      ) {
+      else if (!this.ocupadas.includes(numButaca) && !this.seleccionadas.includes(numButaca)) {
         if (this.seleccionadas.length < 10) {
           this.seleccionadas.push(numButaca);
           event.target.src = this.img_seleccionada;
@@ -105,15 +54,76 @@ export default {
         }
       }
 
-      /* Des-seleccionar butacas */
-      if (this.seleccionadas.includes(numButaca)) {
+      /* Deseleccionar butacas */
+      else if (this.seleccionadas.includes(numButaca)) {
+        event.target.src = this.img_disponible;
+        this.seleccionadas = this.seleccionadas.filter((butaca) => {
+          return butaca != numButaca;
+        })
       }
     },
   },
 };
 </script>
 
-<style scoped>
+<template>
+  <div>
+    <h3 class="text-center">Cars</h3>
+    <section class="seleccionarButacas">
+      <div class="grid-seleccionarButacas">
+        <div class="infoPeli-seleccionarButacas">
+          <h2>PELI DIA - componente peli general</h2>
+          <div class="card" style="width: 25rem">
+            <img
+              src="https://pics.filmaffinity.com/Cars-746710621-mmed.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Cars</h5>
+              <p class="card-text">Demà a les 16:00h</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="butacas-seleccionarButacas">
+          <div class="mallaButacas">
+            <div :key="index" v-for="(butaca, index) in 120">
+              <img
+                v-if="estaocupada('b' + butaca)"
+                :src="this.img_ocupada"
+                @click="SeleccionarButaca('b' + butaca, $events)"
+                :id="'b' + (index + 1)"
+                class="img-fluid butaca"
+              />
+              <img
+                v-if="estalibre('b' + butaca)"
+                :src="this.img_disponible"
+                @click="SeleccionarButaca('b' + butaca, $event)"
+                :id="'b' + (index + 1)"
+                class="img-fluid butaca"
+              />
+              <img
+                v-if="estaseleccionada('b' + butaca)"
+                :src="this.img_seleccionada"
+                @click="SeleccionarButaca('b' + butaca, $event)"
+                :id="'b' + (index + 1)"
+                class="img-fluid butaca"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h5>Butaques seleccionades</h5>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+
+<style>
 main {
   width: 80%;
   margin: 40px auto;
