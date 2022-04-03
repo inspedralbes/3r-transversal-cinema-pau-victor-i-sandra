@@ -10,7 +10,7 @@ export default {
 
   data() {
     return {
-      peliSeleccionada: 0,
+      peliSeleccionada: Object,
     };
   },
 
@@ -20,11 +20,10 @@ export default {
   },
 
   beforeCreate() {
-    console.log("Pelisel" + this.peliSeleccionada);
     console.log(window.location.href.split("/", 5)[4]);
     fetch(
       "http://192.168.1.145:8000/sesionEspecifica?idSesion=" +
-        window.location.href.split("/", 5)[4]
+      window.location.href.split("/", 5)[4]
     )
       .then((response) => response.json())
       .then((data) => {
@@ -43,25 +42,58 @@ export default {
 </script>
 
 <template>
-  <div>
-    <button flat class="btn btn-secondary" label="Volver" @click="retroceder()">
-      Volver
+  <main>
+    <button class="btn btn-secondary volver" label="Volver" @click="retroceder()">
+      <i class="bi bi-arrow-left"></i> Atrás
     </button>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1>Sesión {{ $route.params.idSesion }}</h1>
+        </div>
 
-    <h1>COMPRAR ENTRADES DE LA SESION {{ $route.params.idSesion }}</h1>
+        <div class="col-12 col-md-5 cardInfo align-self-center">
+          <CardPeliGeneral :peliInfo="this.peliSeleccionada" />
+        </div>
 
-    <CardPeliGeneral
-      :peliInfo="this.peliSeleccionada"
-      v-if="typeof this.peliSeleccionada === 'object'"
-    />
-    <SeleccionarButaques
-      :butacasOcupadas="this.peliSeleccionada.butacasOcupadas"
-    />
-    <RouterLink class="btn btn-primary" to="/pagament"
-      >Comprar Entrades</RouterLink
-    >
-    <RouterView />
-  </div>
+        <div class="col-12 col-md-7 butacasInfo">
+          <SeleccionarButaques :butacasOcupadas="this.peliSeleccionada.butacasOcupadas" />
+        </div>
+
+        <div class="col-12 text-center botonComprarEntradas">
+          <RouterLink class="btn btn-primary" to="/pagament">Comprar entradas</RouterLink>
+          <RouterView />
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
 
-<style></style>
+<style>
+.butacasInfo {
+  margin: 30px 0 0 0;
+}
+
+.cardInfo {
+  margin: 10px 0 0 0;
+}
+
+.botonComprarEntradas {
+  margin: 20px 0 25px 0;
+}
+
+.volver {
+  position: relative;
+  top: 10px;
+  left: 10px;
+  margin: 0 0 25px 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .cardInfo {
+    margin: 30px 0 0 0;
+  }
+}
+
+
+</style>

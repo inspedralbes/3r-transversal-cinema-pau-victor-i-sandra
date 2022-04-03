@@ -1,6 +1,6 @@
 <script>
 export default {
-  props: ["butacasOcupadas"],
+  props: ['butacasOcupadas'],
 
   data() {
     return {
@@ -16,9 +16,7 @@ export default {
   },
 
   beforeMount() {
-    if (this.butacasOcupadas) {
-      this.ocupadas = this.butacasOcupadas.split(",");
-    }
+    this.ocupadas = this.butacasOcupadas.split(',');
   },
 
   methods: {
@@ -45,10 +43,7 @@ export default {
 
       // Seleccionar butaca y añadirla al array "seleccionadas"
       // seleccionadas y modifica su imagen (seimpre que no hayan 10 butacas seleccionadas aún)
-      else if (
-        !this.ocupadas.includes(numButaca) &&
-        !this.seleccionadas.includes(numButaca)
-      ) {
+      else if (!this.ocupadas.includes(numButaca) && !this.seleccionadas.includes(numButaca)) {
         if (this.seleccionadas.length < 10) {
           this.seleccionadas.push(numButaca);
           event.target.src = this.img_seleccionada;
@@ -56,12 +51,14 @@ export default {
         } else {
           alert("No puedes seleccionar más de 10 butacas");
         }
-      } else if (this.seleccionadas.includes(numButaca)) {
-        /* Deseleccionar butacas */
+      }
+
+      /* Deseleccionar butacas */
+      else if (this.seleccionadas.includes(numButaca)) {
         event.target.src = this.img_disponible;
         this.seleccionadas = this.seleccionadas.filter((butaca) => {
           return butaca != numButaca;
-        });
+        })
       }
     },
   },
@@ -70,13 +67,12 @@ export default {
 
 <template>
   <div>
-    <h3 class="text-center">Cars</h3>
     <section class="seleccionarButacas">
-      <div class="grid-seleccionarButacas">
-        <div class="infoPeli-seleccionarButacas">
-          <h2>PELI DIA - componente peli general</h2>
-        </div>
+      <div class="tituloSeleccionarButacas">
+        <h2 class="text-center">Selecciona las butacas</h2>
+      </div>
 
+      <div>
         <div class="mallaButacas">
           <div :key="index" v-for="(butaca, index) in 120">
             <img
@@ -102,30 +98,29 @@ export default {
             />
           </div>
         </div>
-
-        <div>
-          <h5>
-            Butaques seleccionades:
-            <span
-              >{{ this.seleccionadas.join(", ")
-              }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}</span
-            >
-          </h5>
-          <h6>Total: {{ this.seleccionadas.length }} butacas</h6>
+        <div class="resultado">
+          <p>
+            Butacas:
+            <span>{{ this.seleccionadas.join(', ') }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}</span>
+          </p>
+          <p>
+            Total:
+            <span>{{ this.seleccionadas.length }} butacas</span>
+          </p>
         </div>
       </div>
     </section>
   </div>
 </template>
 
+
 <style>
 .mallaButacas {
   display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(10, 70px);
+  grid-template-columns: repeat(10, 9.8%);
   grid-template-rows: repeat(12, auto);
-  margin: 50px 0;
-  background-color: rgb(255, 255, 255);
+  justify-content: center;
+  margin: 10px 0 15px 0;
 }
 
 .mallaButacas div {
@@ -134,10 +129,61 @@ export default {
 }
 
 .mallaButacas img {
-  max-width: 55%;
+  max-width: 70%;
 }
 
 .butacas-seleccionarButacas a {
   float: right;
+}
+
+.resultado {
+  margin-left: 3%;
+}
+
+.resultado p:nth-child(1) {
+  font-size: 1.3rem;
+}
+
+.resultado p:nth-child(2) {
+  font-size: 1.1rem;
+}
+
+.resultado p {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.resultado span {
+  font-weight: lighter;
+}
+
+.tituloSeleccionarButacas {
+  margin: 0 0 20px 0;
+}
+
+@media only screen and (min-width: 992px) {
+  .card {
+    width: 80% !important;
+    margin: auto;
+  }
+
+  .mallaButacas {
+    grid-template-columns: repeat(10, 9%);
+  }
+
+  .mallaButacas img {
+    max-width: 70%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+
+  .mallaButacas {
+    grid-template-columns: repeat(10, 8.5%);
+  }
+
+  .mallaButacas img {
+    max-width: 70%;
+  }
 }
 </style>
