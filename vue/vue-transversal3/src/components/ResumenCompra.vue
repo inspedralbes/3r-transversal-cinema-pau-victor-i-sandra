@@ -60,16 +60,15 @@ export default {
   font-weight: bold;
 }
 
-
-  .poster_resumen {
-    width: 230px;
-    height: auto;
+  @media only screen and (max-width: 1022px) {
+    .poster_resumen {
+        width: 100%;
+        height: auto;
+    }
   }
 
   .resumen {
     width: 80%;
   }
-
-
 
 </style>
