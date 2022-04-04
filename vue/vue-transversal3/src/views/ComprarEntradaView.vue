@@ -1,3 +1,21 @@
+<<<<<<< Updated upstream
+=======
+<template>
+  <div>
+    <q-btn flat class="btn btn-secondary" label="Volver" @click="retroceder()"
+      >Volver</q-btn
+    >
+
+    <h1>COMPRAR ENTRADES DE LA SESION {{ $route.params.idSesion }}</h1>
+    <CardPeliGeneral :peliInfo="peliSeleccionada" />
+    <SeleccionarButaques />
+    <RouterLink class="btn btn-primary" to="/pagament"
+      >Comprar Entrades</RouterLink
+    >
+    <RouterView />
+  </div>
+</template>
+>>>>>>> Stashed changes
 <script>
 import CardPeliGeneral from "@/components/CardPeliGeneral.vue";
 import SeleccionarButaques from "@/components/SeleccionarButaques.vue";
