@@ -27,6 +27,13 @@ const router = createRouter({
       name: "realitzatpagament",
       component: RealitzatPagamentView,
     },
+    {
+      path: "/registro",
+      name: "registro",
+      /*component: ,*/
+
+    }
+
   ],
 });
 

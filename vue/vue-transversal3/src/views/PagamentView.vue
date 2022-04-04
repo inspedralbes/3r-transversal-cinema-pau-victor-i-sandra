@@ -26,7 +26,7 @@ export default {
     <div class="container">
       <div class="row gx-5">
         <div class="col-12 text-center titulo-pagament">
-          <h1>Pagament</h1>
+          <h1>Compra tus entradas</h1>
         </div>
 
         <div class="col-12 col-md-5">
