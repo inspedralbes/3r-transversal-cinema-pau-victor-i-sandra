@@ -23,7 +23,7 @@ export default {
   <div v-if="this.dataSesion !== null">
 
     <div class="resumen alert alert-dark justify-content-center align-items-center text-center" role="alert">
-      <h2 class="alert-heading text-center">{{ this.dataSesion.peli.nombrePeli }}</h2>
+      <h2 class="alert-heading text-center bold">{{ this.dataSesion.peli.nombrePeli }}</h2>
       <hr />
 
       <img class="poster_resumen" :src="this.dataSesion.peli.imgPeli" alt="Poster de la pelicula"/>
@@ -69,8 +69,6 @@ export default {
   .resumen {
     width: 80%;
   }
-
-
 
 
 

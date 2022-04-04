@@ -6,7 +6,7 @@
       alt="Card image cap"
     />
     <div class="card-body">
-      <h4 class="card-title">{{ this.peliInfo.peli.nombrePeli }}</h4>
+      <h4 class="card-title bold">{{ this.peliInfo.peli.nombrePeli }}</h4>
       <h6 class="card-text">{{ this.peliInfo.fecha }}</h6>
       <h6 class="card-text">{{ this.peliInfo.hora }}</h6>
     </div>
