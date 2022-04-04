@@ -74,8 +74,6 @@ export default {
 };
 </script>
 
-
-
 <template>
   <div class="justify-content-center align-items-center">
     <div class="col-md-10 text-center">

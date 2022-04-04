@@ -1,10 +1,9 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
-
 export default {
   components: {
     RouterLink,
-    RouterView
+    RouterView,
   },
 };
 </script>
@@ -21,12 +20,12 @@ export default {
               alt="logo del Pedralbes Cinema"
             />
           </RouterLink>
-          <div class="btn-group">
-            <a class="nav-link active" aria-current="page" href="#"
-              >Consultar entradas</a>
+          <div class="btn-group" role="group">
+            <a class="nav-link link" aria-current="page" href="#">Consultar entradas</a>
             <div class="vr"></div>
-            <a class="nav-link active" aria-current="page" href="#"
-              >Admin</a>
+            <RouterLink class="" to="/admin">
+              <a class="nav-link link">Admin</a>
+            </RouterLink>
           </div>
         </div>
       </nav>
@@ -48,10 +47,15 @@ export default {
 .nav-link {
   color: #13afed;
   font-weight: 550;
+  font-size: 16px;
 }
 
 .nav-link:hover {
   color: #fdcb31;
+}
+
+a {
+  text-decoration: none;
 }
 
 .vr {
@@ -60,5 +64,10 @@ export default {
   left: 67%;
   height: 20px;
   top: 10px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 </style>

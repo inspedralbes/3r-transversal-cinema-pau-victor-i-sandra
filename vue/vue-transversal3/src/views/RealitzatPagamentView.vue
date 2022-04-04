@@ -37,7 +37,7 @@ export default {
           <hr />
           <p>{{ this.piniaData.msg }}</p>
           <div v-if="this.piniaData.estadoCompra">
-            <p>Te hemos enviado tus entradas a tu correo....</p>
+            <p>Te hemos enviado tus entradas a tu correo...</p>
             <p>
               Si no, puedes descargarte tus entradas clicando
               <a href=".">aquí</a>
