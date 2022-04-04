@@ -46,7 +46,7 @@ export default {
     SeleccionarButaca: function (numButaca, event) {
       // si la butaca está ocupada
       if (this.ocupadas.includes(numButaca)) {
-        alert("no puedes escoger una ocupada" + numButaca);
+        alert("¡¡No puedes escoger una butaca ocupada!!");
       }
 
       // Seleccionar butaca y añadirla al array "seleccionadas"
@@ -159,6 +159,15 @@ export default {
             <span>{{ this.precioButacas }}€</span>
           </p>
         </div>
+      </div>
+
+      <div class="col-12 text-center botonComprarEntradas">
+        <RouterLink
+          class="btn btn-primary"
+          :class="[!this.seleccionadas.length ? 'isDisabled' : '']"
+          to="/pagament"
+        >Comprar entradas</RouterLink>
+        <RouterView />
       </div>
     </section>
   </div>
