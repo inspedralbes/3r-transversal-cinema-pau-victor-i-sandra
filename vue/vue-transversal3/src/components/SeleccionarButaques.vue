@@ -80,9 +80,10 @@ export default {
     precioEntradas: function (piniaData) {
       let precio = 0;
       this.seleccionadas.forEach((butaca) => {
+        butaca = butaca.split('b')[1];
         if (piniaData.diaEspectador) {
           if (piniaData.vip) {
-            if (butaca >= "b51" && butaca <= "b60") {
+            if (butaca >= "51" && butaca <= "60") {
               // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
               precio += 6;
             } else {
@@ -93,7 +94,7 @@ export default {
           }
         } else {
           if (piniaData.vip) {
-            if (butaca >= "b51" && butaca <= "b60") {
+            if (butaca >= "51" && butaca <= "60") {
               // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
               precio += 8;
             } else {
