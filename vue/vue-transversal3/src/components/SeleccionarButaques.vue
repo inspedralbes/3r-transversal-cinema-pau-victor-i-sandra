@@ -12,6 +12,7 @@ export default {
       ocupadas: null,
       seleccionadas: [],
       precioButacas: 0,
+      infoPeli: 0,
 
       /* Imagenes tipo butacas */
       img_disponible: "../../src/assets/Butacas/butaca_disponible.png",
@@ -23,6 +24,7 @@ export default {
 
   beforeMount() {
     this.ocupadas = this.butacasOcupadas.split(",");
+    this.infoPeli = this.sessioStore.get;
   },
 
   methods: {
@@ -44,7 +46,7 @@ export default {
     SeleccionarButaca: function (numButaca, event) {
       // si la butaca está ocupada
       if (this.ocupadas.includes(numButaca)) {
-        alert("no puedes escoger una ocupada" + numButaca);
+        alert("¡¡No puedes escoger una butaca ocupada!!");
       }
 
       // Seleccionar butaca y añadirla al array "seleccionadas"
@@ -78,12 +80,12 @@ export default {
     precioEntradas: function (piniaData) {
       let precio = 0;
       this.seleccionadas.forEach((butaca) => {
+        butaca = butaca.split('b')[1];
         if (piniaData.diaEspectador) {
           if (piniaData.vip) {
-            if (butaca >= "b51" && butaca <= "b60") {
+            if (butaca >= "51" && butaca <= "60") {
               // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
               precio += 6;
-              console.log();
             } else {
               precio += 4;
             }
@@ -92,7 +94,7 @@ export default {
           }
         } else {
           if (piniaData.vip) {
-            if (butaca >= "b51" && butaca <= "b60") {
+            if (butaca >= "51" && butaca <= "60") {
               // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
               precio += 8;
             } else {
@@ -129,7 +131,7 @@ export default {
             />
             <img
               v-if="estalibre('b' + butaca)"
-              :src="this.img_disponible"
+              :src="(this.infoPeli.vip && ((butaca >= '51') && (butaca <= '60'))) ? this.img_vip : this.img_disponible"
               @click="SeleccionarButaca('b' + butaca, $event)"
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
@@ -146,16 +148,26 @@ export default {
         <div class="resultado">
           <p>
             Butacas:
-            <span
-              >{{ this.seleccionadas.join(", ")
-              }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}</span
-            >
+            <span>
+              {{
+                this.seleccionadas.join(", ")
+              }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}
+            </span>
           </p>
           <p>
             Total:
             <span>{{ this.precioButacas }}€</span>
           </p>
         </div>
+      </div>
+
+      <div class="col-12 text-center botonComprarEntradas">
+        <RouterLink
+          class="btn btn-primary"
+          :class="[!this.seleccionadas.length ? 'isDisabled' : '']"
+          to="/pagament"
+        >Comprar entradas</RouterLink>
+        <RouterView />
       </div>
     </section>
   </div>

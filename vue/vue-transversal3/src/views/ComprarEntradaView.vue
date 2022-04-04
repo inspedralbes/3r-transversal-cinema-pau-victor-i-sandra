@@ -65,13 +65,6 @@ export default {
             :butacasOcupadas="this.peliSeleccionada.butacasOcupadas"
           />
         </div>
-
-        <div class="col-12 text-center botonComprarEntradas">
-          <RouterLink class="btn btn-primary" to="/pagament"
-            >Comprar entradas</RouterLink
-          >
-          <RouterView />
-        </div>
       </div>
     </div>
   </main>

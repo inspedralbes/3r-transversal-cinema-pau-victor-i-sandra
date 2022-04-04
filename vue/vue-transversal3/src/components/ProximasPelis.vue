@@ -16,8 +16,9 @@ export default {
 </script>
 
 <template>
-  <div>
-    <h2>ESTO SON LAS PROXIMAS PELIS</h2>
+  <div class="prox_sesiones"><br>
+    <h1 class="titulo_css">Próximas sesiones</h1>
+    <br>
     <section class="container">
       <div class="row gy-5">
         <div
@@ -40,7 +41,18 @@ export default {
 </template>
 
 <style>
-.card {
-  margin: auto;
-}
+
+  .prox_sesiones {
+    margin: 60px;
+  }
+
+  .card {
+    margin: auto;
+  }
+
+  .titulo_css {
+    font-variant: small-caps;
+  }
+
+  
 </style>
