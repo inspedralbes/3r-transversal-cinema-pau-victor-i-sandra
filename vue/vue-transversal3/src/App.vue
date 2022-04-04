@@ -16,12 +16,10 @@ import { RouterLink, RouterView } from "vue-router";
           </RouterLink>
           <div class="btn-group">
             <a class="nav-link active" aria-current="page" href="#"
-              >Iniciar sesión</a
-            >
+              >Consultar entradas</a>
             <div class="vr"></div>
             <a class="nav-link active" aria-current="page" href="#"
-              >Registrarse</a
-            >
+              >Admin</a>
           </div>
         </div>
       </nav>
@@ -50,9 +48,9 @@ import { RouterLink, RouterView } from "vue-router";
 }
 
 .vr {
-  border-left: 2px solid #13afed;
+  border-left: 2px solid #4dcdff;
   position: absolute;
-  left: 53%;
+  left: 67%;
   height: 20px;
   top: 10px;
 }

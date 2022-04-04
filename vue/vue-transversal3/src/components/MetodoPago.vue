@@ -75,52 +75,74 @@ export default {
 
 
 <template>
-  <h2>Pagar</h2>
-  <form class="row g-3">
-    <div class="col-md-6">
-      <label for="titular" class="form-label">Nombre del titular</label>
-      <input type="text" class="form-control" id="titular" />
+  <div class="justify-content-center align-items-center">
+    <div class="col-md-10 text-center">
+      <h2>Inicia sesión</h2>
     </div>
-    <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" />
-    </div>
-    <div class="col-6 col-md-4">
-      <label for="inputCity" class="form-label">Fecha de caducidad</label>
-      <input
-        type="text"
-        class="form-control"
-        id="inputCity"
-        placeholder="mm / yy"
-      />
-    </div>
-    <div class="col-6 col-md-2">
-      <label for="cvv" class="form-label">CVV</label>
-      <input type="text" class="form-control" id="cvv" maxlength="3" />
-    </div>
-    <div class="col-12">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="condiciones" />
-        <label class="form-check-label" for="condiciones"
-          >Acepto les condiciones de compra</label
-        >
+    
+    <form class="row g-3 margin15">
+      <div class="col-md-5">
+        <label for="titular" class="form-label text-left">Nombre</label>
+        <input type="text" class="form-control" id="titular" />
       </div>
-    </div>
-    <div class="col-12">
-      <RouterLink
-        class="btn btn-primary"
-        @click.native="this.comprarEntradas"
-        to="/realitzatpagament"
-        >Pagar</RouterLink
-      >
-      <RouterView />
-      <a @click="this.comprarEntradas" class="btn btn-danger paypal">PayPal</a>
-    </div>
-  </form>
+      <div class="col-md-5">
+        <label for="titular" class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="titular" />
+      </div>
+      <div class="col-md-10">
+        <label for="titular" class="form-label">Email</label>
+        <input type="email" class="form-control" id="titular" />
+      </div>
+      <div class="col-md-5">
+        <label for="inputPassword4" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="inputPassword4" />
+      </div>
+
+      <div class="col-md-10 text-center">
+        <RouterLink
+          class="btn btn-primary margin10"
+          @click.native="this.comprarEntradas"
+          to="/realitzatpagament"
+          >Comprar</RouterLink
+        >
+        <RouterView />
+        <br><br>
+        <hr>
+        </div>
+      </form>
+
+
+        <div class="col-md-10 text-center margin20">
+          <h4>¿No tienes usuario?</h4>
+          <br>
+          <RouterLink
+            @click.native="this.comprarEntradas"
+            to="/registro"
+            >Crea tu cuenta</RouterLink
+          >
+          <RouterView />
+
+      </div>
+      
+    
+  </div>
 </template>
 
+
 <style>
-.paypal {
-  margin-left: 10px;
+
+
+.margin10 {
+  margin: 10px;
 }
+
+.margin15 {
+  margin: 15px;
+}
+
+.margin15 {
+  margin: 20px;
+}
+
+
 </style>
