@@ -5,8 +5,8 @@ export default {
   data() {
     return {
       dataSesion: null,
-      precioButacas: 0
-    }
+      precioButacas: 0,
+    };
   },
 
   computed: {
@@ -16,10 +16,8 @@ export default {
   mounted() {
     this.dataSesion = this.sessioStore.get;
   },
-}
+};
 </script>
-
-
 
 <template>
   <div v-if="this.dataSesion !== null">
@@ -44,7 +42,7 @@ export default {
       </p>
       <p>
         <span class="bold">Butacas seleccionadas:</span>
-        {{ this.dataSesion.butacasSeleccionadas.join(', ') }}
+        {{ this.dataSesion.butacasSeleccionadas.join(", ") }}
       </p>
       <hr />
       <p class="mb-0">

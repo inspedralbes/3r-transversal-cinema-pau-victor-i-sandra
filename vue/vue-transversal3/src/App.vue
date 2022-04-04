@@ -8,12 +8,20 @@ import { RouterLink, RouterView } from "vue-router";
       <nav class="navbar navbar-expand-lg navbar-light bg-light header">
         <div class="container-fluid header">
           <RouterLink class="navbar-brand" to="/">
-            <img class="logo" src="./assets/logo.png" alt="logo del Pedralbes Cinema" />
+            <img
+              class="logo"
+              src="./assets/logo.png"
+              alt="logo del Pedralbes Cinema"
+            />
           </RouterLink>
           <div class="btn-group">
-            <a class="nav-link active" aria-current="page" href="#">Iniciar sesión</a>
+            <a class="nav-link active" aria-current="page" href="#"
+              >Iniciar sesión</a
+            >
             <div class="vr"></div>
-            <a class="nav-link active" aria-current="page" href="#">Registrarse</a>
+            <a class="nav-link active" aria-current="page" href="#"
+              >Registrarse</a
+            >
           </div>
         </div>
       </nav>

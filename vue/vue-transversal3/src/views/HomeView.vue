@@ -15,7 +15,7 @@ export default {
   },
 
   beforeCreate() {
-    fetch("http://192.168.1.145:8000/sesiones")
+    fetch("http://192.168.210.161:8000/sesiones")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

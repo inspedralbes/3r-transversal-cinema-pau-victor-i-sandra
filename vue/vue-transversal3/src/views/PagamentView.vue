@@ -14,10 +14,13 @@ export default {
 };
 </script>
 
-
 <template>
   <main>
-    <button class="btn btn-secondary volver" label="Volver" @click="retroceder()">
+    <button
+      class="btn btn-secondary volver"
+      label="Volver"
+      @click="retroceder()"
+    >
       <i class="bi bi-arrow-left"></i> Atrás
     </button>
     <div class="container">
@@ -33,15 +36,13 @@ export default {
         <div class="col-12 col-md-7">
           <MetodoPago />
         </div>
-
       </div>
     </div>
   </main>
 </template>
 
-
 <style>
-.titulo-pagament{
-  margin-bottom: 20px
+.titulo-pagament {
+  margin-bottom: 20px;
 }
 </style>

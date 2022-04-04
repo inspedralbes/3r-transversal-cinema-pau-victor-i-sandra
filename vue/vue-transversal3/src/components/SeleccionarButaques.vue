@@ -5,7 +5,7 @@ export default {
   computed: {
     ...mapStores(sessioStore),
   },
-  props: ['butacasOcupadas'],
+  props: ["butacasOcupadas"],
 
   data() {
     return {
@@ -22,7 +22,7 @@ export default {
   },
 
   beforeMount() {
-    this.ocupadas = this.butacasOcupadas.split(',');
+    this.ocupadas = this.butacasOcupadas.split(",");
   },
 
   methods: {
@@ -49,7 +49,10 @@ export default {
 
       // Seleccionar butaca y añadirla al array "seleccionadas"
       // seleccionadas y modifica su imagen (seimpre que no hayan 10 butacas seleccionadas aún)
-      else if (!this.ocupadas.includes(numButaca) && !this.seleccionadas.includes(numButaca)) {
+      else if (
+        !this.ocupadas.includes(numButaca) &&
+        !this.seleccionadas.includes(numButaca)
+      ) {
         if (this.seleccionadas.length < 10) {
           this.seleccionadas.push(numButaca);
           event.target.src = this.img_seleccionada;
@@ -57,14 +60,12 @@ export default {
         } else {
           alert("No puedes seleccionar más de 10 butacas");
         }
-      }
-
-      /* Deseleccionar butacas */
-      else if (this.seleccionadas.includes(numButaca)) {
+      } else if (this.seleccionadas.includes(numButaca)) {
+        /* Deseleccionar butacas */
         event.target.src = this.img_disponible;
         this.seleccionadas = this.seleccionadas.filter((butaca) => {
           return butaca != numButaca;
-        })
+        });
       }
 
       let piniaData = this.sessioStore.get;
@@ -79,9 +80,10 @@ export default {
       this.seleccionadas.forEach((butaca) => {
         if (piniaData.diaEspectador) {
           if (piniaData.vip) {
-            if (butaca >= 'b51' && butaca <= 'b60') { // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
+            if (butaca >= "b51" && butaca <= "b60") {
+              // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
               precio += 6;
-              console.log()
+              console.log();
             } else {
               precio += 4;
             }
@@ -90,7 +92,8 @@ export default {
           }
         } else {
           if (piniaData.vip) {
-            if (butaca >= 'b51' && butaca <= 'b60') { // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
+            if (butaca >= "b51" && butaca <= "b60") {
+              // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
               precio += 8;
             } else {
               precio += 6;
@@ -102,7 +105,7 @@ export default {
       });
 
       this.precioButacas = precio;
-    }
+    },
   },
 };
 </script>
@@ -143,7 +146,10 @@ export default {
         <div class="resultado">
           <p>
             Butacas:
-            <span>{{ this.seleccionadas.join(', ') }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}</span>
+            <span
+              >{{ this.seleccionadas.join(", ")
+              }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}</span
+            >
           </p>
           <p>
             Total:
@@ -154,7 +160,6 @@ export default {
     </section>
   </div>
 </template>
-
 
 <style>
 .mallaButacas {

@@ -14,20 +14,40 @@ export default {
       let ahora = moment();
       let horaPeli = moment(this.infoPelicula.hora, "HH:mm:ss");
       let finPeli = moment(this.infoPelicula.hora, "HH:mm:ss").add(2, "h"); // Add 2h despues de que empieze la peli
-      this.tiempo = (horaPeli > ahora) ? "Faltan " + moment(horaPeli.subtract(1, "h").valueOf() - ahora.valueOf()).format("HH:mm:ss") : (ahora > horaPeli && finPeli > ahora) ? "En directo" : "Ya vista";
-      this.disabled = (ahora > finPeli) ? 1 : 0; //Si la peli ya se ha visto, no se pueden comprar entradas...
+      this.tiempo =
+        horaPeli > ahora
+          ? "Faltan " +
+            moment(
+              horaPeli.subtract(1, "h").valueOf() - ahora.valueOf()
+            ).format("HH:mm:ss")
+          : ahora > horaPeli && finPeli > ahora
+          ? "En directo"
+          : "Ya vista";
+      this.disabled = ahora > finPeli ? 1 : 0; //Si la peli ya se ha visto, no se pueden comprar entradas...
     }, 1000);
+  },
+  beforeCreate() {
+    fetch(
+      "https://www.omdbapi.com/?apikey=5149518a&i=" +
+        this.infoPelicula.peli.idPeli
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.masInfoPeli = data;
+        console.log("hola mira aqui", this.masInfoPeli);
+      });
   },
 
   data() {
     return {
       tiempo: null,
-      disabled: 0
+      disabled: 0,
+      masInfoPeli: 0,
     };
   },
 
   methods: {
-    tiempoRestante: function () { },
+    tiempoRestante: function () {},
   },
 };
 </script>
@@ -42,24 +62,31 @@ export default {
       </div>
       <div class="row g-0">
         <div class="col-md-4">
-          <img :src="this.infoPelicula.peli.imgPeli" class="img-fluid rounded-start" alt="..." />
+          <img
+            :src="this.infoPelicula.peli.imgPeli"
+            class="img-fluid rounded-start"
+            alt="..."
+          />
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <h3 class="card-title">{{ this.infoPelicula.peli.nombrePeli }}</h3>
-            <div class="card-text">
+            <div v-if="typeof this.masInfoPeli === 'object'" class="card-text">
               <p>
-                <span class="underlined">Sinopsis:</span>
+                <span class="underlined">Sinopsis: </span
+                >{{ this.masInfoPeli.Plot }}
               </p>
               <p>
-                <span class="underlined">Duración:</span>
+                <span class="underlined">Duración: </span
+                >{{ this.masInfoPeli.Runtime }}
               </p>
             </div>
             <RouterLink
               class="btn btn-primary"
-              :class="[this.disabled ? 'isDisabled': '']"
+              :class="[this.disabled ? 'isDisabled' : '']"
               :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
-            >Comprar entradas</RouterLink>
+              >Comprar entradas</RouterLink
+            >
             <RouterView />
           </div>
         </div>
@@ -72,7 +99,11 @@ export default {
       <div class="tiempoRestante">
         <span>{{ this.tiempo }}</span>
       </div>
-      <img class="card-img-top" :src="this.infoPelicula.peli.imgPeli" salt="Card image cap" />
+      <img
+        class="card-img-top"
+        :src="this.infoPelicula.peli.imgPeli"
+        salt="Card image cap"
+      />
       <div class="card-body">
         <div class="row">
           <div class="col-9">
@@ -92,9 +123,10 @@ export default {
           <div class="col">
             <RouterLink
               class="btn btn-primary"
-              :class="[this.disabled ? 'isDisabled': '']"
+              :class="[this.disabled ? 'isDisabled' : '']"
               :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
-            >Comprar entradas</RouterLink>
+              >Comprar entradas</RouterLink
+            >
             <RouterView />
           </div>
         </div>
@@ -110,12 +142,19 @@ export default {
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Más información sobre esta pelicula</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="exampleModalLabel">
+              Más información sobre esta pelicula
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
-            <p>Sinopsis:</p>
-            <p>Duración:</p>
+            <p>Sinopsis: {{ this.masInfoPeli.Plot }}</p>
+            <p>Duración: {{ this.masInfoPeli.Runtime }}</p>
           </div>
         </div>
       </div>
@@ -141,8 +180,8 @@ export default {
 }
 
 .isDisabled {
-    opacity: 0.5;
-    pointer-events: none;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 @media only screen and (min-width: 768px) {

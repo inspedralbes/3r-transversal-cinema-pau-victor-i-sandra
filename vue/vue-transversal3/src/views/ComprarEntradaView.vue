@@ -1,21 +1,3 @@
-<<<<<<< Updated upstream
-=======
-<template>
-  <div>
-    <q-btn flat class="btn btn-secondary" label="Volver" @click="retroceder()"
-      >Volver</q-btn
-    >
-
-    <h1>COMPRAR ENTRADES DE LA SESION {{ $route.params.idSesion }}</h1>
-    <CardPeliGeneral :peliInfo="peliSeleccionada" />
-    <SeleccionarButaques />
-    <RouterLink class="btn btn-primary" to="/pagament"
-      >Comprar Entrades</RouterLink
-    >
-    <RouterView />
-  </div>
-</template>
->>>>>>> Stashed changes
 <script>
 import CardPeliGeneral from "@/components/CardPeliGeneral.vue";
 import SeleccionarButaques from "@/components/SeleccionarButaques.vue";
@@ -40,8 +22,8 @@ export default {
   beforeCreate() {
     console.log(window.location.href.split("/", 5)[4]);
     fetch(
-      "http://192.168.1.145:8000/sesionEspecifica?idSesion=" +
-      window.location.href.split("/", 5)[4]
+      "http://192.168.210.161:8000/sesionEspecifica?idSesion=" +
+        window.location.href.split("/", 5)[4]
     )
       .then((response) => response.json())
       .then((data) => {
@@ -61,7 +43,11 @@ export default {
 
 <template>
   <main>
-    <button class="btn btn-secondary volver" label="Volver" @click="retroceder()">
+    <button
+      class="btn btn-secondary volver"
+      label="Volver"
+      @click="retroceder()"
+    >
       <i class="bi bi-arrow-left"></i> Atrás
     </button>
     <div class="container">
@@ -75,11 +61,15 @@ export default {
         </div>
 
         <div class="col-12 col-md-7 butacasInfo">
-          <SeleccionarButaques :butacasOcupadas="this.peliSeleccionada.butacasOcupadas" />
+          <SeleccionarButaques
+            :butacasOcupadas="this.peliSeleccionada.butacasOcupadas"
+          />
         </div>
 
         <div class="col-12 text-center botonComprarEntradas">
-          <RouterLink class="btn btn-primary" to="/pagament">Comprar entradas</RouterLink>
+          <RouterLink class="btn btn-primary" to="/pagament"
+            >Comprar entradas</RouterLink
+          >
           <RouterView />
         </div>
       </div>
@@ -112,6 +102,4 @@ export default {
     margin: 30px 0 0 0;
   }
 }
-
-
 </style>
