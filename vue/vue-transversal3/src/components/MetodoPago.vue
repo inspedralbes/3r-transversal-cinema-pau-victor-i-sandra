@@ -34,7 +34,9 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          this.datosPinia.estadoCompra = data.status;
+          this.datosPinia.msg = data.msg;
+          this.sessioStore.set(this.datosPinia);
         });
     },
 
