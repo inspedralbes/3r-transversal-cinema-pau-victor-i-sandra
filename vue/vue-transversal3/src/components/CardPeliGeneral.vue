@@ -1,21 +1,24 @@
 <template>
-  <div class="card" style="width: 18rem">
+  <div class="card shadow-sm p-3 mb-5 bg-white rounded" style="width: 18rem">
     <img
       class="card-img-top"
       :src="this.peliInfo.peli.imgPeli"
       alt="Card image cap"
     />
     <div class="card-body">
-      <h5 class="card-title">{{ this.peliInfo.peli.nombrePeli }}</h5>
-      <h5 class="card-title">{{ this.peliInfo.fecha }}</h5>
-      <h5 class="card-title">{{ this.peliInfo.hora }}</h5>
+      <h4 class="card-title">{{ this.peliInfo.peli.nombrePeli }}</h4>
+      <h6 class="card-text">{{ this.peliInfo.fecha }}</h6>
+      <h6 class="card-text">{{ this.peliInfo.hora }}</h6>
     </div>
   </div>
 </template>
+
+
+
 <script>
-export default {
-  props: ["peliInfo"],
-};
+  export default {
+    props: ["peliInfo"],
+  };
 </script>
 
 <style></style>
