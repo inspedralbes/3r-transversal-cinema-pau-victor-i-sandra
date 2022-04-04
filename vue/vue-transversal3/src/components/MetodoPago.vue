@@ -34,19 +34,21 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          this.datosPinia.estadoCompra = data.status;
+          this.datosPinia.msg = data.msg;
+          this.sessioStore.set(this.datosPinia);
         });
     },
 
     precioEntradas: function (butaca) {
       let precio = 0;
+      butaca = butaca.split('b')[1];
 
       if (this.datosPinia.diaEspectador) {
         if (this.datosPinia.vip) {
-          if (butaca >= "b51" && butaca <= "b60") {
+          if (butaca >= "51" && butaca <= "60") {
             // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
             precio += 6;
-            console.log();
           } else {
             precio += 4;
           }
@@ -55,7 +57,7 @@ export default {
         }
       } else {
         if (this.datosPinia.vip) {
-          if (butaca >= "b51" && butaca <= "b60") {
+          if (butaca >= "51" && butaca <= "60") {
             // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
             precio += 8;
           } else {

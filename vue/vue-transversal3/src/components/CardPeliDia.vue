@@ -34,7 +34,6 @@ export default {
       .then((response) => response.json())
       .then((data) => {
         this.masInfoPeli = data;
-        console.log("hola mira aqui", this.masInfoPeli);
       });
   },
 

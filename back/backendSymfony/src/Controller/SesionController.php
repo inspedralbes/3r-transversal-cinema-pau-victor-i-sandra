@@ -68,9 +68,9 @@ class SesionController extends AbstractController
                 $sesionRepository->guardarButacasOcupadas($butacasOcupadas, $dataEntradas['idSesion']);
                 $entradaRepository->guardarEntradas($dataEntradas['idUsuari'], $dataEntradas['idSesion'], $butaca, $precio);
             }
-            return new JsonResponse(['status' => 'Compra realizada!'], Response::HTTP_OK);
+            return new JsonResponse(['status' => true, 'msg' => 'Compra realizada!'], Response::HTTP_OK);
         } else {
-            return new JsonResponse(['status' => '¡Error! Compra no realizada!'], Response::HTTP_OK);
+            return new JsonResponse(['status' => false, 'msg' => '¡Error! Compra no realizada!'], Response::HTTP_OK);
         }
     }
 
@@ -78,7 +78,7 @@ class SesionController extends AbstractController
     public function devolverEntradas(Request $request, EntradaRepository $entradaRepository): JsonResponse
     {
         $dades = $entradaRepository->seleccionarEntradasUsuario($request->query->get('idSesion'), $request->query->get('idUsuario'));
-        $entradas = array("entradas" => []);
+        $entradas = array("entradas" => []); 
 
         foreach ($dades as $entrada) {
             array_push($entradas['entradas'], [
