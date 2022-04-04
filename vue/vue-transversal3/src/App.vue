@@ -1,5 +1,11 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
+export default {
+  components: {
+    RouterLink,
+    RouterView,
+  },
+};
 </script>
 
 <template>
@@ -18,6 +24,9 @@ import { RouterLink, RouterView } from "vue-router";
             <a class="nav-link active" aria-current="page" href="#"
               >Iniciar sesión</a
             >
+            <RouterLink class="navbar-brand" to="/admin">
+              <label class="nav-link active">Admin</label>
+            </RouterLink>
             <div class="vr"></div>
             <a class="nav-link active" aria-current="page" href="#"
               >Registrarse</a

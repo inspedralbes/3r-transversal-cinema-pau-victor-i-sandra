@@ -72,8 +72,6 @@ export default {
 };
 </script>
 
-
-
 <template>
   <h2>Pagar</h2>
   <form class="row g-3">
