@@ -12,6 +12,7 @@ export default {
       ocupadas: null,
       seleccionadas: [],
       precioButacas: 0,
+      infoPeli: 0,
 
       /* Imagenes tipo butacas */
       img_disponible: "../../src/assets/Butacas/butaca_disponible.png",
@@ -23,6 +24,7 @@ export default {
 
   beforeMount() {
     this.ocupadas = this.butacasOcupadas.split(",");
+    this.infoPeli = this.sessioStore.get;
   },
 
   methods: {
@@ -83,7 +85,6 @@ export default {
             if (butaca >= "b51" && butaca <= "b60") {
               // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
               precio += 6;
-              console.log();
             } else {
               precio += 4;
             }
@@ -129,7 +130,7 @@ export default {
             />
             <img
               v-if="estalibre('b' + butaca)"
-              :src="this.img_disponible"
+              :src="(this.infoPeli.vip && ((butaca >= '51') && (butaca <= '60'))) ? this.img_vip : this.img_disponible"
               @click="SeleccionarButaca('b' + butaca, $event)"
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
@@ -146,10 +147,11 @@ export default {
         <div class="resultado">
           <p>
             Butacas:
-            <span
-              >{{ this.seleccionadas.join(", ")
-              }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}</span
-            >
+            <span>
+              {{
+                this.seleccionadas.join(", ")
+              }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}
+            </span>
           </p>
           <p>
             Total:
