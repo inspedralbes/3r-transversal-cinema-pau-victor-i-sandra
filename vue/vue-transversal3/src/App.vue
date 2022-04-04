@@ -20,13 +20,11 @@ export default {
               alt="logo del Pedralbes Cinema"
             />
           </RouterLink>
-          <div class="btn-group">
-            <a class="nav-link active" aria-current="page" href="#"
-              >Consultar entradas</a
-            >
+          <div class="btn-group" role="group">
+            <a class="nav-link link" aria-current="page" href="#">Consultar entradas</a>
             <div class="vr"></div>
-            <RouterLink class="navbar-brand" to="/admin">
-              <label class="nav-link active">Admin</label>
+            <RouterLink class="" to="/admin">
+              <a class="nav-link link">Admin</a>
             </RouterLink>
           </div>
         </div>
@@ -49,10 +47,15 @@ export default {
 .nav-link {
   color: #13afed;
   font-weight: 550;
+  font-size: 16px;
 }
 
 .nav-link:hover {
   color: #fdcb31;
+}
+
+a {
+  text-decoration: none;
 }
 
 .vr {
