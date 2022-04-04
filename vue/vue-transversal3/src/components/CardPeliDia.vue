@@ -64,7 +64,7 @@ export default {
     <br>
 
     <div class="card-horizontal d-none d-md-block ">
-      <div class="card mb-3 shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="card mb-3 shadow bg-white rounded">
         <div class="tiempoRestante">
           <span>{{ this.tiempo }}</span>
         </div>

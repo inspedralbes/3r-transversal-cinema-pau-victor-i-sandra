@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow-sm p-3 mb-5 bg-white rounded" style="width: 18rem">
+  <div class="card shadow-sm bg-white rounded" style="width: 18rem">
     <img
       class="card-img-top"
       :src="this.peliInfo.peli.imgPeli"
