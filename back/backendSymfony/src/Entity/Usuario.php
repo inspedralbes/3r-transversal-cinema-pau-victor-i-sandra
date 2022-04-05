@@ -25,9 +25,6 @@ class Usuario
     private $apellidos;
 
     #[ORM\Column(type: 'string', length: 50)]
-    private $username;
-
-    #[ORM\Column(type: 'string', length: 50)]
     private $email;
 
     #[ORM\OneToMany(mappedBy: 'usuario', targetEntity: Entrada::class)]
@@ -80,18 +77,6 @@ class Usuario
     public function setApellidos(?string $apellidos): self
     {
         $this->apellidos = $apellidos;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
 
         return $this;
     }

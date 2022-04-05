@@ -69,10 +69,40 @@ class SesionRepository extends ServiceEntityRepository
     public function guardarButacasOcupadas($butacasOcupadas, $idSesion)
     {
         $conn = $this->getEntityManager()->getConnection();
-
         $sql = "UPDATE sesion SET butacas_ocupadas = '$butacasOcupadas' WHERE id = $idSesion";
-   
         $conn->prepare($sql)->executeQuery();
+    }
+
+    public function anadirSesion($dataSesion)
+    {
+        // print_r($dataSesion);
+        foreach ($dataSesion as $sesion => $data) {
+            $$sesion = $data;
+        }
+
+        if ($this->comprovarExisteSesion($fecha)) {
+            $conn = $this->getEntityManager()->getConnection();
+            $sql = "INSERT INTO `sesion`(fecha, hora, vip, dia_espectador, id_peli, nombre_peli, ano_peli, img_peli) 
+                    VALUES ('$fecha', '$hora', $vip, $diaEspectador, '$idPeli', '$nombrePeli', '$anoPeli', '$imgPeli')";
+            $conn->prepare($sql)->executeQuery();
+            $r = 1;
+        } else {
+            $r = 0;
+        }
+
+        return $r;
+    }
+
+    public function comprovarExisteSesion($fecha)
+    {
+        $res = $this->createQueryBuilder('s')
+            ->select('s.id as ID')
+            ->where('s.fecha = :fecha')
+            ->setParameter('fecha', $fecha)
+            ->getQuery()
+            ->getResult();
+
+        return (empty($res)) ? 1 : 0;
     }
 
     // /**

@@ -36,7 +36,7 @@ class Sesion
     #[ORM\Column(type: 'string', length: 255)]
     private $nombrePeli;
 
-    #[ORM\Column(type: 'date', nullable: true)]
+    #[ORM\Column(type: 'string', length: 5, nullable: true)]
     private $anoPeli;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -144,12 +144,12 @@ class Sesion
         return $this;
     }
 
-    public function getAnoPeli(): ?\DateTimeInterface
+    public function getAnoPeli(): ?string
     {
         return $this->anoPeli;
     }
 
-    public function setAnoPeli(?\DateTimeInterface $anoPeli): self
+    public function setAnoPeli(string $anoPeli): self
     {
         $this->anoPeli = $anoPeli;
 
