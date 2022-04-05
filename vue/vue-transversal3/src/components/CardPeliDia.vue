@@ -101,13 +101,17 @@ export default {
                   {{ this.masInfoPeli.Runtime }}
                 </p>
               </div>
-              <RouterLink
-                class="btn btn-primary text-right"
+
+              <div class="text-center">
+<RouterLink
+                class="btn btn-primary"
                 :class="[this.disabled ? 'isDisabled' : '']"
                 :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
                 >Comprar entradas</RouterLink
               >
               <RouterView />
+              </div>
+              
             </div>
           </div>
         </div>
