@@ -1,16 +1,13 @@
 <template>
   <div>
-    <RouterLink
-      to="/adminEditarPeli"
+    <button
       type="button"
-      @click="anadirPeli"
+      @click="$emit('peli')"
       class="btn btn-success"
       id="anadirPeli"
-      :peliEditar="this.botonPelicula"
     >
       Añadir
-    </RouterLink>
-    <RouterView />
+    </button>
   </div>
 </template>
 <script>
