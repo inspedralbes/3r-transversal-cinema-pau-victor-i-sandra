@@ -78,7 +78,8 @@ export default {
 
     crearCuenta: function() {
       this.mostrarIniciarSesion=false;
-    }
+    },
+  
   },
 };
 </script>
@@ -94,16 +95,16 @@ export default {
 
       <div class="row g-3 margin15">
         <div class="col-md-5">
-          <label for="titular" class="form-label text-left">Nombre</label>
-          <input type="text" class="form-control" id="titular" />
+          <label for="nombre" class="form-label text-left">Nombre</label>
+          <input type="text" class="form-control" id="nombre" />
         </div>
         <div class="col-md-5">
-          <label for="titular" class="form-label">Apellido</label>
-          <input type="text" class="form-control" id="titular" />
+          <label for="apellido" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="apellido" />
         </div>
         <div class="col-md-10">
-          <label for="titular" class="form-label">Email</label>
-          <input type="email" class="form-control" id="titular" />
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" />
         </div>
         <div class="col-md-5">
           <label for="inputPassword4" class="form-label">Contraseña</label>
@@ -163,6 +164,7 @@ export default {
             >Comprar</RouterLink
           >
           <RouterView />
+          
           <br/><br />
           <hr/>
         </div>
