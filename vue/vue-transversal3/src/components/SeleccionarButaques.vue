@@ -9,7 +9,7 @@ export default {
 
   data() {
     return {
-      ocupadas: null,
+      ocupadas: [],
       seleccionadas: [],
       precioButacas: 0,
       infoPeli: 0,
@@ -22,10 +22,13 @@ export default {
     };
   },
 
-  beforeMount() {
-    this.ocupadas = this.butacasOcupadas.split(",");
+  created() {
     this.infoPeli = this.sessioStore.get;
+    if (this.butacasOcupadas != null) {
+      this.ocupadas = this.butacasOcupadas.split(",");
+    }
   },
+
 
   methods: {
     // Comprueba si la butaca está ocupada
@@ -153,7 +156,8 @@ export default {
           <p>
             Butacas:
             <span>
-              {{ this.seleccionadas.join(", ")
+              {{
+                this.seleccionadas.join(", ")
               }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}
             </span>
           </p>
@@ -169,8 +173,7 @@ export default {
           class="btn btn-primary"
           :class="[!this.seleccionadas.length ? 'isDisabled' : '']"
           to="/pagament"
-          >Comprar entradas</RouterLink
-        >
+        >Comprar entradas</RouterLink>
         <RouterView />
       </div>
     </section>
