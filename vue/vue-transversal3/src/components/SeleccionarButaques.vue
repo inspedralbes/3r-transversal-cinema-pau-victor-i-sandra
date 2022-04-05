@@ -116,10 +116,11 @@ export default {
   <div>
     <section class="seleccionarButacas">
       <div class="tituloSeleccionarButacas">
-        <h2 class="text-center">Selecciona las butacas</h2>
+        <h3 class="text-center">Selecciona las butacas</h3>
       </div>
 
-      <div>
+      <div class="container" align="center">
+        <img src="../../src/assets/Butacas/pantalla.png" class="pantalla">
         <div class="mallaButacas">
           <div :key="index" v-for="(butaca, index) in 120">
             <img
@@ -159,7 +160,7 @@ export default {
           </p>
           <p>
             Total:
-            <span>{{ this.precioButacas }}€</span>
+            <span>{{ this.precioButacas }},00€</span>
           </p>
         </div>
       </div>
@@ -184,6 +185,10 @@ export default {
   grid-template-rows: repeat(12, auto);
   justify-content: center;
   margin: 10px 0 15px 0;
+}
+
+.container {
+  width: 90%;
 }
 
 .mallaButacas div {
@@ -222,6 +227,11 @@ export default {
 
 .tituloSeleccionarButacas {
   margin: 0 0 20px 0;
+}
+
+.pantalla {
+  width: 90%;
+  margin-bottom: 8px;
 }
 
 @media only screen and (min-width: 992px) {
