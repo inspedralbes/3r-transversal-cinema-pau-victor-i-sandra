@@ -52,7 +52,7 @@ class Sesion
 
     public function __toString()
     {
-        return $this->id;
+        return $this->nombrePeli . " - " . $this->fecha->format('d/m/Y') . " " . $this->hora->format('H:i:s');
     }
 
     public function getId(): ?int

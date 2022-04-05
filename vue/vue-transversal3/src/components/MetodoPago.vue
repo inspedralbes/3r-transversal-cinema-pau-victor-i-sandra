@@ -42,7 +42,7 @@ export default {
 
     precioEntradas: function (butaca) {
       let precio = 0;
-      butaca = butaca.split('b')[1];
+      butaca = butaca.split("b")[1];
 
       if (this.datosPinia.diaEspectador) {
         if (this.datosPinia.vip) {
@@ -79,7 +79,7 @@ export default {
     <div class="col-md-10 text-center">
       <h2>Inicia sesión</h2>
     </div>
-    
+
     <form class="row g-3 margin15">
       <div class="col-md-5">
         <label for="titular" class="form-label text-left">Nombre</label>
@@ -106,32 +106,23 @@ export default {
           >Comprar</RouterLink
         >
         <RouterView />
-        <br><br>
-        <hr>
-        </div>
-      </form>
-
-
-        <div class="col-md-10 text-center margin20">
-          <h4>¿No tienes usuario?</h4>
-          <br>
-          <RouterLink
-            @click.native="this.comprarEntradas"
-            to="/registro"
-            >Crea tu cuenta</RouterLink
-          >
-          <RouterView />
-
+        <br /><br />
+        <hr />
       </div>
-      
-    
+    </form>
+
+    <div class="col-md-10 text-center margin20">
+      <h4>¿No tienes usuario?</h4>
+      <br />
+      <RouterLink @click.native="this.comprarEntradas" to="/registro"
+        >Crea tu cuenta</RouterLink
+      >
+      <RouterView />
+    </div>
   </div>
 </template>
 
-
 <style>
-
-
 .margin10 {
   margin: 10px;
 }
@@ -143,6 +134,4 @@ export default {
 .margin15 {
   margin: 20px;
 }
-
-
 </style>

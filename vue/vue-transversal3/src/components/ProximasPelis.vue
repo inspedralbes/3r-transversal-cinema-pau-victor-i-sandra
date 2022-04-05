@@ -16,9 +16,10 @@ export default {
 </script>
 
 <template>
-  <div class="prox_sesiones"><br>
+  <div class="prox_sesiones">
+    <br />
     <h1 class="titulo_css">Próximas sesiones</h1>
-    <br>
+    <br />
     <section class="container">
       <div class="row gy-5">
         <div
@@ -41,18 +42,15 @@ export default {
 </template>
 
 <style>
+.prox_sesiones {
+  margin: 60px;
+}
 
-  .prox_sesiones {
-    margin: 60px;
-  }
+.card {
+  margin: auto;
+}
 
-  .card {
-    margin: auto;
-  }
-
-  .titulo_css {
-    font-variant: small-caps;
-  }
-
-  
+.titulo_css {
+  font-variant: small-caps;
+}
 </style>
