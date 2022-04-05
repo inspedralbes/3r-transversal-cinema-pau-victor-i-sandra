@@ -68,7 +68,7 @@ export default {
       <option value="1">Si</option>
     </select>
     <AdminBuscador />
-    <a class="btn btn-warning" @click="GuardarSesion" id="btn_guardar"
+    <a class="btn btn-dark" @click="GuardarSesion" id="btn_guardar"
       >Guardar Sesion</a
     >
   </main>
