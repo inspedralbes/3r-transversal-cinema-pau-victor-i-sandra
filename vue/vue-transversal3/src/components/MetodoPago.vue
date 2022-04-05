@@ -106,17 +106,15 @@ export default {
           >Comprar</RouterLink
         >
         <RouterView />
-        <br /><br />
-        <hr />
+        <br/><br />
+        <hr/>
       </div>
     </form>
 
     <div class="col-md-10 text-center margin20">
       <h4>¿No tienes usuario?</h4>
       <br />
-      <RouterLink @click.native="this.comprarEntradas" to="/registro"
-        >Crea tu cuenta</RouterLink
-      >
+      <RouterLink>Crea tu cuenta y <br> compra ahora</RouterLink>
       <RouterView />
     </div>
   </div>

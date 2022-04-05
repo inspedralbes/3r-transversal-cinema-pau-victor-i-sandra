@@ -66,7 +66,7 @@ export default {
 
 <template>
   <div class="sesion_hoy">
-    <h2 class="text-center titulo_css">Sesión de hoy</h2>
+    <h1 class="text-center titulo_css">Sesión de hoy</h1>
     <br />
 
     <div class="card-horizontal d-none d-md-block">
