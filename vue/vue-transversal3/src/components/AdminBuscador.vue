@@ -14,8 +14,15 @@
       <a class="btn" @click="buscarPeli" id="btn_search">
         <i class="bi bi-search"></i
       ></a>
+      <a class="btn" @click="ocultarPelis" id="btn_ocultar">
+        <i class="bi bi-arrow-down-square"></i
+      ></a>
     </div>
-    <div class="row">
+    <div
+      id="mostrarAdminPelis"
+      :class="{ ocultar: !mostrarbusqueda }"
+      class="row"
+    >
       <div
         class="col-md-3"
         :key="index"
@@ -36,6 +43,7 @@ export default {
     return {
       search: "",
       arrayPeliculas: 0,
+      mostrarbusqueda: true,
     };
   },
   methods: {
@@ -45,7 +53,12 @@ export default {
         .then((data) => {
           console.log(data);
           this.arrayPeliculas = data.Search;
+          this.mostrarbusqueda = true;
         });
+    },
+    ocultarPelis() {
+      this.mostrarbusqueda = false;
+      console.log("hola");
     },
   },
   components: {
@@ -53,3 +66,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.ocultar {
+  display: none;
+}
+</style>
