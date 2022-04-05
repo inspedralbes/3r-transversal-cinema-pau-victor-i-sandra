@@ -8,14 +8,13 @@ export default {
 
   data() {
     return {
-      piniaData: 0
-    }
+      piniaData: 0,
+    };
   },
 
   mounted() {
     this.piniaData = this.sessioStore.get;
   },
-
 
   methods: {
     goHome() {
@@ -44,7 +43,7 @@ export default {
             </p>
           </div>
           <div v-else>
-            <p>Ya has comprado entradas para esta sesion... </p>
+            <p>Ya has comprado entradas para esta sesion...</p>
             <p>¿Quieres verlas? Haz click <a href=".">aquí!</a></p>
           </div>
         </div>

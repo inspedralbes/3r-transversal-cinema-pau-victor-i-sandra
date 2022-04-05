@@ -4,10 +4,8 @@ export default {
     return {};
   },
   props: ["peliEditar"],
-  methods: {
-    verarray() {
-      console.log(this.peliEditar);
-    },
+  beforeCreate() {
+    console.log(this.peliEditar);
   },
 };
 </script>

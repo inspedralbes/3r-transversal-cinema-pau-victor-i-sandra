@@ -80,7 +80,7 @@ export default {
     precioEntradas: function (piniaData) {
       let precio = 0;
       this.seleccionadas.forEach((butaca) => {
-        butaca = butaca.split('b')[1];
+        butaca = butaca.split("b")[1];
         if (piniaData.diaEspectador) {
           if (piniaData.vip) {
             if (butaca >= "51" && butaca <= "60") {
@@ -131,7 +131,11 @@ export default {
             />
             <img
               v-if="estalibre('b' + butaca)"
-              :src="(this.infoPeli.vip && ((butaca >= '51') && (butaca <= '60'))) ? this.img_vip : this.img_disponible"
+              :src="
+                this.infoPeli.vip && butaca >= '51' && butaca <= '60'
+                  ? this.img_vip
+                  : this.img_disponible
+              "
               @click="SeleccionarButaca('b' + butaca, $event)"
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
@@ -149,8 +153,7 @@ export default {
           <p>
             Butacas:
             <span>
-              {{
-                this.seleccionadas.join(", ")
+              {{ this.seleccionadas.join(", ")
               }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}
             </span>
           </p>
@@ -166,7 +169,8 @@ export default {
           class="btn btn-primary"
           :class="[!this.seleccionadas.length ? 'isDisabled' : '']"
           to="/pagament"
-        >Comprar entradas</RouterLink>
+          >Comprar entradas</RouterLink
+        >
         <RouterView />
       </div>
     </section>
