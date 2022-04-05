@@ -31,7 +31,7 @@ export default {
       </nav>
     </div>
   </header>
-  <RouterView />
+  <RouterView/>
 </template>
 
 <style>
