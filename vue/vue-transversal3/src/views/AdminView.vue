@@ -45,25 +45,26 @@ export default {
 </script>
 <template>
   <main>
-    <h1>Crear una sesion</h1>
-    <label>Data: </label>
-    <input type="date" id="date" name="trip-start" value="2022-04-01" />
+    <h1>Crear una sesión</h1>
+    <label>Fecha: </label>
+    <input class="datepicker" type="date" id="date" name="trip-start" value="2022-04-01" />
 
     <label for="hora">Hora: </label>
-    <select name="hora" id="hora">
+    <select class="form-select" aria-label="selectHora" name="hora" id="hora">
+      <option selected>Hora</option>
       <option value="20:00:00">20:00:00</option>
       <option value="18:00:00">18:00:00</option>
       <option value="16:00:00">16:00:00</option>
     </select>
 
     <label for="vip">VIP: </label>
-    <select name="vip" id="vip">
+    <select class="form-select" name="vip" id="vip">
       <option value="0">No</option>
       <option value="1">Si</option>
     </select>
 
     <label for="espectador">Dia del espectador: </label>
-    <select name="espectador" id="espectador">
+    <select class="form-select" name="espectador" id="espectador">
       <option value="0">No</option>
       <option value="1">Si</option>
     </select>
@@ -73,3 +74,10 @@ export default {
     >
   </main>
 </template>
+
+
+<style scoped>
+.form-select{
+  width: 100px;
+}
+</style>
