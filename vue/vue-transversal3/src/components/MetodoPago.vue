@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       datosPinia: null,
+      mostrarIniciarSesion: true,
     };
   },
 
@@ -47,7 +48,7 @@ export default {
       if (this.datosPinia.diaEspectador) {
         if (this.datosPinia.vip) {
           if (butaca >= "51" && butaca <= "60") {
-            // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
+            // b51 - b60 => butacas entre las que se encuntran las VIP (ambas incluidas)
             precio += 6;
           } else {
             precio += 4;
@@ -58,7 +59,7 @@ export default {
       } else {
         if (this.datosPinia.vip) {
           if (butaca >= "51" && butaca <= "60") {
-            // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
+            // b51 - b60 => butacas entre las que se encuntran las VIP (ambas incluidas)
             precio += 8;
           } else {
             precio += 6;
@@ -70,53 +71,112 @@ export default {
 
       return precio;
     },
+
+    iniciarSesion: function() {
+      this.mostrarIniciarSesion=true;
+    },
+
+    crearCuenta: function() {
+      this.mostrarIniciarSesion=false;
+    }
   },
 };
 </script>
 
 <template>
-  <div class="justify-content-center align-items-center">
-    <div class="col-md-10 text-center">
-      <h2>Inicia sesión</h2>
-    </div>
+  <div class="justify-content-center align-items-center margin15">
 
-    <form class="row g-3 margin15">
-      <div class="col-md-5">
-        <label for="titular" class="form-label text-left">Nombre</label>
-        <input type="text" class="form-control" id="titular" />
-      </div>
-      <div class="col-md-5">
-        <label for="titular" class="form-label">Apellido</label>
-        <input type="text" class="form-control" id="titular" />
-      </div>
-      <div class="col-md-10">
-        <label for="titular" class="form-label">Email</label>
-        <input type="email" class="form-control" id="titular" />
-      </div>
-      <div class="col-md-5">
-        <label for="inputPassword4" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="inputPassword4" />
-      </div>
-
+    <!-- FORMULARIO INICIAR SESIÓN -->
+    <div id="iniciar_sesion " :class="{ocultar : !mostrarIniciarSesion}">
       <div class="col-md-10 text-center">
-        <RouterLink
-          class="btn btn-primary margin10"
-          @click.native="this.comprarEntradas"
-          to="/realitzatpagament"
-          >Comprar</RouterLink
-        >
-        <RouterView />
-        <br/><br />
-        <hr/>
+        <h2>Inicia sesión</h2>
       </div>
-    </form>
 
-    <div class="col-md-10 text-center margin20">
-      <h4>¿No tienes usuario?</h4>
-      <br />
-      <RouterLink>Crea tu cuenta y <br> compra ahora</RouterLink>
-      <RouterView />
+      <div class="row g-3 margin15">
+        <div class="col-md-5">
+          <label for="titular" class="form-label text-left">Nombre</label>
+          <input type="text" class="form-control" id="titular" />
+        </div>
+        <div class="col-md-5">
+          <label for="titular" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="titular" />
+        </div>
+        <div class="col-md-10">
+          <label for="titular" class="form-label">Email</label>
+          <input type="email" class="form-control" id="titular" />
+        </div>
+        <div class="col-md-5">
+          <label for="inputPassword4" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="inputPassword4" />
+        </div>
+
+        <div class="col-md-10 text-center">
+          <RouterLink
+            class="btn btn-primary margin10"
+            @click.native="this.comprarEntradas"
+            to="/realitzatpagament"
+            >Comprar</RouterLink
+          >
+          <RouterView />
+          <br/><br />
+          <hr/>
+        </div>
+      </div>
+
+      <div class="col-md-10 text-center margin20">
+        <h4>¿No tienes usuario?</h4>
+        <br />
+        <a href="#" @click="crearCuenta" class="link_crear_cuenta">Crea tu cuenta <br> y compra ahora</a>
+      </div>
     </div>
+
+
+    <!-- FORMULARIO CREAR USUARIO-->
+    <div id="crear_cuenta" :class="{ocultar : mostrarIniciarSesion}">
+      <div class="col-md-10 text-center">
+        <h2>Crear cuenta</h2>
+      </div>
+
+      <div class="row g-3 margin15">
+        <div class="col-md-5">
+          <label for="titular" class="form-label text-left">Nombre</label>
+          <input type="text" class="form-control" id="titular" />
+        </div>
+        <div class="col-md-5">
+          <label for="titular" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="titular" />
+        </div>
+        <div class="col-md-10">
+          <label for="titular" class="form-label">Email</label>
+          <input type="email" class="form-control" id="titular" />
+        </div>
+        <div class="col-md-5">
+          <label for="inputPassword4" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="inputPassword4" />
+        </div>
+
+        <div class="col-md-10 text-center">
+          <RouterLink
+            class="btn btn-primary margin10"
+            @click.native="this.comprarEntradas"
+            to="/realitzatpagament"
+            >Comprar</RouterLink
+          >
+          <RouterView />
+          <br/><br />
+          <hr/>
+        </div>
+      </div>
+
+      <div class="col-md-10 text-center margin20">
+        <h4>¿Ya eres usuario?</h4>
+        <br />
+        <a href="#" @click="iniciarSesion" class="link_iniciar_sesion">Inicia sesión <br> y compra ahora</a>
+      </div>
+
+    </div>
+
+
   </div>
 </template>
 
@@ -132,4 +192,15 @@ export default {
 .margin15 {
   margin: 20px;
 }
+
+.iniciar_sesion {
+  display:none;
+}
+
+.ocultar {
+  display: none;
+}
+
+
+
 </style>
