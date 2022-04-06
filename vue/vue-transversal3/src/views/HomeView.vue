@@ -15,7 +15,7 @@ export default {
   },
 
   beforeCreate() {
-    fetch("http://cinema1back.alumnes.inspedralbes.cat/sesiones")
+    fetch("http://192.168.210.161:8000/sesiones")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

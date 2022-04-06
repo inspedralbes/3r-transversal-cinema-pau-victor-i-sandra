@@ -30,7 +30,7 @@ export default {
 
       entradas.append("butacasReservadas", JSON.stringify(butacasReservadas));
 
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/entradas", {
+      fetch("http://192.168.210.161:8000/entradas", {
         method: "POST",
         body: entradas,
       })
@@ -93,7 +93,7 @@ export default {
         "password",
         document.getElementById("password2").value
       );
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/registrar", {
+      fetch("http://192.168.210.161:8000/registrar", {
         method: "POST",
         body: crearCuenta,
       })
@@ -109,7 +109,7 @@ export default {
         "password",
         document.getElementById("password1").value
       );
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/login", {
+      fetch("http://192.168.210.161:8000/login", {
         method: "POST",
         body: iniciarSesion,
       })
