@@ -29,7 +29,6 @@ export default {
     }
   },
 
-
   methods: {
     // Comprueba si la butaca está ocupada
     estaocupada: function (n) {
@@ -123,7 +122,7 @@ export default {
       </div>
 
       <div class="container" align="center">
-        <img src="../../src/assets/Butacas/pantalla.png" class="pantalla">
+        <img src="../../src/assets/Butacas/pantalla.png" class="pantalla" />
         <div class="mallaButacas">
           <div :key="index" v-for="(butaca, index) in 120">
             <img
@@ -157,8 +156,7 @@ export default {
           <p>
             Butacas:
             <span>
-              {{
-                this.seleccionadas.join(", ")
+              {{ this.seleccionadas.join(", ")
               }}{{ this.seleccionadas.length > 0 ? "." : "ninguna" }}
             </span>
           </p>
@@ -174,7 +172,8 @@ export default {
           class="btn btn-primary"
           :class="[!this.seleccionadas.length ? 'isDisabled' : '']"
           to="/pagament"
-        >Comprar entradas</RouterLink>
+          >Comprar entradas</RouterLink
+        >
         <RouterView />
       </div>
     </section>

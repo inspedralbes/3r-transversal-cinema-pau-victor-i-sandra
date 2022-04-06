@@ -22,13 +22,7 @@ export default {
 <template>
   <div v-if="this.dataSesion !== null">
     <div
-      class="
-        resumen
-        alert alert-dark
-        justify-content-center
-        align-items-center
-        text-center
-      "
+      class="resumen alert alert-dark justify-content-center align-items-center text-center"
       role="alert"
     >
       <h2 class="alert-heading text-center bold">
