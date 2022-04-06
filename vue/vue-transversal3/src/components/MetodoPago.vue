@@ -103,6 +103,9 @@ export default {
           this.msgRegister = data.msg;
           if (data.status == true) {
             this.bien = true;
+            this.datosPinia = this.sessioStore.get;
+            this.datosPinia.idUsuario = data.idUsuario;
+            this.sessioStore.set(this.datosPinia);
           }
         });
     },
@@ -142,14 +145,6 @@ export default {
       </div>
 
       <div class="row g-3 margin15">
-        <!-- <div class="col-md-5">
-          <label for="nombre" class="form-label text-left">Nombre</label>
-          <input type="text" class="form-control" id="nombre1" />
-        </div>
-        <div class="col-md-5">
-          <label for="apellido" class="form-label">Apellido</label>
-          <input type="text" class="form-control" id="apellido1" />
-        </div>-->
         <div class="col-md-12" v-if="this.msgLogin != null">
           <div class="alert alert-primary" role="alert">{{ this.msgLogin }}</div>
         </div>
@@ -200,9 +195,7 @@ export default {
 
       <div class="row g-3 margin15">
         <div class="col-md-12" v-if="this.msgRegister != null">
-          <div class="alert alert-primary" role="alert">
-            {{ this.msgRegister }}
-          </div>
+          <div class="alert alert-primary" role="alert">{{ this.msgRegister }}</div>
         </div>
         <div class="col-md-5">
           <label for="titular" class="form-label text-left">Nombre</label>
@@ -227,9 +220,7 @@ export default {
             class="btn btn-primary margin10"
             @click="cuentaNuevaCompra"
             :class="{ ocultar: bien }"
-          >
-            Crear Cuenta
-          </button>
+          >Crear Cuenta</button>
           <RouterLink
             class="btn btn-primary margin10"
             @click.native="this.comprarEntradas"
