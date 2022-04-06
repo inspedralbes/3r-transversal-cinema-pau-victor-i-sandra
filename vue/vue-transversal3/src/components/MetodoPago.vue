@@ -11,6 +11,7 @@ export default {
       datosPinia: null,
       mostrarIniciarSesion: true,
       bien: false,
+      msgRegister: null,
     };
   },
 
@@ -100,6 +101,10 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
+          this.msgRegister = data.msg;
+          if (data.status == true) {
+            this.bien = true;
+          }
         });
     },
     iniciarSesionCompra() {
@@ -188,6 +193,11 @@ export default {
       </div>
 
       <div class="row g-3 margin15">
+        <div class="col-md-12" v-if="this.msgRegister != null">
+          <div class="alert alert-primary" role="alert">
+            {{ this.msgRegister }}
+          </div>
+        </div>
         <div class="col-md-5">
           <label for="titular" class="form-label text-left">Nombre</label>
           <input type="text" class="form-control" id="nombre2" />
@@ -206,10 +216,18 @@ export default {
         </div>
 
         <div class="col-md-10 text-center">
-          <RouterLink
+          <button
+            type="button"
             class="btn btn-primary margin10"
             @click="cuentaNuevaCompra"
+            :class="{ ocultar: bien }"
+          >
+            Crear Cuenta
+          </button>
+          <RouterLink
+            class="btn btn-primary margin10"
             @click.native="this.comprarEntradas"
+            :class="{ ocultar: !bien }"
             to="/realitzatpagament"
             >Comprar</RouterLink
           >
