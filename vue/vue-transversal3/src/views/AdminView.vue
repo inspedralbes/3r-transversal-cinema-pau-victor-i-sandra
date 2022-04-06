@@ -31,7 +31,7 @@ export default {
       nuevaSesion.append("nombrePeli", this.peli.peliInfo.Title);
       nuevaSesion.append("imgPeli", this.peli.peliInfo.Poster);
       nuevaSesion.append("anoPeli", this.peli.peliInfo.Year);
-      fetch("http://192.168.210.161:8000/sesion", {
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/sesion", {
         method: "POST",
         body: nuevaSesion,
       })
@@ -47,7 +47,13 @@ export default {
   <main>
     <h1>Crear una sesión</h1>
     <label>Fecha: </label>
-    <input class="datepicker" type="date" id="date" name="trip-start" value="2022-04-01" />
+    <input
+      class="datepicker"
+      type="date"
+      id="date"
+      name="trip-start"
+      value="2022-04-01"
+    />
 
     <label for="hora">Hora: </label>
     <select class="form-select" aria-label="selectHora" name="hora" id="hora">
@@ -75,9 +81,8 @@ export default {
   </main>
 </template>
 
-
 <style scoped>
-.form-select{
+.form-select {
   width: 100px;
 }
 </style>

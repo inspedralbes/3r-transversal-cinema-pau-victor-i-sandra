@@ -9,7 +9,7 @@
       <h4 class="card-title bold">{{ this.peliInfo.peli.nombrePeli }}</h4>
       <h6 class="card-text">{{ this.peliInfo.fecha }}</h6>
       <h6 class="card-text">{{ this.peliInfo.hora }}</h6>
-      <br>
+      <br />
       <RouterLink
         class="btn btn-primary"
         v-if="this.$route.name != 'butacas'"
