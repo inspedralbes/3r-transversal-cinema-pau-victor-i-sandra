@@ -49,7 +49,6 @@ export default {
     },
     ocultarPelis() {
       this.mostrarbusqueda = false;
-      console.log("hola");
     },
   },
   components: {
