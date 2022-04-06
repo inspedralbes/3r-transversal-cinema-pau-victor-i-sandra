@@ -1,5 +1,6 @@
 <script>
 import AdminBuscador from "@/components/AdminBuscador.vue";
+import ProximasPelis from "@/components/ProximasPelis.vue";
 import { sessioStore } from "../stores/sessioStore";
 import { mapStores } from "pinia";
 export default {
@@ -9,14 +10,26 @@ export default {
   data() {
     return {
       peli: "",
+      basePeliculas: 0,
     };
   },
   components: {
     AdminBuscador,
+    ProximasPelis,
   },
+
+  beforeCreate() {
+    fetch("http://cinema1back.alumnes.inspedralbes.cat/sesiones")
+      .then((response) => response.json())
+      .then((data) => {
+        this.basePeliculas = data.sesiones;
+      });
+  },
+
   mounted() {
     this.peli = this.sessioStore.get;
   },
+
   methods: {
     GuardarSesion() {
       let nuevaSesion = new FormData();
@@ -45,12 +58,21 @@ export default {
 </script>
 <template>
   <main>
-    <div class="container">
-      <h1 class="text-center">Crea una sesión</h1>
 
-      <div
-        class="form_sesion input-group row g-4 d-flex justify-content-center"
-      >
+    <div class="container1">
+      <h1 class="text-center">Consultar sesiones</h1>
+      <br />
+      <div class="consultar_entradas" v-if="typeof this.basePeliculas === 'object'">
+        <ProximasPelis :peliculasInfo="basePeliculas.splice(1, 6)" />
+      </div>
+
+    </div>
+
+
+    <div class="container2 justify-content-center">
+      <h1 class="text-center">Crear una sesión</h1>
+
+      <div class="form_sesion input-group row g-4 d-flex justify-content-center ">
         <div class="col-auto col-form-label">
           <label><i class="bi bi-calendar-event"></i> Fecha: </label>
         </div>
@@ -126,14 +148,15 @@ export default {
   margin-bottom: 40px;
 }
 
-.container {
+.container1, .container2 {
   margin-top: 40px;
 }
 
-@media only screen and (max-width: 600px) {
-  .container {
+@media only screen and (max-width: 500px) {
+  .container2 {
     width: 260px;
-  }
+    margin-left: 20%;
+    }
 }
 
 @media only screen and (min-width: 600px) {
