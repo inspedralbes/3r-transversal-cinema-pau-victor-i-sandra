@@ -98,7 +98,7 @@ class SesionController extends AbstractController
     {
         $dataUsuario = $request->request->all();
 
-        if ($usuarioRepository->comprovarCorreo($dataUsuario['email'])) {
+        if (empty($usuarioRepository->getUsuario($dataUsuario['email']))) {
             foreach ($dataUsuario as $usuario => $data) {
                 $$usuario = $data;
             }
@@ -122,20 +122,17 @@ class SesionController extends AbstractController
     public function login(Request $request, UsuarioRepository $usuarioRepository): JsonResponse
     {
         $dataPOSTUsuario = $request->request->all();
-
-        if ($this->comprovarExistenciaUsuario($dataPOSTUsuario['email'], $dataPOSTUsuario['password'])) {
-
-
-            return new JsonResponse(['status' => true, 'idUsuario' => $usuario->getId()], Response::HTTP_ACCEPTED);
-        } else {
+        $resultado = $usuarioRepository->getUsuario($dataPOSTUsuario['email']);
+        if (empty($resultado)) {
             // ERROR 1
             return new JsonResponse(['status' => false, 'msg' => 'No existe un usuario con este correo y contraseña...'], Response::HTTP_NOT_ACCEPTABLE);
+        } else {
+            if ($resultado[0]->getEmail() == $dataPOSTUsuario['email'] && password_verify($dataPOSTUsuario['password'], $resultado[0]->getPassword())) {
+                return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId()], Response::HTTP_ACCEPTED);
+            } else {
+                return new JsonResponse(['status' => false, 'msg' => 'Error en la contraseña...'], Response::HTTP_NOT_ACCEPTABLE);
+            }
         }
-    }
-
-    public function comprovarExistenciaUsuario($email, $password, UsuarioRepository $usuarioRepository)
-    {
-        
     }
 
     public function crearArrayPelis($dades, $bool = 0)

@@ -48,19 +48,7 @@ class UsuarioRepository extends ServiceEntityRepository
     // /**
     //  * @return Usuario[] Returns an array of Usuario objects
     //  */
-    public function comprovarCorreo($email)
-    {
-        $res = $this->createQueryBuilder('u')
-            ->select('u.id as ID')
-            ->where('u.email = :email')
-            ->setParameter('email', $email)
-            ->getQuery()
-            ->getResult();
-
-        return (empty($res)) ? 1 : 0;
-    }
-
-    public function comprovarUsuario($email)
+    public function getUsuario($email)
     {
         return $this->createQueryBuilder('u')
             ->where('u.email = :email')
