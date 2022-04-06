@@ -18,7 +18,7 @@ class Usuario
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     private $nombre;
 
-    #[ORM\Column(type: 'string', length: 20)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $password;
 
     #[ORM\Column(type: 'string', length: 70, nullable: true)]

@@ -68,6 +68,12 @@ class EntradaRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    public function usuarioTieneEntradas($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT entrada.*, sesion.fecha FROM entrada JOIN sesion ON sesion.id = entrada.sesion_id where entrada.usuario_id = $id and sesion.fecha > now();";
+        return $conn->prepare($sql)->executeQuery()->fetchAllAssociative();
+    }
     // /**
     //  * @return Entrada[] Returns an array of Entrada objects
     //  */
