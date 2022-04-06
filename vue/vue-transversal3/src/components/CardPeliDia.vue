@@ -103,15 +103,14 @@ export default {
               </div>
 
               <div class="text-center">
-<RouterLink
-                class="btn btn-primary"
-                :class="[this.disabled ? 'isDisabled' : '']"
-                :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
-                >Comprar entradas</RouterLink
-              >
-              <RouterView />
+                <RouterLink
+                  class="btn btn-primary"
+                  :class="[this.disabled ? 'isDisabled' : '']"
+                  :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
+                  >Comprar entradas</RouterLink
+                >
+                <RouterView />
               </div>
-              
             </div>
           </div>
         </div>

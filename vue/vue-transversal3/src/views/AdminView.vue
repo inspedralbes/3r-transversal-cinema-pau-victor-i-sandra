@@ -31,7 +31,7 @@ export default {
       nuevaSesion.append("nombrePeli", this.peli.peliInfo.Title);
       nuevaSesion.append("imgPeli", this.peli.peliInfo.Poster);
       nuevaSesion.append("anoPeli", this.peli.peliInfo.Year);
-      fetch("http://192.168.210.161:8000/sesion", {
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/sesion", {
         method: "POST",
         body: nuevaSesion,
       })
@@ -48,20 +48,32 @@ export default {
     <div class="container">
       <h1 class="text-center">Crea una sesión</h1>
 
-      <div class="form_sesion input-group row g-4 d-flex justify-content-center">
-
+      <div
+        class="form_sesion input-group row g-4 d-flex justify-content-center"
+      >
         <div class="col-auto col-form-label">
           <label><i class="bi bi-calendar-event"></i> Fecha: </label>
         </div>
         <div class="col-auto">
-          <input class="form-control picker__inputdatepicker" type="date" id="date" name="trip-start" value="2022-04-01" />
+          <input
+            class="form-control picker__inputdatepicker"
+            type="date"
+            id="date"
+            name="trip-start"
+            value="2022-04-01"
+          />
         </div>
 
         <div class="col-auto col-form-label">
           <label for="hora"><i class="bi bi-clock"></i> Hora: </label>
         </div>
         <div class="col-auto">
-          <select class="form-select" aria-label="selectHora" name="hora" id="hora">
+          <select
+            class="form-select"
+            aria-label="selectHora"
+            name="hora"
+            id="hora"
+          >
             <option value="16:00:00">16:00h</option>
             <option value="18:00:00">18:00h</option>
             <option value="20:00:00">20:00h</option>
@@ -70,7 +82,7 @@ export default {
 
         <div class="col-auto col-form-label">
           <label for="vip"><i class="bi bi-star"></i> VIP: </label>
-        </div>  
+        </div>
         <div class="col-auto">
           <select class="form-select" name="vip" id="vip">
             <option value="0">No</option>
@@ -78,9 +90,11 @@ export default {
           </select>
         </div>
 
-
         <div class="col-auto col-form-label">
-          <label for="espectador"><i class="bi bi-people"></i> Dia del <br class="screen"> espectador: </label>
+          <label for="espectador"
+            ><i class="bi bi-people"></i> Dia del <br class="screen" />
+            espectador:
+          </label>
         </div>
         <div class="col-auto">
           <select class="form-select" name="espectador" id="espectador">
@@ -90,40 +104,39 @@ export default {
         </div>
       </div>
 
-      <div class="d-flex justify-content-center ">
+      <div class="d-flex justify-content-center">
         <AdminBuscador />
-        
       </div>
-      <div class="d-flex justify-content-center ">
-      <a class="btn btn-dark" @click="GuardarSesion" id="btn_guardar">Guardar Sesión</a> 
-    </div>
+      <div class="d-flex justify-content-center">
+        <a class="btn btn-dark" @click="GuardarSesion" id="btn_guardar"
+          >Guardar Sesión</a
+        >
+      </div>
     </div>
   </main>
 </template>
 
-
 <style scoped>
-.form-select{
+.form-select {
   width: 100px;
 }
 
-.form_sesion{
+.form_sesion {
   margin-top: 30px;
   margin-bottom: 40px;
 }
 
 .container {
   margin-top: 40px;
-  
 }
 
-@media only screen and (max-width:600px) {
+@media only screen and (max-width: 600px) {
   .container {
     width: 260px;
   }
 }
 
-@media only screen and (min-width:600px) {
+@media only screen and (min-width: 600px) {
   .screen {
     display: none;
   }
@@ -136,5 +149,4 @@ i {
 #btn_guardar {
   margin: 20px;
 }
-
 </style>

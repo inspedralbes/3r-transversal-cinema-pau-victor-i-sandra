@@ -50,7 +50,6 @@ export default {
 </template>
 
 <style scoped>
-
 .container {
   height: 75vh;
 }
@@ -58,5 +57,4 @@ export default {
 .resum {
   width: 50%;
 }
-
 </style>
