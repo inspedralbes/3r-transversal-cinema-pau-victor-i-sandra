@@ -97,41 +97,64 @@ class SesionController extends AbstractController
     public function registrar(Request $request, UsuarioRepository $usuarioRepository): JsonResponse
     {
         $dataUsuario = $request->request->all();
+        foreach ($dataUsuario as $usuario => $data) {
+            $$usuario = $data;
+        }
 
-        if (empty($usuarioRepository->getUsuario($dataUsuario['email']))) {
-            foreach ($dataUsuario as $usuario => $data) {
-                $$usuario = $data;
-            }
-
-            $usuario = new Usuario();
-            $usuario->setNombre($nombre);
-            $usuario->setApellidos($apellidos);
-            $usuario->setEmail($email);
-            $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
-            $usuarioRepository->add($usuario);
-            $usuario = $usuarioRepository->findBy(['email' => $email])[0];
-
-            return new JsonResponse(['status' => true, 'idUsuario' => $usuario->getId()], Response::HTTP_ACCEPTED);
+        if (empty($nombre) || empty($apellidos) || empty($email) || empty($password)) {
+            // ERROR
+            return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_NOT_ACCEPTABLE);
         } else {
-            // ERROR 3
-            return new JsonResponse(['status' => false, 'msg' => 'Este correo ya esta asociado a una cuenta... prueba con otro!'], Response::HTTP_NOT_ACCEPTABLE);
+            if (empty($usuarioRepository->getUsuario($email))) {
+
+                $usuario = new Usuario();
+                $usuario->setNombre($nombre);
+                $usuario->setApellidos($apellidos);
+                $usuario->setEmail($email);
+                $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
+                $usuarioRepository->add($usuario);
+                $usuario = $usuarioRepository->findBy(['email' => $email])[0];
+
+                // OK
+                return new JsonResponse(['status' => true, 'idUsuario' => $usuario->getId()], Response::HTTP_ACCEPTED);
+            } else {
+                // ERROR
+                return new JsonResponse(['status' => false, 'msg' => 'Este correo ya esta asociado a una cuenta... prueba con otro!'], Response::HTTP_NOT_ACCEPTABLE);
+            }
         }
     }
 
     #[Route('/login', name: 'post_login', methods: ['POST'])]
-    public function login(Request $request, UsuarioRepository $usuarioRepository): JsonResponse
+    public function login(Request $request, UsuarioRepository $usuarioRepository, EntradaRepository $entradaRepository): JsonResponse
     {
         $dataPOSTUsuario = $request->request->all();
-        $resultado = $usuarioRepository->getUsuario($dataPOSTUsuario['email']);
-        if (empty($resultado)) {
-            // ERROR 1
-            return new JsonResponse(['status' => false, 'msg' => 'No existe un usuario con este correo y contraseña...'], Response::HTTP_NOT_ACCEPTABLE);
-        } else {
-            if ($resultado[0]->getEmail() == $dataPOSTUsuario['email'] && password_verify($dataPOSTUsuario['password'], $resultado[0]->getPassword())) {
-                return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId()], Response::HTTP_ACCEPTED);
+        foreach ($dataPOSTUsuario as $usuario => $data) {
+            $$usuario = $data;
+        }
+
+        if (!empty($email) || !empty($password)) {
+            $resultado = $usuarioRepository->getUsuario($email);
+            if (empty($resultado)) {
+                // ERROR 1
+                return new JsonResponse(['status' => false, 'msg' => 'No existe un usuario con este correo y contraseña...'], Response::HTTP_NOT_ACCEPTABLE);
             } else {
-                return new JsonResponse(['status' => false, 'msg' => 'Error en la contraseña...'], Response::HTTP_NOT_ACCEPTABLE);
+                if ($resultado[0]->getEmail() == $email && password_verify($password, $resultado[0]->getPassword())) {
+                    if(empty($entradaRepository->usuarioTieneEntradas($resultado[0]->getId()))){
+                        // OK
+                        return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'Puedes comprar entradas!'], Response::HTTP_ACCEPTED);
+                    }else{
+                        return new JsonResponse(['status' => false, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'No puedes comprar entradas porque ya tienes'], Response::HTTP_NOT_ACCEPTABLE);
+                    }
+                    
+                    // return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'Puedes comprar entradas!'], Response::HTTP_ACCEPTED);
+                } else {
+                    // ERROR
+                    return new JsonResponse(['status' => false, 'msg' => 'Contraseña o correo incorrectos...'], Response::HTTP_NOT_ACCEPTABLE);
+                }
             }
+        } else {
+            // ERROR
+            return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_NOT_ACCEPTABLE);
         }
     }
 
