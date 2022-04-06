@@ -16,7 +16,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 // Include Dompdf required namespaces
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
+//QR 
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
+use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Writer\PngWriter;
 
 class SesionController extends AbstractController
 {
@@ -71,12 +78,14 @@ class SesionController extends AbstractController
     {
         $dades = $entradaRepository->seleccionarEntradasUsuario($request->query->get('idSesion'), $request->query->get('idUsuario'));
         $entradas = array("entradas" => []);
-        $butacas = "";
+        $butacas = array();
+        $sesion = "";
+        $usuario = "";
 
         foreach ($dades as $entrada) {
             $usuario = $entrada->getUsuario()->__toString();
             $sesion = $entrada->getSesion()->__toString();
-            $butacas .= $entrada->getButaca() . " " . $entrada->getPrecio();
+            array_push($butacas, $entrada->getButaca() . " - " . $entrada->getPrecio() . "€");
 
             array_push($entradas['entradas'], [
                 'idUsuario' => $entrada->getUsuario()->__toString(),
@@ -139,13 +148,13 @@ class SesionController extends AbstractController
                 return new JsonResponse(['status' => false, 'msg' => 'No existe un usuario con este correo y contraseña...'], Response::HTTP_OK);
             } else {
                 if ($resultado[0]->getEmail() == $email && password_verify($password, $resultado[0]->getPassword())) {
-                    if(empty($entradaRepository->usuarioTieneEntradas($resultado[0]->getId()))){
+                    if (empty($entradaRepository->usuarioTieneEntradas($resultado[0]->getId()))) {
                         // OK
                         return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'Usuario validado, ahora puedes comprar tus entradas haciendo click al boton de comprar!'], Response::HTTP_ACCEPTED);
-                    }else{
+                    } else {
                         return new JsonResponse(['status' => false, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'No puedes comprar entradas porque ya tienes unas para alguna proxima sesion. Para saber cuales son, accede al apartado consultar entradas'], Response::HTTP_OK);
                     }
-                    
+
                     // return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'Puedes comprar entradas!'], Response::HTTP_ACCEPTED);
                 } else {
                     // ERROR
@@ -211,9 +220,30 @@ class SesionController extends AbstractController
 
         // Store PDF Binary Data
         $output = $dompdf->output();
-        $pdfFilepath =  "../public/EntradasPDF/mypdf.pdf";
+        $pdfFilepath =  "../public/EntradasPDF/Entradas_" . $usuario . ".pdf";
 
         // Write file to the desired path
         file_put_contents($pdfFilepath, $output);
+
+        $this->qr("", $usuario);
+    }
+
+    public function qr($PDFpath = "", $user)
+    {
+        $result = Builder::create()
+            ->writer(new PngWriter())
+            ->writerOptions([])
+            ->data("$PDFpath")
+            ->encoding(new Encoding('UTF-8'))
+            ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+            ->size(400)
+            ->margin(10)
+            ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
+            ->labelText('Escanéame para ver tus entradas')
+            ->labelFont(new NotoSans(20))
+            ->labelAlignment(new LabelAlignmentCenter())
+            ->build();
+        
+            $result->saveToFile('../public/QR/Entradas_'.$user.'.png');
     }
 }
