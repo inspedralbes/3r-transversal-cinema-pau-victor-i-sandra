@@ -11,6 +11,7 @@ export default {
       datosPinia: null,
       mostrarIniciarSesion: true,
       bien: false,
+      msgLogin: null,
     };
   },
 
@@ -22,7 +23,7 @@ export default {
     comprarEntradas: function () {
       let entradas = new FormData();
       let butacasReservadas = {};
-      entradas.append("idUsuari", 1);
+      entradas.append("idUsuari", this.datosPinia.idUsuario);
       entradas.append("idSesion", this.datosPinia.idSesion);
       this.datosPinia.butacasSeleccionadas.forEach((butaca) => {
         butacasReservadas[butaca] = this.precioEntradas(butaca);
@@ -33,13 +34,11 @@ export default {
       fetch("http://192.168.210.161:8000/entradas", {
         method: "POST",
         body: entradas,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          this.datosPinia.estadoCompra = data.status;
-          this.datosPinia.msg = data.msg;
-          this.sessioStore.set(this.datosPinia);
-        });
+      }).then((response) => response.json()).then((data) => {
+        this.datosPinia.estadoCompra = data.status;
+        this.datosPinia.msg = data.msg;
+        this.sessioStore.set(this.datosPinia);
+      });
     },
 
     precioEntradas: function (butaca) {
@@ -102,6 +101,7 @@ export default {
           console.log(data);
         });
     },
+
     iniciarSesionCompra() {
       let iniciarSesion = new FormData();
       iniciarSesion.append("email", document.getElementById("email1").value);
@@ -115,8 +115,13 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
-          this.bien = true;
+          this.msgLogin = data.msg;
+          if (data.status == true) {
+            this.datosPinia = this.sessioStore.get;
+            this.datosPinia.idUsuario = data.idUsuario;
+            this.sessioStore.set(this.datosPinia);
+            this.bien = true;
+          }
         });
     },
   },
@@ -139,7 +144,10 @@ export default {
         <div class="col-md-5">
           <label for="apellido" class="form-label">Apellido</label>
           <input type="text" class="form-control" id="apellido1" />
-        </div> -->
+        </div>-->
+        <div class="col-md-12" v-if="this.msgLogin != null">
+          <div class="alert alert-primary" role="alert">{{ this.msgLogin }}</div>
+        </div>
         <div class="col-md-10">
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email1" />
@@ -155,18 +163,16 @@ export default {
             class="btn btn-primary margin10"
             @click="iniciarSesionCompra"
             :class="{ ocultar: bien }"
-          >
-            Iniciar Sesion
-          </button>
+          >Iniciar Sesion</button>
           <RouterLink
             class="btn btn-primary margin10"
             @click.native="this.comprarEntradas"
             :class="{ ocultar: !bien }"
             to="/realitzatpagament"
-            >Comprar</RouterLink
-          >
+          >Comprar</RouterLink>
           <RouterView />
-          <br /><br />
+          <br />
+          <br />
           <hr />
         </div>
       </div>
@@ -174,10 +180,10 @@ export default {
       <div class="col-md-10 text-center margin20">
         <h4>¿No tienes usuario?</h4>
         <br />
-        <a href="#" @click="crearCuenta" class="link_crear_cuenta"
-          >Crea tu cuenta <br />
-          y compra ahora</a
-        >
+        <a href="#" @click="crearCuenta" class="link_crear_cuenta">
+          Crea tu cuenta
+          <br />y compra ahora
+        </a>
       </div>
     </div>
 
@@ -211,11 +217,11 @@ export default {
             @click="cuentaNuevaCompra"
             @click.native="this.comprarEntradas"
             to="/realitzatpagament"
-            >Comprar</RouterLink
-          >
+          >Comprar</RouterLink>
           <RouterView />
 
-          <br /><br />
+          <br />
+          <br />
           <hr />
         </div>
       </div>
@@ -223,10 +229,10 @@ export default {
       <div class="col-md-10 text-center margin20">
         <h4>¿Ya eres usuario?</h4>
         <br />
-        <a href="#" @click="iniciarSesion" class="link_iniciar_sesion"
-          >Inicia sesión <br />
-          y compra ahora</a
-        >
+        <a href="#" @click="iniciarSesion" class="link_iniciar_sesion">
+          Inicia sesión
+          <br />y compra ahora
+        </a>
       </div>
     </div>
   </div>
