@@ -44,7 +44,7 @@ export default {
       nuevaSesion.append("nombrePeli", this.peli.peliInfo.Title);
       nuevaSesion.append("imgPeli", this.peli.peliInfo.Poster);
       nuevaSesion.append("anoPeli", this.peli.peliInfo.Year);
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/sesion", {
+      fetch("http://192.168.210.161:8000/sesion", {
         method: "POST",
         body: nuevaSesion,
       })

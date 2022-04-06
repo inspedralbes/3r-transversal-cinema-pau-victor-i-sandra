@@ -33,15 +33,35 @@ export default {
             />
           </RouterLink>
           <div class="btn-group" role="group">
-            <a class="nav-link link" aria-current="page" data-bs-toggle="modal" data-bs-target="#entradasModal">Consultar entradas</a>
+            <a
+              class="nav-link link"
+              aria-current="page"
+              data-bs-toggle="modal"
+              data-bs-target="#entradasModal"
+              >Consultar entradas</a
+            >
 
             <!-- MODAL CONSULTAR ENTRADAS -->
-            <div class="modal fade" id="entradasModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="entradasModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered  modal-lg">
+            <div
+              class="modal fade"
+              id="entradasModal"
+              data-bs-backdrop="static"
+              tabindex="-1"
+              aria-labelledby="entradasModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title " id="entradasModalLabel">Consulta tus entradas</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title" id="entradasModalLabel">
+                      Consulta tus entradas
+                    </h4>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
                   </div>
                   <div class="modal-body align-self-center grande">
                     <!-- From usuario -->
@@ -102,36 +122,67 @@ export default {
 
             <div class="vr"></div>
 
-            <a class="nav-link link" data-bs-toggle="modal" data-bs-target="#adminModal">Admin</a>
-
+            <a
+              class="nav-link link"
+              data-bs-toggle="modal"
+              data-bs-target="#adminModal"
+              >Admin</a
+            >
 
             <!-- MODAL ADMIN -->
-            <div class="modal" id="adminModal" tabindex="-1" aria-labelledby="adminModalLabel" aria-hidden="true">
+            <div
+              class="modal"
+              id="adminModal"
+              tabindex="-1"
+              aria-labelledby="adminModalLabel"
+              aria-hidden="true"
+            >
               <div class="modal-dialog modal-dialog-centered modal">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title " id="adminModalLabel">Identificate como admin</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>                  
+                    <h4 class="modal-title" id="adminModalLabel">
+                      Identificate como admin
+                    </h4>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
                   </div>
 
                   <div class="modal-body align-self-center">
                     <div id="form_admin">
-                      <div class="col ">
+                      <div class="col">
                         <div class="col">
-                          <label for="usuario" class="form-label text-left">Usuario</label>
-                          <input type="text" class="form-control" id="usuario" />
+                          <label for="usuario" class="form-label text-left"
+                            >Usuario</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="usuario"
+                          />
                         </div>
 
                         <div class="col">
-                          <label for="contraseña" class="form-label">Contraseña</label>
-                          <input type="password" class="form-control" id="contraseña" />
+                          <label for="contraseña" class="form-label"
+                            >Contraseña</label
+                          >
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="contraseña"
+                          />
                         </div>
 
-                        <br>
+                        <br />
 
                         <div class="col text-center">
                           <RouterLink class="" to="/admin">
-                            <button type="button" class="btn btn-primary">Aceptar</button>
+                            <button type="button" class="btn btn-primary">
+                              Aceptar
+                            </button>
                           </RouterLink>
                         </div>
                       </div>
@@ -139,13 +190,18 @@ export default {
                   </div>
 
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cerrar
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
             <!-- FIN MODAL ADMIN -->
-
           </div>
         </div>
       </nav>

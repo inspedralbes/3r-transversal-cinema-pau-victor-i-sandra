@@ -28,7 +28,7 @@ class SesionController extends AbstractController
         if ($sesionRepository->anadirSesion($dataSesion)) {
             return new JsonResponse(['status' => true, 'msg' => 'Sesion introducida!'], Response::HTTP_ACCEPTED);
         } else {
-            return new JsonResponse(['status' => false, 'msg' => 'Sesion no introducida! Ya existe una sesion con esta fecha'], Response::HTTP_NOT_ACCEPTABLE);
+            return new JsonResponse(['status' => false, 'msg' => 'Sesion no introducida! Ya existe una sesion con esta fecha'], Response::HTTP_OK);
         }
     }
 
@@ -62,7 +62,7 @@ class SesionController extends AbstractController
             }
             return new JsonResponse(['status' => true, 'msg' => 'Compra realizada!'], Response::HTTP_OK);
         } else {
-            return new JsonResponse(['status' => false, 'msg' => '¡Error! Compra no realizada!'], Response::HTTP_NOT_ACCEPTABLE);
+            return new JsonResponse(['status' => false, 'msg' => '¡Error! Compra no realizada!'], Response::HTTP_OK);
         }
     }
 
@@ -103,7 +103,7 @@ class SesionController extends AbstractController
 
         if (empty($nombre) || empty($apellidos) || empty($email) || empty($password)) {
             // ERROR
-            return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_NOT_ACCEPTABLE);
+            return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_OK);
         } else {
             if (empty($usuarioRepository->getUsuario($email))) {
 
@@ -116,10 +116,10 @@ class SesionController extends AbstractController
                 $usuario = $usuarioRepository->findBy(['email' => $email])[0];
 
                 // OK
-                return new JsonResponse(['status' => true, 'idUsuario' => $usuario->getId()], Response::HTTP_ACCEPTED);
+                return new JsonResponse(['status' => true, 'idUsuario' => $usuario->getId(), 'msg' => 'Usuario registrado! Ahora puedes comprar tus entradas haciendo click al boton de comprar!!'], Response::HTTP_ACCEPTED);
             } else {
                 // ERROR
-                return new JsonResponse(['status' => false, 'msg' => 'Este correo ya esta asociado a una cuenta... prueba con otro!'], Response::HTTP_NOT_ACCEPTABLE);
+                return new JsonResponse(['status' => false, 'msg' => 'Este correo ya esta asociado a una cuenta... prueba con otro!'], Response::HTTP_OK);
             }
         }
     }
@@ -136,25 +136,25 @@ class SesionController extends AbstractController
             $resultado = $usuarioRepository->getUsuario($email);
             if (empty($resultado)) {
                 // ERROR 1
-                return new JsonResponse(['status' => false, 'msg' => 'No existe un usuario con este correo y contraseña...'], Response::HTTP_NOT_ACCEPTABLE);
+                return new JsonResponse(['status' => false, 'msg' => 'No existe un usuario con este correo y contraseña...'], Response::HTTP_OK);
             } else {
                 if ($resultado[0]->getEmail() == $email && password_verify($password, $resultado[0]->getPassword())) {
                     if(empty($entradaRepository->usuarioTieneEntradas($resultado[0]->getId()))){
                         // OK
-                        return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'Puedes comprar entradas!'], Response::HTTP_ACCEPTED);
+                        return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'Usuario validado, ahora puedes comprar tus entradas haciendo click al boton de comprar!'], Response::HTTP_ACCEPTED);
                     }else{
-                        return new JsonResponse(['status' => false, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'No puedes comprar entradas porque ya tienes'], Response::HTTP_NOT_ACCEPTABLE);
+                        return new JsonResponse(['status' => false, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'No puedes comprar entradas porque ya tienes unas para alguna proxima sesion. Para saber cuales son, accede al apartado consultar entradas'], Response::HTTP_OK);
                     }
                     
                     // return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'Puedes comprar entradas!'], Response::HTTP_ACCEPTED);
                 } else {
                     // ERROR
-                    return new JsonResponse(['status' => false, 'msg' => 'Contraseña o correo incorrectos...'], Response::HTTP_NOT_ACCEPTABLE);
+                    return new JsonResponse(['status' => false, 'msg' => 'Contraseña o correo incorrectos...'], Response::HTTP_OK);
                 }
             }
         } else {
             // ERROR
-            return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_NOT_ACCEPTABLE);
+            return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_OK);
         }
     }
 
