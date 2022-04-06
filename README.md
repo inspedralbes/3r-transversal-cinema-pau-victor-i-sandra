@@ -2,16 +2,11 @@
 # transversals
 Esquema mínim de carpetes pels projectes transversals
 
-És obligatori seguir aquesta estructura tot i que la podeu ampliar.
 
-## Atenció
-Un cop comenceu heu de canviar aquesta explicació amb la corresponent al vostre projecte (utilitzant markdown)
-
-
-# Aquest fitxer ha de contenir com a mínim:
- * Nom dels integrants: Victor, Pau i Sandra
- * Nom del projecte: "".
- * Petita descripció: creació d'una aplicacio web que et permet comprar entrades pel cinema.
- * URL de producció (quan la tingueu)
+# Grup 1
+ Victor, Pau i Sandra
+ * Projecte: "Pedralbes Cinema"
+ * Descripció: creació d'una aplicacio web que et permet comprar entrades pel cinema.
+ * URL de producció: 
  * Estat: fase inicial -> ja tenim el backlog i hem començat a completar tasques!
  * Backlog: https://freedcamp.com/view/3181588/tasks
