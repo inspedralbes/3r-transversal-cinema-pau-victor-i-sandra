@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       mostrarFormUsr: true,
-    };
+    };s
   },
 
   methods: {
