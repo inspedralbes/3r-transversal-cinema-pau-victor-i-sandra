@@ -125,6 +125,7 @@ export default {
         <img src="../../src/assets/Butacas/pantalla.png" class="pantalla" />
         <div class="mallaButacas">
           <div :key="index" v-for="(butaca, index) in 120">
+            <!-- Butaca ocupada img -->
             <img
               v-if="estaocupada('b' + butaca)"
               :src="this.img_ocupada"
@@ -132,6 +133,7 @@ export default {
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
             />
+            <!-- Butaca disponible img -->
             <img
               v-if="estalibre('b' + butaca)"
               :src="
@@ -143,6 +145,7 @@ export default {
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
             />
+            <!-- Butaca selecconada img -->
             <img
               v-if="estaseleccionada('b' + butaca)"
               :src="this.img_seleccionada"
