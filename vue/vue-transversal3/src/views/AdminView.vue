@@ -25,6 +25,11 @@ export default {
       .then((response) => response.json())
       .then((data) => {
         this.basePeliculas = data.sesiones;
+        console.log("este es");
+        console.log(this.basePeliculas);
+        this.sessioStore.set(this.basePeliculas);
+        this.sessioStore.setAdmin();
+        //alert(this.sessioStore.getAdmin);
       });
   },
 
@@ -56,40 +61,41 @@ export default {
         });
     },
 
-    mostrarCrearSesion: function () {
-      console.log("hshs"); 
-    },
+    // mostrarCrearSesion: function () {
+    //   console.log("hshs");
+    // },
 
-    mostrarConsultarSesion: function() {
-      console.log("aaa");
-      this.mostrarConsultarSesion = true;
-    },
-
+    // mostrarConsultarSesion: function () {
+    //   console.log("aaa");
+    //   this.mostrarConsultarSesion = true;
+    // },
   },
 };
 </script>
 <template>
   <main>
-
     <div class="container1">
-      <h1 class="text-center titulo" @click="mostrarConsultarSesion">Consultar sesiones</h1>
+      <h1 class="text-center titulo" @click="mostrarConsultarSesion">
+        Consultar sesiones
+      </h1>
       <br />
-      <div id="consultar_entradas"  :class="{ ocultar: mostrarConsultarSesion }" v-if="typeof this.basePeliculas === 'object'">
-        <ProximasPelis :peliculasInfo="basePeliculas.splice(1, 6)" />
+      <div
+        id="consultar_entradas"
+        :class="{ ocultar: mostrarConsultarSesion }"
+        v-if="typeof this.basePeliculas === 'object'"
+      >
+        <ProximasPelis :peliculasInfo="basePeliculas" />
       </div>
-      <hr>
+      <hr />
     </div>
-    
-
-
-    
 
     <div class="container2 justify-content-center">
-
       <h1 class="text-center">Crear una sesión</h1>
 
       <div class="crear_sesion">
-        <div class="form_sesion input-group row g-4 d-flex justify-content-center ">
+        <div
+          class="form_sesion input-group row g-4 d-flex justify-content-center"
+        >
           <div class="col-auto col-form-label">
             <label><i class="bi bi-calendar-event"></i> Fecha: </label>
           </div>
@@ -147,18 +153,16 @@ export default {
           <AdminBuscador />
         </div>
         <div class="d-flex justify-content-center">
-          <a class="btn btn-dark" @click="GuardarSesion" id="btn_guardar">Guardar Sesión</a>
+          <a class="btn btn-dark" @click="GuardarSesion" id="btn_guardar"
+            >Guardar Sesión</a
+          >
         </div>
       </div>
     </div>
-
   </main>
 </template>
 
-
-
 <style scoped>
-
 .form-select {
   width: 100px;
 }
@@ -173,7 +177,8 @@ hr {
   margin-left: 20%;
 }
 
-.container1, .container2 {
+.container1,
+.container2 {
   margin-top: 40px;
 }
 
@@ -181,7 +186,7 @@ hr {
   .container2 {
     width: 260px;
     margin-left: 20%;
-    }
+  }
 }
 
 @media only screen and (min-width: 600px) {
@@ -199,9 +204,7 @@ i {
   color: #dfaa22;
 }
 
-
 #btn_guardar {
   margin: 20px;
 }
-
 </style>

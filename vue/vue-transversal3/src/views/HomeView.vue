@@ -2,10 +2,16 @@
 import ProximasPelis from "@/components/ProximasPelis.vue";
 import CardPeliDia from "@/components/CardPeliDia.vue";
 //import BD from "../../../../back/End Points/home.json";
+import { sessioStore } from "../stores/sessioStore";
+import { mapStores } from "pinia";
 export default {
+  computed: {
+    ...mapStores(sessioStore),
+  },
   data() {
     return {
       basePeliculas: 0,
+      enadmin: 0,
     };
   },
 
@@ -20,6 +26,8 @@ export default {
       .then((data) => {
         this.basePeliculas = data.sesiones;
         console.log(this.basePeliculas);
+        this.sessioStore.setComprador();
+        //alert(this.sessioStore.getAdmin);
       });
   },
 };

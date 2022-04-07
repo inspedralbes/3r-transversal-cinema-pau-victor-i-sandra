@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       peliSeleccionada: null,
+      enadmin: 0,
     };
   },
 
@@ -23,11 +24,14 @@ export default {
     console.log(window.location.href.split("/", 5)[4]);
     fetch(
       "http://192.168.210.161:8000/sesionEspecifica?idSesion=" +
-      window.location.href.split("/", 5)[4]
+        window.location.href.split("/", 5)[4]
     )
       .then((response) => response.json())
       .then((data) => {
         this.peliSeleccionada = data.sesiones[0]; // Porque solo se pasa una sesion
+        this.peliSeleccionada.enadmin = 0;
+        console.log("este es el que quiero");
+        console.log(this.peliSeleccionada);
         this.sessioStore.set(this.peliSeleccionada);
       });
   },
@@ -42,7 +46,11 @@ export default {
 
 <template>
   <main>
-    <button class="btn btn-secondary volver" label="Volver" @click="retroceder()">
+    <button
+      class="btn btn-secondary volver"
+      label="Volver"
+      @click="retroceder()"
+    >
       <i class="bi bi-arrow-left"></i> Atrás
     </button>
     <div class="container">
@@ -52,7 +60,10 @@ export default {
         </div>
 
         <div class="col-12 col-md-5 cardInfo align-self-center">
-          <CardPeliGeneral v-if="this.peliSeleccionada != null" :peliInfo="this.peliSeleccionada" />
+          <CardPeliGeneral
+            v-if="this.peliSeleccionada != null"
+            :peliInfo="this.peliSeleccionada"
+          />
         </div>
 
         <div class="col-12 col-md-7 butacasInfo">

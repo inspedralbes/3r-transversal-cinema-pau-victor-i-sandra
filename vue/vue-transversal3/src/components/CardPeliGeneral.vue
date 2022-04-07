@@ -13,8 +13,7 @@ export default {
     contarButacasOcupadas: function () {
       console.log(this.peliInfo);
       if (this.peliInfo.butacasOcupadas != null) {
-        this.butacasOcupadas =
-          this.peliInfo.butacasOcupadas.split(",").length - 1;
+        this.butacasOcupadas = this.peliInfo.butacasOcupadas.split(",").length;
         console.log(this.butacasOcupadas);
       } else {
         this.butacasOcupadas = 0;
@@ -37,16 +36,22 @@ export default {
       <h6 class="card-text">{{ this.peliInfo.hora }}</h6>
       <h6 class="card-text">{{ this.butacasOcupadas }}/120</h6>
       <br />
+
       <RouterLink
         class="btn btn-primary"
-        v-if="this.$route.name != 'butacas'"
+        v-if="this.$route.name != 'butacas' && this.$route.name != 'admin'"
         :to="'/seleccionarButacas/' + this.peliInfo.idSesion"
         >Comprar entradas</RouterLink
+      >
+      <RouterLink
+        class="btn btn-primary"
+        v-if="this.$route.name == 'admin'"
+        :to="'/seleccionarButacas/' + this.peliInfo.idSesion"
+        >Ver</RouterLink
       >
       <RouterView />
     </div>
   </div>
 </template>
-
 
 <style></style>

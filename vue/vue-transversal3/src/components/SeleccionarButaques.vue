@@ -26,6 +26,7 @@ export default {
     this.infoPeli = this.sessioStore.get;
     if (this.butacasOcupadas != null) {
       this.ocupadas = this.butacasOcupadas.split(",");
+      this.precioEntradas(this.infoPeli);
     }
   },
 
@@ -46,42 +47,48 @@ export default {
     },
 
     SeleccionarButaca: function (numButaca, event) {
-      // si la butaca está ocupada
-      if (this.ocupadas.includes(numButaca)) {
-        alert("¡¡No puedes escoger una butaca ocupada!!");
-      }
-
-      // Seleccionar butaca y añadirla al array "seleccionadas"
-      // seleccionadas y modifica su imagen (seimpre que no hayan 10 butacas seleccionadas aún)
-      else if (
-        !this.ocupadas.includes(numButaca) &&
-        !this.seleccionadas.includes(numButaca)
-      ) {
-        if (this.seleccionadas.length < 10) {
-          this.seleccionadas.push(numButaca);
-          event.target.src = this.img_seleccionada;
-          this.stringButacas;
-        } else {
-          alert("No puedes seleccionar más de 10 butacas");
+      if (this.sessioStore.getAdmin == 0) {
+        if (this.ocupadas.includes(numButaca)) {
+          // si la butaca está ocupada
+          alert("¡¡No puedes escoger una butaca ocupada!!");
         }
-      } else if (this.seleccionadas.includes(numButaca)) {
-        /* Deseleccionar butacas */
-        event.target.src = this.img_disponible;
-        this.seleccionadas = this.seleccionadas.filter((butaca) => {
-          return butaca != numButaca;
-        });
-      }
 
-      let piniaData = this.sessioStore.get;
-      this.precioEntradas(piniaData);
-      piniaData.butacasSeleccionadas = this.seleccionadas;
-      piniaData.precioButacas = this.precioButacas;
-      this.sessioStore.set(piniaData);
+        // Seleccionar butaca y añadirla al array "seleccionadas"
+        // seleccionadas y modifica su imagen (seimpre que no hayan 10 butacas seleccionadas aún)
+        else if (
+          !this.ocupadas.includes(numButaca) &&
+          !this.seleccionadas.includes(numButaca)
+        ) {
+          if (this.seleccionadas.length < 10) {
+            this.seleccionadas.push(numButaca);
+            event.target.src = this.img_seleccionada;
+            this.stringButacas;
+          } else {
+            alert("No puedes seleccionar más de 10 butacas");
+          }
+        } else if (this.seleccionadas.includes(numButaca)) {
+          /* Deseleccionar butacas */
+          event.target.src = this.img_disponible;
+          this.seleccionadas = this.seleccionadas.filter((butaca) => {
+            return butaca != numButaca;
+          });
+        }
+
+        let piniaData = this.sessioStore.get;
+        this.precioEntradas(piniaData);
+        piniaData.butacasSeleccionadas = this.seleccionadas;
+        piniaData.precioButacas = this.precioButacas;
+        this.sessioStore.set(piniaData);
+      }
     },
 
     precioEntradas: function (piniaData) {
       let precio = 0;
-      this.seleccionadas.forEach((butaca) => {
+      let array = null;
+
+      array = !this.sessioStore.getAdmin ? this.seleccionadas : this.ocupadas;
+
+      array.forEach((butaca) => {
         butaca = butaca.split("b")[1];
         if (piniaData.diaEspectador) {
           if (piniaData.vip) {
@@ -153,7 +160,7 @@ export default {
           </div>
         </div>
         <div class="resultado">
-          <p>
+          <p v-if="this.sessioStore.getAdmin == 0">
             Butacas:
             <span>
               {{ this.seleccionadas.join(", ")
@@ -171,6 +178,7 @@ export default {
         <RouterLink
           class="btn btn-primary"
           :class="[!this.seleccionadas.length ? 'isDisabled' : '']"
+          v-if="this.sessioStore.getAdmin == 0"
           to="/pagament"
           >Comprar entradas</RouterLink
         >
