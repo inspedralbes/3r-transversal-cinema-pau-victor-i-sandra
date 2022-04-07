@@ -63,7 +63,7 @@ class SesionController extends AbstractController
             $butacasOcupadas = $sesionRepository->findBy(['id' => $dataEntradas['idSesion']])[0]->getButacasOcupadas();
 
             foreach (json_decode($dataEntradas['butacasReservadas']) as $butaca => $precio) {
-                $butacasOcupadas .= ",$butaca";
+                $butacasOcupadas .= ($butacasOcupadas == "") ? "$butaca" : ",$butaca";
                 $sesionRepository->guardarButacasOcupadas($butacasOcupadas, $dataEntradas['idSesion']);
                 $entradaRepository->guardarEntradas($dataEntradas['idUsuari'], $dataEntradas['idSesion'], $butaca, $precio);
             }
