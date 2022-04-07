@@ -77,16 +77,11 @@ export default {
       <div id="consultar_entradas"  :class="{ ocultar: mostrarConsultarSesion }" v-if="typeof this.basePeliculas === 'object'">
         <ProximasPelis :peliculasInfo="basePeliculas.splice(1, 6)" />
       </div>
-<<<<<<< Updated upstream
       <hr>
-=======
-      <br><hr>
->>>>>>> Stashed changes
     </div>
     
 
 
-<<<<<<< Updated upstream
     
 
     <div class="container2 justify-content-center">
@@ -94,13 +89,6 @@ export default {
       <h1 class="text-center">Crear una sesión</h1>
 
       <div class="crear_sesion">
-=======
-    <div class="container2 justify-content-center">
-
-      <h1 class="text-center titulo" @click="mostrarCrearSesion">Crear una sesión</h1>
-
-      <div id="crear_sesion" :class="{ ocultar: mostrarCrearSesion }">
->>>>>>> Stashed changes
         <div class="form_sesion input-group row g-4 d-flex justify-content-center ">
           <div class="col-auto col-form-label">
             <label><i class="bi bi-calendar-event"></i> Fecha: </label>
@@ -161,10 +149,6 @@ export default {
         <div class="d-flex justify-content-center">
           <a class="btn btn-dark" @click="GuardarSesion" id="btn_guardar">Guardar Sesión</a>
         </div>
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
       </div>
     </div>
 
@@ -215,12 +199,6 @@ i {
   color: #dfaa22;
 }
 
-<<<<<<< Updated upstream
-=======
-.ocultar {
-  display: none;
-}
->>>>>>> Stashed changes
 
 #btn_guardar {
   margin: 20px;
