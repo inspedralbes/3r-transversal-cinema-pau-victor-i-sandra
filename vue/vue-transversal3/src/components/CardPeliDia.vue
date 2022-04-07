@@ -62,8 +62,15 @@ export default {
 
   methods: {
     contarButacasOcupadas: function () {
-      this.butacasOcupadas =
-        this.infoPelicula.butacasOcupadas.split(",").length;
+      console.log("aaaaaaaaaaaa");
+      console.log(this.infoPelicula.butacasOcupadas);
+      if (this.infoPelicula.butacasOcupadas != null) {
+        console.log("no");
+        this.butacasOcupadas =
+          this.infoPelicula.butacasOcupadas.split(",").length;
+      } else {
+        this.butacasOcupadas = 0;
+      }
     },
   },
 };
@@ -185,10 +192,12 @@ export default {
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
-            </div>
-            <div class="modal-body">
-              <p>Sinopsis: {{ this.masInfoPeli.Plot }}</p>
-              <p>Duración: {{ this.masInfoPeli.Runtime }}</p>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
           </div>
         </div>

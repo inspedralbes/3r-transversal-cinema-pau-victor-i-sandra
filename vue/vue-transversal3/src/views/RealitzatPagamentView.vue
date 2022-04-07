@@ -9,21 +9,25 @@ export default {
   data() {
     return {
       piniaData: 0,
-      entradasData: null
+      entradasData: null,
     };
   },
 
   beforeMount() {
     this.piniaData = this.sessioStore.get;
-    fetch(`http://localhost:8000/entradasUsuario?idUsuario=${this.piniaData.idUsuario}&idSesion=${this.piniaData.idSesion}`).then(response => response.json()).then(data => {
-      this.entradasData = data;
-      console.log(data);
-    });
+    fetch(
+      `http://localhost:8000/entradasUsuario?idUsuario=${this.piniaData.idUsuario}&idSesion=${this.piniaData.idSesion}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.entradasData = data;
+        console.log(data);
+      });
   },
 
   methods: {
-    goHome: function() {
-      window.location.href = '.';
+    goHome: function () {
+      window.location.href = ".";
     },
   },
 };
@@ -31,7 +35,11 @@ export default {
 
 <template>
   <main>
-    <button class="btn btn-outline-secondary home" label="Home" @click="goHome()">
+    <button
+      class="btn btn-outline-secondary home"
+      label="Home"
+      @click="goHome()"
+    >
       <i class="bi bi-house"></i> Inicio
     </button>
     <div class="container">
@@ -46,10 +54,8 @@ export default {
               <p>Te hemos enviado tus entradas a tu correo...</p>
               <p>
                 Si no, puedes descargarte tus entradas clicando
-                <a
-                  :href="this.entradasData.pdf"
-                  target="_blank"
-                >aquí</a> o escanenando el siguiente código QR
+                <a :href="this.entradasData.pdf" target="_blank">aquí</a> o
+                escanenando el siguiente código QR
               </p>
             </div>
             <div class="col-12 col-md-4 qr">
@@ -76,7 +82,9 @@ export default {
                       :data-bs-target="'#flush-collapse' + index"
                       aria-expanded="false"
                       aria-controls="flush-collapseOne"
-                    >Entrada #{{ index }}</button>
+                    >
+                      Entrada #{{ index }}
+                    </button>
                   </h2>
                   <div
                     :id="'flush-collapse' + index"
@@ -87,7 +95,11 @@ export default {
                     <div class="accordion-body">
                       <div class="row align-items-center">
                         <div class="col-4">
-                          <img :src="this.piniaData.peli.imgPeli" alt class="img-fluid" />
+                          <img
+                            :src="this.piniaData.peli.imgPeli"
+                            alt
+                            class="img-fluid"
+                          />
                         </div>
                         <div class="col-8">
                           <p>
