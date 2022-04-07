@@ -82,18 +82,19 @@ class SesionController extends AbstractController
         $sesion = "";
         $usuario = "";
 
+        $entradas = array_merge($entradas, [
+            'pdf' => "http://cinema1back.alumnes.inspedralbes.cat/EntradasPDF/Entradas_" . $dades[0]->getUsuario()->__toString() . ".pdf",
+            'qr' => "http://cinema1back.alumnes.inspedralbes.cat/QR/Entradas_" . $dades[0]->getUsuario()->__toString() . ".jpg"
+        ]);
         foreach ($dades as $entrada) {
             $usuario = $entrada->getUsuario()->__toString();
             $sesion = $entrada->getSesion()->__toString();
             array_push($butacas, $entrada->getButaca() . " - " . $entrada->getPrecio() . "€");
-
             array_push($entradas['entradas'], [
                 'idUsuario' => $entrada->getUsuario()->__toString(),
                 'idSesion' => $entrada->getSesion()->__toString(),
                 'butaca' => $entrada->getButaca(),
                 'precio' => $entrada->getPrecio(),
-                'pdf' => "",
-                'qr' => ""
             ]);
         }
 
@@ -182,12 +183,9 @@ class SesionController extends AbstractController
                     'nombrePeli' => $sesion->getNombrePeli(),
                     'anoPeli' => $sesion->getAnoPeli(),
                     'imgPeli' => $sesion->getImgPeli(),
-                ]
+                ],
+                'butacasOcupadas' => $sesion->getbutacasOcupadas()
             ]);
-
-            if ($bool) {
-                $sesiones['sesiones'] = array_merge($sesiones['sesiones'][0], ['butacasOcupadas' => $sesion->getbutacasOcupadas()]);
-            }
         }
 
         return $sesiones;
@@ -225,7 +223,7 @@ class SesionController extends AbstractController
         // Write file to the desired path
         file_put_contents($pdfFilepath, $output);
 
-        $this->qr("", $usuario);
+        $this->qr("http://cinema1back.alumnes.inspedralbes.cat/EntradasPDF/Entradas_$usuario.pdf", $usuario);
     }
 
     public function qr($PDFpath = "", $user)
@@ -239,11 +237,8 @@ class SesionController extends AbstractController
             ->size(400)
             ->margin(10)
             ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
-            ->labelText('Escanéame para ver tus entradas')
-            ->labelFont(new NotoSans(20))
-            ->labelAlignment(new LabelAlignmentCenter())
             ->build();
-        
-            $result->saveToFile('../public/QR/Entradas_'.$user.'.png');
+
+        $result->saveToFile('../public/QR/Entradas_' . $user . '.png');
     }
 }
