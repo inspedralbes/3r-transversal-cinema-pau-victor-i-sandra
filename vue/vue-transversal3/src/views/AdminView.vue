@@ -11,8 +11,6 @@ export default {
     return {
       peli: "",
       basePeliculas: 0,
-      mostrarConsultarSesion: false,
-      mostrarCrearSesion: false,
     };
   },
   components: {
@@ -55,16 +53,6 @@ export default {
           console.log(data);
         });
     },
-
-    mostrarCrearSesion: function () {
-      console.log("hshs"); 
-    },
-
-    mostrarConsultarSesion: function() {
-      console.log("aaa");
-      this.mostrarConsultarSesion = true;
-    },
-
   },
 };
 </script>
@@ -72,16 +60,13 @@ export default {
   <main>
 
     <div class="container1">
-      <h1 class="text-center titulo" @click="mostrarConsultarSesion">Consultar sesiones</h1>
+      <h1 class="text-center titulo">Consultar sesiones</h1>
       <br />
-      <div id="consultar_entradas"  :class="{ ocultar: mostrarConsultarSesion }" v-if="typeof this.basePeliculas === 'object'">
+      <div id="consultar_entradas" v-if="typeof this.basePeliculas === 'object'">
         <ProximasPelis :peliculasInfo="basePeliculas.splice(1, 6)" />
       </div>
       <hr>
     </div>
-    
-
-
     
 
     <div class="container2 justify-content-center">
