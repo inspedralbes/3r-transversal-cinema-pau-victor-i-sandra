@@ -11,8 +11,7 @@ export default {
   },
   methods: {
     contarButacasOcupadas: function () {
-      this.butacasOcupadas =
-        this.peliInfo.butacasOcupadas.split(",").length - 1;
+      this.butacasOcupadas = this.peliInfo.butacasOcupadas.split(",").length - 1;
       console.log(this.butacasOcupadas);
     },
   },
