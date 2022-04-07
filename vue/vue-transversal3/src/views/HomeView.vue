@@ -10,8 +10,7 @@ export default {
   },
   data() {
     return {
-      basePeliculas: 0,
-      enadmin: 0,
+      basePeliculas: null,
     };
   },
 
@@ -34,7 +33,7 @@ export default {
 </script>
 <template>
   <main>
-    <div v-if="typeof this.basePeliculas === 'object'">
+    <div v-if="this.basePeliculas != null">
       <CardPeliDia :infoPelicula="basePeliculas[0]" />
 
       <div class="prox_sesiones">

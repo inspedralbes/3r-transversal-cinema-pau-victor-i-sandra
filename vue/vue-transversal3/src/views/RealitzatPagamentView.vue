@@ -9,16 +9,21 @@ export default {
   data() {
     return {
       piniaData: 0,
+      entradasData: null
     };
   },
 
-  mounted() {
+  beforeMount() {
     this.piniaData = this.sessioStore.get;
+    fetch(`http://localhost:8000/entradasUsuario?idUsuario=${this.piniaData.idUsuario}&idSesion=${this.piniaData.idSesion}`).then(response => response.json()).then(data => {
+      this.entradasData = data;
+      console.log(data);
+    });
   },
 
   methods: {
-    goHome() {
-      window.href = ".";
+    goHome: function() {
+      window.location.href = '.';
     },
   },
 };
@@ -26,22 +31,88 @@ export default {
 
 <template>
   <main>
-    <div class="container d-flex align-items-center justify-content-center">
+    <button class="btn btn-outline-secondary home" label="Home" @click="goHome()">
+      <i class="bi bi-house"></i> Inicio
+    </button>
+    <div class="container">
       <div class="row resum">
-        <div class="col-12 alert alert-dark text-center" role="alert">
+        <div class="col-12 alert alert-dark" role="alert">
           <h2 class="alert-heading text-center">Resumen de la compra</h2>
           <hr />
-          <p>{{ this.piniaData.msg }}</p>
-          <div v-if="this.piniaData.estadoCompra">
-            <p>Te hemos enviado tus entradas a tu correo...</p>
-            <p>
-              Si no, puedes descargarte tus entradas clicando
-              <a href=".">aquí</a>
-            </p>
-          </div>
-          <div v-else>
-            <p>Ya has comprado entradas para esta sesion...</p>
-            <p>¿Quieres verlas? Haz click <a href=".">aquí!</a></p>
+
+          <div class="row">
+            <div class="col-12 col-md-8">
+              <p>{{ this.piniaData.msg }}</p>
+              <p>Te hemos enviado tus entradas a tu correo...</p>
+              <p>
+                Si no, puedes descargarte tus entradas clicando
+                <a
+                  :href="this.entradasData.pdf"
+                  target="_blank"
+                >aquí</a> o escanenando el siguiente código QR
+              </p>
+            </div>
+            <div class="col-12 col-md-4 qr">
+              <img
+                src="http://cinema1back.alumnes.inspedralbes.cat/QR/Entradas_aaaa.png"
+                class="img-fluid"
+                alt
+              />
+            </div>
+
+            <div class="col-12">
+              <h2>Tus entradas</h2>
+              <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div
+                  class="accordion-item"
+                  v-for="(entrada, index) in this.entradasData.entradas"
+                  :key="index"
+                >
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button
+                      class="accordion-button collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      :data-bs-target="'#flush-collapse' + index"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseOne"
+                    >Entrada #{{ index }}</button>
+                  </h2>
+                  <div
+                    :id="'flush-collapse' + index"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="flush-headingOne"
+                    data-bs-parent="#accordionFlushExample"
+                  >
+                    <div class="accordion-body">
+                      <div class="row align-items-center">
+                        <div class="col-4">
+                          <img :src="this.piniaData.peli.imgPeli" alt class="img-fluid" />
+                        </div>
+                        <div class="col-8">
+                          <p>
+                            <span class="bold">Usuario:</span>
+                            {{ entrada.idUsuario }}
+                          </p>
+                          <p>
+                            <span class="bold">Sesion:</span>
+                            {{ entrada.idSesion }}
+                          </p>
+                          <p>
+                            <span class="bold">Butaca:</span>
+                            {{ entrada.butaca }}
+                          </p>
+                          <p>
+                            <span class="bold">Precio:</span>
+                            {{ entrada.precio }}€
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -50,11 +121,59 @@ export default {
 </template>
 
 <style scoped>
-.container {
-  height: 75vh;
+main {
+  position: relative;
+}
+.resum {
+  width: 95%;
+  margin: auto;
 }
 
-.resum {
-  width: 50%;
+.container {
+  margin-top: 20px;
+  height: 84vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+}
+
+.qr img {
+  max-height: 200px !important;
+}
+
+.qr {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .resum {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .resum {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .resum {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .resum {
+    width: 50%;
+  }
 }
 </style>

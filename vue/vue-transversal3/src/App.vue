@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       mostrarFormUsr: true,
-    };
+    };s
   },
 
   methods: {
@@ -26,20 +26,25 @@ export default {
       <nav class="navbar navbar-expand-lg navbar-light bg-light header">
         <div class="container-fluid header">
           <RouterLink class="navbar-brand" to="/">
-            <img
-              class="logo"
-              src="./assets/logo.png"
-              alt="logo del Pedralbes Cinema"
-            />
+            <img class="logo" src="./assets/logo.png" alt="logo del Pedralbes Cinema" />
           </RouterLink>
           <div class="btn-group" role="group">
+            <!-- Trigger consultar entradas -->
             <a
               class="nav-link link"
               aria-current="page"
               data-bs-toggle="modal"
               data-bs-target="#entradasModal"
-              >Consultar entradas</a
-            >
+            >Consultar entradas</a>
+
+            
+            <!-- Trigger modal admin -->
+            <a
+              type="button"
+              class="nav-link link"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >Admin</a>
 
             <!-- MODAL CONSULTAR ENTRADAS -->
             <div
@@ -53,9 +58,7 @@ export default {
               <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title" id="entradasModalLabel">
-                      Consulta tus entradas
-                    </h4>
+                    <h4 class="modal-title" id="entradasModalLabel">Consulta tus entradas</h4>
                     <button
                       type="button"
                       class="btn-close"
@@ -68,21 +71,13 @@ export default {
                     <div id="form_usr" :class="{ ocultar: !mostrarFormUsr }">
                       <div class="col">
                         <div class="col">
-                          <label for="email" class="form-label text-left"
-                            >Email</label
-                          >
+                          <label for="email" class="form-label text-left">Email</label>
                           <input type="email" class="form-control" id="email" />
                         </div>
 
                         <div class="col">
-                          <label for="contraseña" class="form-label"
-                            >Contraseña</label
-                          >
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="contraseña"
-                          />
+                          <label for="contraseña" class="form-label">Contraseña</label>
+                          <input type="password" class="form-control" id="contraseña" />
                         </div>
                         <br />
                         <div class="col text-center">
@@ -90,9 +85,7 @@ export default {
                             type="button"
                             @click="consultarEntradas"
                             class="btn btn-primary"
-                          >
-                            Aceptar
-                          </button>
+                          >Aceptar</button>
                         </div>
                       </div>
                     </div>
@@ -107,42 +100,27 @@ export default {
                   <!-- Fin entradas  -->
 
                   <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                   </div>
                 </div>
               </div>
             </div>
             <!-- FIN MODAL CONSULTAR ENTRADAS -->
 
-            <div class="vr"></div>
-
-            <a
-              class="nav-link link"
-              data-bs-toggle="modal"
-              data-bs-target="#adminModal"
-              >Admin</a
-            >
-
             <!-- MODAL ADMIN -->
             <div
-              class="modal"
-              id="adminModal"
+              class="modal fade"
+              id="staticBackdrop"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
               tabindex="-1"
-              aria-labelledby="adminModalLabel"
+              aria-labelledby="staticBackdropLabel"
               aria-hidden="true"
             >
-              <div class="modal-dialog modal-dialog-centered modal">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title" id="adminModalLabel">
-                      Identificate como admin
-                    </h4>
+                    <h4 class="modal-title" id="adminModalLabel">Identificate como admin</h4>
                     <button
                       type="button"
                       class="btn-close"
@@ -150,53 +128,33 @@ export default {
                       aria-label="Close"
                     ></button>
                   </div>
-
-                  <div class="modal-body align-self-center">
-                    <div id="form_admin">
-                      <div class="col">
+                  <div class="modal-body">
+                    <div class="modal-body align-self-center">
+                      <div id="form_admin">
                         <div class="col">
-                          <label for="usuario" class="form-label text-left"
-                            >Usuario</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="usuario"
-                          />
-                        </div>
+                          <div class="col">
+                            <label for="usuario" class="form-label text-left">Usuario</label>
+                            <input type="text" class="form-control" id="usuario" />
+                          </div>
 
-                        <div class="col">
-                          <label for="contraseña" class="form-label"
-                            >Contraseña</label
-                          >
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="contraseña"
-                          />
-                        </div>
+                          <div class="col">
+                            <label for="contraseña" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="contraseña" />
+                          </div>
 
-                        <br />
+                          <br />
 
-                        <div class="col text-center">
-                          <RouterLink class="" to="/admin">
-                            <button type="button" class="btn btn-primary">
-                              Aceptar
-                            </button>
-                          </RouterLink>
+                          <div class="col text-center">
+                            <RouterLink class to="/admin">
+                              <button type="button" class="btn btn-primary">Aceptar</button>
+                            </RouterLink>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-
                   <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>

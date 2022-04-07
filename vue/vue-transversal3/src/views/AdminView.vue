@@ -11,8 +11,6 @@ export default {
     return {
       peli: "",
       basePeliculas: 0,
-      mostrarConsultarSesion: false,
-      mostrarCrearSesion: false,
     };
   },
   components: {
@@ -60,15 +58,6 @@ export default {
           console.log(data);
         });
     },
-
-    // mostrarCrearSesion: function () {
-    //   console.log("hshs");
-    // },
-
-    // mostrarConsultarSesion: function () {
-    //   console.log("aaa");
-    //   this.mostrarConsultarSesion = true;
-    // },
   },
 };
 </script>
