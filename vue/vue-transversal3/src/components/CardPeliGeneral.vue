@@ -9,6 +9,7 @@
       <h4 class="card-title bold">{{ this.peliInfo.peli.nombrePeli }}</h4>
       <h6 class="card-text">{{ this.peliInfo.fecha }}</h6>
       <h6 class="card-text">{{ this.peliInfo.hora }}</h6>
+      <h6 class="card-text">{{ this.butacasOcupadas }}/120</h6>
       <br />
       <RouterLink
         class="btn btn-primary"
@@ -23,7 +24,22 @@
 
 <script>
 export default {
+  data() {
+    return {
+      butacasOcupadas: 0,
+    };
+  },
   props: ["peliInfo"],
+  beforeMount() {
+    this.contarButacasOcupadas;
+  },
+  methods: {
+    contarButacasOcupadas: function () {
+      this.butacasOcupadas =
+        this.peliInfo.butacasOcupadas.split(",").length - 1;
+      console.log(this.butacasOcupadas);
+    },
+  },
 };
 </script>
 

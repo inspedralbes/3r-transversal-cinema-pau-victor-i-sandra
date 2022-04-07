@@ -58,21 +58,23 @@ export default {
 </script>
 <template>
   <main>
-
     <div class="container1">
       <h1 class="text-center">Consultar sesiones</h1>
       <br />
-      <div class="consultar_entradas" v-if="typeof this.basePeliculas === 'object'">
+      <div
+        class="consultar_entradas"
+        v-if="typeof this.basePeliculas === 'object'"
+      >
         <ProximasPelis :peliculasInfo="basePeliculas.splice(1, 6)" />
       </div>
-
     </div>
-
 
     <div class="container2 justify-content-center">
       <h1 class="text-center">Crear una sesión</h1>
 
-      <div class="form_sesion input-group row g-4 d-flex justify-content-center ">
+      <div
+        class="form_sesion input-group row g-4 d-flex justify-content-center"
+      >
         <div class="col-auto col-form-label">
           <label><i class="bi bi-calendar-event"></i> Fecha: </label>
         </div>
@@ -148,7 +150,8 @@ export default {
   margin-bottom: 40px;
 }
 
-.container1, .container2 {
+.container1,
+.container2 {
   margin-top: 40px;
 }
 
@@ -156,7 +159,7 @@ export default {
   .container2 {
     width: 260px;
     margin-left: 20%;
-    }
+  }
 }
 
 @media only screen and (min-width: 600px) {

@@ -19,6 +19,7 @@ export default {
       .then((response) => response.json())
       .then((data) => {
         this.basePeliculas = data.sesiones;
+        console.log(this.basePeliculas);
       });
   },
 };
@@ -27,7 +28,7 @@ export default {
   <main>
     <div v-if="typeof this.basePeliculas === 'object'">
       <CardPeliDia :infoPelicula="basePeliculas[0]" />
-      
+
       <div class="prox_sesiones">
         <br />
         <h1 class="titulo_css">Próximas sesiones</h1>
