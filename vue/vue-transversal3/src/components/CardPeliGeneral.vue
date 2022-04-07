@@ -6,13 +6,19 @@ export default {
     };
   },
   props: ["peliInfo"],
-  beforeMount() {
-    this.contarButacasOcupadas;
+  mounted() {
+    this.contarButacasOcupadas();
   },
   methods: {
     contarButacasOcupadas: function () {
-      this.butacasOcupadas = this.peliInfo.butacasOcupadas.split(",").length - 1;
-      console.log(this.butacasOcupadas);
+      console.log(this.peliInfo);
+      if (this.peliInfo.butacasOcupadas != null) {
+        this.butacasOcupadas =
+          this.peliInfo.butacasOcupadas.split(",").length - 1;
+        console.log(this.butacasOcupadas);
+      } else {
+        this.butacasOcupadas = 0;
+      }
     },
   },
 };
@@ -20,7 +26,11 @@ export default {
 
 <template>
   <div class="card shadow-sm bg-white rounded" style="width: 18rem">
-    <img class="card-img-top" :src="this.peliInfo.peli.imgPeli" alt="Card image cap" />
+    <img
+      class="card-img-top"
+      :src="this.peliInfo.peli.imgPeli"
+      alt="Card image cap"
+    />
     <div class="card-body text-center">
       <h4 class="card-title bold">{{ this.peliInfo.peli.nombrePeli }}</h4>
       <h6 class="card-text">{{ this.peliInfo.fecha }}</h6>
@@ -31,7 +41,8 @@ export default {
         class="btn btn-primary"
         v-if="this.$route.name != 'butacas'"
         :to="'/seleccionarButacas/' + this.peliInfo.idSesion"
-      >Comprar entradas</RouterLink>
+        >Comprar entradas</RouterLink
+      >
       <RouterView />
     </div>
   </div>
