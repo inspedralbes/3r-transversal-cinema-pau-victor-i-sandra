@@ -1,11 +1,11 @@
 <script>
 import ProximasPelis from "@/components/ProximasPelis.vue";
 import CardPeliDia from "@/components/CardPeliDia.vue";
-//import BD from "../../../../back/End Points/home.json";
+
 export default {
   data() {
     return {
-      basePeliculas: 0,
+      basePeliculas: null,
     };
   },
 
@@ -26,7 +26,7 @@ export default {
 </script>
 <template>
   <main>
-    <div v-if="typeof this.basePeliculas === 'object'">
+    <div v-if="this.basePeliculas != null">
       <CardPeliDia :infoPelicula="basePeliculas[0]" />
 
       <div class="prox_sesiones">

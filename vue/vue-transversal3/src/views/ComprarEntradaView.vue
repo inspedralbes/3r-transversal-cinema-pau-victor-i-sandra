@@ -86,10 +86,6 @@ export default {
   margin: 0 0 25px 0;
 }
 
-body {
-  margin-bottom: 70px;
-}
-
 h1 {
   font-variant: small-caps;
 }
