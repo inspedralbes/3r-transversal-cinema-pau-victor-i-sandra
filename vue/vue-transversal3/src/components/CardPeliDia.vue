@@ -26,6 +26,7 @@ export default {
           : "Ya proyectada";
       this.disabled = ahora > finPeli ? 1 : 0; //Si la peli ya se ha visto, no se pueden comprar entradas...
     }, 1000);
+    this.contarButacasOcupadas();
   },
 
   beforeCreate() {
@@ -55,11 +56,16 @@ export default {
       tiempo: null,
       disabled: 0,
       masInfoPeli: 0,
+      butacasOcupadas: 0,
     };
   },
 
   methods: {
-    tiempoRestante: function () {},
+    contarButacasOcupadas: function () {
+      this.butacasOcupadas =
+        this.infoPelicula.butacasOcupadas.split(",").length - 1;
+      console.log(this.butacasOcupadas);
+    },
   },
 };
 </script>
@@ -99,6 +105,10 @@ export default {
                 <p>
                   <span class="bold">Duración:</span>
                   {{ this.masInfoPeli.Runtime }}
+                </p>
+                <p>
+                  <span class="bold">Ocupació de la sala:</span>
+                  {{ this.butacasOcupadas }}/120
                 </p>
               </div>
 

@@ -35,11 +35,13 @@ export default {
       fetch("http://192.168.210.161:8000/entradas", {
         method: "POST",
         body: entradas,
-      }).then((response) => response.json()).then((data) => {
-        this.datosPinia.estadoCompra = data.status;
-        this.datosPinia.msg = data.msg;
-        this.sessioStore.set(this.datosPinia);
-      });
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          this.datosPinia.estadoCompra = data.status;
+          this.datosPinia.msg = data.msg;
+          this.sessioStore.set(this.datosPinia);
+        });
     },
 
     precioEntradas: function (butaca) {
@@ -146,7 +148,9 @@ export default {
 
       <div class="row g-3 margin15">
         <div class="col-md-12" v-if="this.msgLogin != null">
-          <div class="alert alert-primary" role="alert">{{ this.msgLogin }}</div>
+          <div class="alert alert-primary" role="alert">
+            {{ this.msgLogin }}
+          </div>
         </div>
         <div class="col-md-10">
           <label for="email" class="form-label">Email</label>
@@ -163,13 +167,16 @@ export default {
             class="btn btn-primary margin10"
             @click="iniciarSesionCompra"
             :class="{ ocultar: bien }"
-          >Iniciar Sesion</button>
+          >
+            Iniciar Sesion
+          </button>
           <RouterLink
             class="btn btn-primary margin10"
             @click.native="this.comprarEntradas"
             :class="{ ocultar: !bien }"
             to="/realitzatpagament"
-          >Comprar</RouterLink>
+            >Comprar</RouterLink
+          >
           <RouterView />
           <br />
           <br />
@@ -195,7 +202,9 @@ export default {
 
       <div class="row g-3 margin15">
         <div class="col-md-12" v-if="this.msgRegister != null">
-          <div class="alert alert-primary" role="alert">{{ this.msgRegister }}</div>
+          <div class="alert alert-primary" role="alert">
+            {{ this.msgRegister }}
+          </div>
         </div>
         <div class="col-md-5">
           <label for="titular" class="form-label text-left">Nombre</label>
@@ -220,13 +229,16 @@ export default {
             class="btn btn-primary margin10"
             @click="cuentaNuevaCompra"
             :class="{ ocultar: bien }"
-          >Crear Cuenta</button>
+          >
+            Crear Cuenta
+          </button>
           <RouterLink
             class="btn btn-primary margin10"
             @click.native="this.comprarEntradas"
             :class="{ ocultar: !bien }"
             to="/realitzatpagament"
-          >Comprar</RouterLink>
+            >Comprar</RouterLink
+          >
           <RouterView />
 
           <br />
