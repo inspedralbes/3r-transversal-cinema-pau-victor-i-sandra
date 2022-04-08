@@ -119,7 +119,7 @@ export default {
         "password",
         document.getElementById("password1").value
       );
-      fetch("http://192.168.210.161:8000/login", {
+      fetch("http://192.168.210.161:8000/loginComprarEntradas", {
         method: "POST",
         body: iniciarSesion,
       })
