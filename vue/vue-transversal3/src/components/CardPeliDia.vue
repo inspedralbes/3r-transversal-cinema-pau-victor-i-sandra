@@ -183,21 +183,34 @@ export default {
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Más información sobre esta pelicula
-              </h5>
+              <h3 class="modal-title">
+                {{ this.infoPelicula.peli.nombrePeli }}
+              </h3>
               <button
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+            </div>
+            <div class="card-body">
+              <div
+                v-if="typeof this.masInfoPeli === 'object'"
+                class="card-text"
+              >
+                <p>
+                  <span class="bold">Sinopsis:</span>
+                  {{ this.masInfoPeli.Plot }}
+                </p>
+                <p>
+                  <span class="bold">Duración:</span>
+                  {{ this.masInfoPeli.Runtime }}
+                </p>
+                <p>
+                  <span class="bold">Ocupació de la sala:</span>
+                  {{ this.butacasOcupadas }}/120
+                </p>
+              </div>
             </div>
           </div>
         </div>
