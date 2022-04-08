@@ -5,7 +5,7 @@
       <h5 class="card-title">{{ peliInfo.Title }}</h5>
       <button
         type="button"
-        @click="anadirPeli"
+        @click="this.anadirPeli"
         :class="[this.animacion ? 'added' : '']"
         class="btn btn-primary"
         id="anadirPeli"
@@ -29,9 +29,11 @@ export default {
   },
   props: ["peliInfo"],
   methods: {
-    anadirPeli() {
+    anadirPeli: function() {
+      console.log("anadir");
       let pinia = this.sessioStore.get;
       pinia.peliInfo = this.peliInfo;
+      console.log(pinia);
       this.sessioStore.set(pinia);
       this.animacion = true;
       setTimeout(this.cambiarAnimacion, 2000);
