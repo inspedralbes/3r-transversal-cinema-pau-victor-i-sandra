@@ -1,5 +1,5 @@
 INSERT INTO `usuari` (`id`, `nombre`, `apellidos`, `username`, `email`) VALUES
-(1, 'Victor', 'Moreno', 'victormoreno_018', 'a20vicmormor@inspedralbes.cat'),
+(1, 'ausias', 'ausias', 'ausias', 'ausias@ausias.cat'),
 (2, 'Benito', 'Aka BadBunny', 'BadBunny', 'badbunny@gmail.com'),
 (3, 'Pau', 'Muñoz', 'pauchinpun', 'a20paumonoli@inspedralbes.cat'),
 (4, 'Rosa', 'Pepita', 'LaPepi', 'lapepi@gmail.com');
