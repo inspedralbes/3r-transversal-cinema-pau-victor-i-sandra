@@ -108,38 +108,40 @@ class SesionController extends AbstractController
     {
         $dataUsuario = $request->request->all();
         foreach ($dataUsuario as $usuario => $data) {
-            $$usuario = $data;
+            $$usuario = htmlspecialchars(trim($data));
         }
 
         if (empty($nombre) || empty($apellidos) || empty($email) || empty($password)) {
             // ERROR
             return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_OK);
         } else {
-            if (empty($usuarioRepository->getUsuario($email))) {
+            if ($this->comprovarData()) {
+                if (empty($usuarioRepository->getUsuario($email))) {
 
-                $usuario = new Usuario();
-                $usuario->setNombre($nombre);
-                $usuario->setApellidos($apellidos);
-                $usuario->setEmail($email);
-                $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
-                $usuarioRepository->add($usuario);
-                $usuario = $usuarioRepository->findBy(['email' => $email])[0];
+                    $usuario = new Usuario();
+                    $usuario->setNombre($nombre);
+                    $usuario->setApellidos($apellidos);
+                    $usuario->setEmail($email);
+                    $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
+                    $usuarioRepository->add($usuario);
+                    $usuario = $usuarioRepository->findBy(['email' => $email])[0];
 
-                // OK
-                return new JsonResponse(['status' => true, 'idUsuario' => $usuario->getId(), 'msg' => 'Usuario registrado! Ahora puedes comprar tus entradas haciendo click al boton de comprar!!'], Response::HTTP_ACCEPTED);
-            } else {
-                // ERROR
-                return new JsonResponse(['status' => false, 'msg' => 'Este correo ya esta asociado a una cuenta... prueba con otro!'], Response::HTTP_OK);
+                    // OK
+                    return new JsonResponse(['status' => true, 'idUsuario' => $usuario->getId(), 'msg' => 'Usuario registrado! Ahora puedes comprar tus entradas haciendo click al boton de comprar!!'], Response::HTTP_ACCEPTED);
+                } else {
+                    // ERROR
+                    return new JsonResponse(['status' => false, 'msg' => 'Este correo ya esta asociado a una cuenta... prueba con otro!'], Response::HTTP_OK);
+                }
             }
         }
     }
 
-    #[Route('/login', name: 'post_login', methods: ['POST'])]
-    public function login(Request $request, UsuarioRepository $usuarioRepository, EntradaRepository $entradaRepository): JsonResponse
+    #[Route('/loginComprarEntradas', name: 'post_login_comprarEntradas', methods: ['POST'])]
+    public function loginComprarEntradas(Request $request, UsuarioRepository $usuarioRepository, EntradaRepository $entradaRepository): JsonResponse
     {
         $dataPOSTUsuario = $request->request->all();
         foreach ($dataPOSTUsuario as $usuario => $data) {
-            $$usuario = $data;
+            $$usuario = htmlspecialchars(trim($data));
         }
 
         if (!empty($email) || !empty($password)) {
@@ -155,8 +157,6 @@ class SesionController extends AbstractController
                     } else {
                         return new JsonResponse(['status' => false, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'No puedes comprar entradas porque ya tienes unas para alguna proxima sesion. Para saber cuales son, accede al apartado consultar entradas'], Response::HTTP_OK);
                     }
-
-                    // return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'Puedes comprar entradas!'], Response::HTTP_ACCEPTED);
                 } else {
                     // ERROR
                     return new JsonResponse(['status' => false, 'msg' => 'Contraseña o correo incorrectos...'], Response::HTTP_OK);
@@ -167,6 +167,41 @@ class SesionController extends AbstractController
             return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_OK);
         }
     }
+
+    #[Route('/loginAdmin', name: 'post_login_admin', methods: ['POST'])]
+    public function loginAdmin(Request $request, UsuarioRepository $usuarioRepository): JsonResponse
+    {
+        $dataPOSTUsuario = $request->request->all();
+        foreach ($dataPOSTUsuario as $usuario => $data) {
+            $$usuario = htmlspecialchars(trim($data));
+        }
+
+        if (!empty($email) || !empty($password)) {
+            $resultado = $usuarioRepository->getUsuario($email);
+            if (empty($resultado)) {
+                return new JsonResponse(['status' => false, 'msg' => 'Error! Correo o contraseña incorrectos'], Response::HTTP_OK);
+            } else {
+                if ($resultado[0]->getEmail() == $email && password_verify($password, $resultado[0]->getPassword())) {
+                    return new JsonResponse(['status' => true, 'msg' => '¡Hola administrador!'], Response::HTTP_OK);
+                } else {
+                    return new JsonResponse(['status' => false, 'msg' => 'Error! Correo o contraseña incorrectos'], Response::HTTP_OK);
+                }
+            }
+        } else {
+            return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_OK);
+        }
+    }
+
+    public function comprovarData($loginORsign, $email, $password, $nombre = "", $apellidos = "")
+    {
+        if ($loginORsign) {
+            
+        } else {
+        }
+    }
+
+
+
 
     public function crearArrayPelis($dades, $bool = 0)
     {
