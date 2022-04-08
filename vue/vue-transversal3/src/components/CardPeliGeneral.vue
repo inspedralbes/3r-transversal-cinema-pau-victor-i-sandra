@@ -12,10 +12,7 @@ export default {
   methods: {
     contarButacasOcupadas: function () {
       console.log(this.peliInfo);
-      if (
-        this.peliInfo.butacasOcupadas != "" ||
-        this.peliInfo.butacasOcupadas != null
-      ) {
+      if (this.peliInfo.butacasOcupadas != null) {
         this.butacasOcupadas = this.peliInfo.butacasOcupadas.split(",").length;
         console.log(this.butacasOcupadas);
       }
