@@ -29,7 +29,7 @@ export default {
   },
   props: ["peliInfo"],
   methods: {
-    anadirPeli: function() {
+    anadirPeli: function () {
       console.log("anadir");
       let pinia = this.sessioStore.get;
       pinia.peliInfo = this.peliInfo;

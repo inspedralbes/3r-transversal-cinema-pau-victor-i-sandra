@@ -1,5 +1,7 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import router from "@/router";
+
 export default {
   components: {
     RouterLink,
@@ -15,6 +17,46 @@ export default {
   methods: {
     consultarEntradas: function () {
       this.mostrarFormUsr = false;
+    },
+    comprobarSesion() {
+      let adminLogin = new FormData();
+      adminLogin.append("email", document.getElementById("emailAdmin").value);
+      adminLogin.append(
+        "password",
+        document.getElementById("contrasenaAdmin").value
+      );
+      fetch("http://192.168.210.161:8000/loginAdmin", {
+        method: "POST",
+        body: adminLogin,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.msg);
+          document.addEventListener("keydown", (e) => {
+            console.log(e);
+            console.log("bbbb");
+          });
+          if (data.status == true) {
+            document.getElementById("staticBackdrop").dispatchEvent(
+              new KeyboardEvent("keydown", {
+                altKey: false,
+                bubbles: true,
+                code: "Escape",
+                ctrlKey: false,
+                isComposing: false,
+                key: "Escape",
+                location: 0,
+                metaKey: false,
+                repeat: false,
+                shiftKey: false,
+                which: 27,
+                charCode: 0,
+                keyCode: 27,
+              })
+            );
+            router.push({ name: "admin" });
+          }
+        });
     },
   },
 };
@@ -81,17 +123,21 @@ export default {
                           <label for="email" class="form-label text-left"
                             >Email</label
                           >
-                          <input type="email" class="form-control" id="email" />
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="emailConsultar"
+                          />
                         </div>
 
                         <div class="col">
-                          <label for="contraseña" class="form-label"
+                          <label for="contrasena" class="form-label"
                             >Contraseña</label
                           >
                           <input
                             type="password"
                             class="form-control"
-                            id="contraseña"
+                            id="contrasenaConsultar"
                           />
                         </div>
                         <br />
@@ -135,7 +181,7 @@ export default {
               class="modal fade"
               id="staticBackdrop"
               data-bs-backdrop="static"
-              data-bs-keyboard="false"
+              data-bs-keyboard="true"
               tabindex="-1"
               aria-labelledby="staticBackdropLabel"
               aria-hidden="true"
@@ -158,35 +204,37 @@ export default {
                       <div id="form_admin">
                         <div class="col">
                           <div class="col">
-                            <label for="usuario" class="form-label text-left"
-                              >Usuario</label
+                            <label for="email" class="form-label text-left"
+                              >Email</label
                             >
                             <input
                               type="text"
                               class="form-control"
-                              id="usuario"
+                              id="emailAdmin"
                             />
                           </div>
 
                           <div class="col">
-                            <label for="contraseña" class="form-label"
+                            <label for="contrasenaAdmin" class="form-label"
                               >Contraseña</label
                             >
                             <input
                               type="password"
                               class="form-control"
-                              id="contraseña"
+                              id="contrasenaAdmin"
                             />
                           </div>
 
                           <br />
 
                           <div class="col text-center">
-                            <RouterLink class to="/admin">
-                              <button type="button" class="btn btn-primary">
-                                Aceptar
-                              </button>
-                            </RouterLink>
+                            <button
+                              type="button"
+                              @click="comprobarSesion"
+                              class="btn btn-primary"
+                            >
+                              Aceptar
+                            </button>
                           </div>
                         </div>
                       </div>

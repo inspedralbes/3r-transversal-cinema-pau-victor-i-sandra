@@ -45,7 +45,7 @@ export default {
         "diaEspectador",
         document.getElementById("espectador").value
       );
-      console.log(this.peli)
+      console.log(this.peli);
       nuevaSesion.append("idPeli", this.peli.peliInfo.imdbID);
       nuevaSesion.append("nombrePeli", this.peli.peliInfo.Title);
       nuevaSesion.append("imgPeli", this.peli.peliInfo.Poster);
