@@ -39,6 +39,7 @@ export default {
   },
 
   beforeCreate() {
+    console.log(this.infoPelicula);
     fetch(
       "https://www.omdbapi.com/?apikey=5149518a&i=" +
         this.infoPelicula.peli.idPeli

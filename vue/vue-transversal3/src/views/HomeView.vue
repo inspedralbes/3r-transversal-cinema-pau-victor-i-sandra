@@ -4,6 +4,8 @@ import CardPeliDia from "@/components/CardPeliDia.vue";
 //import BD from "../../../../back/End Points/home.json";
 import { sessioStore } from "../stores/sessioStore";
 import { mapStores } from "pinia";
+import router from "@/router";
+
 export default {
   computed: {
     ...mapStores(sessioStore),
@@ -20,14 +22,18 @@ export default {
   },
 
   beforeCreate() {
-    fetch("http://192.168.210.161:8000/sesiones")
+    // fetch("http://192.168.210.161:8000/sesiones")
+    fetch("http://192.168.1.140:8000/sesiones")
       .then((response) => response.json())
       .then((data) => {
         this.basePeliculas = data.sesiones;
         console.log(this.basePeliculas);
         this.sessioStore.setComprador();
         //alert(this.sessioStore.getAdmin);
-      });
+      }).catch( () => {
+        router.push({ name: "error" });
+      }
+      );
   },
 };
 </script>

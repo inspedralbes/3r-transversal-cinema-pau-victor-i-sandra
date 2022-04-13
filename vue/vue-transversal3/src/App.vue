@@ -25,7 +25,7 @@ export default {
         "password",
         document.getElementById("contrasenaAdmin").value
       );
-      fetch("http://192.168.210.161:8000/loginAdmin", {
+      fetch("http://192.168.1.140:8000/loginAdmin", {
         method: "POST",
         body: adminLogin,
       })
