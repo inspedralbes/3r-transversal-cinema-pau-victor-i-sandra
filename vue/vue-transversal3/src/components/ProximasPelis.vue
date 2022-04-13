@@ -9,9 +9,6 @@ export default {
     RouterView,
   },
   props: ["peliculasInfo"],
-  beforeUpdate() {
-    //console.log(JSON.parse(JSON.stringify(this.peliculasInfo)));
-  },
 };
 </script>
 

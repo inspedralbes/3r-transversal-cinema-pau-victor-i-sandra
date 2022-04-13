@@ -13,15 +13,15 @@ export default {
     };
   },
 
-  beforeMount() {
+  created() {
     this.piniaData = this.sessioStore.get;
+
     fetch(
-      `http://192.168.210.161:8000/entradasUsuario?idUsuario=${this.piniaData.idUsuario}&idSesion=${this.piniaData.idSesion}`
+      `http://192.168.1.140:8000/entradasUsuario?idUsuario=${this.piniaData.idUsuario}&idSesion=${this.piniaData.idSesion}`
     )
       .then((response) => response.json())
       .then((data) => {
         this.entradasData = data;
-        console.log(data);
       });
   },
 
@@ -35,14 +35,10 @@ export default {
 
 <template>
   <main>
-    <button
-      class="btn btn-outline-secondary home"
-      label="Home"
-      @click="goHome()"
-    >
+    <button class="btn btn-outline-secondary home" label="Home" @click="goHome()">
       <i class="bi bi-house"></i> Inicio
     </button>
-    <div class="container">
+    <div class="container" v-if="this.entradasData != null">
       <div class="row resum">
         <div class="col-12 alert alert-dark" role="alert">
           <h2 class="alert-heading text-center">Resumen de la compra</h2>
@@ -59,47 +55,26 @@ export default {
               </p>
             </div>
             <div class="col-12 col-md-4 qr">
-              <img
-                src="http://cinema1back.alumnes.inspedralbes.cat/QR/Entradas_aaaa.png"
-                class="img-fluid"
-                alt
-              />
+              <img src="http://cinema1back.alumnes.inspedralbes.cat/QR/Entradas_aaaa.png" class="img-fluid" alt />
             </div>
 
             <div class="col-12">
               <h2>Tus entradas</h2>
               <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div
-                  class="accordion-item"
-                  v-for="(entrada, index) in this.entradasData.entradas"
-                  :key="index"
-                >
+                <div class="accordion-item" v-for="(entrada, index) in this.entradasData.entradas" :key="index">
                   <h2 class="accordion-header" id="flush-headingOne">
-                    <button
-                      class="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      :data-bs-target="'#flush-collapse' + index"
-                      aria-expanded="false"
-                      aria-controls="flush-collapseOne"
-                    >
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      :data-bs-target="'#flush-collapse' + index" aria-expanded="false"
+                      aria-controls="flush-collapseOne">
                       Entrada #{{ index }}
                     </button>
                   </h2>
-                  <div
-                    :id="'flush-collapse' + index"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample"
-                  >
+                  <div :id="'flush-collapse' + index" class="accordion-collapse collapse"
+                    aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
                       <div class="row align-items-center">
                         <div class="col-4">
-                          <img
-                            :src="this.piniaData.peli.imgPeli"
-                            alt
-                            class="img-fluid"
-                          />
+                          <img :src="this.piniaData.peli.imgPeli" alt class="img-fluid" />
                         </div>
                         <div class="col-8">
                           <p>
@@ -136,6 +111,7 @@ export default {
 main {
   position: relative;
 }
+
 .resum {
   width: 95%;
   margin: auto;

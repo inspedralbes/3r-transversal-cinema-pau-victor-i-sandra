@@ -54,7 +54,6 @@ export default {
       fetch("https://www.omdbapi.com/?apikey=5149518a&s=" + this.search)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           this.arrayPeliculas = data.Search;
           this.mostrarbusqueda = true;
         });
