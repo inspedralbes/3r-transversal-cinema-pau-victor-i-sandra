@@ -21,7 +21,6 @@ export default {
   },
 
   beforeCreate() {
-    console.log(window.location.href.split("/", 5)[4]);
     fetch(
       "http://192.168.1.140:8000/sesionEspecifica?idSesion=" +
         window.location.href.split("/", 5)[4]
@@ -30,8 +29,7 @@ export default {
       .then((data) => {
         this.peliSeleccionada = data.sesiones[0]; // Porque solo se pasa una sesion
         this.peliSeleccionada.enadmin = 0;
-        console.log("este es el que quiero");
-        console.log(this.peliSeleccionada);
+
         this.sessioStore.set(this.peliSeleccionada);
       });
   },

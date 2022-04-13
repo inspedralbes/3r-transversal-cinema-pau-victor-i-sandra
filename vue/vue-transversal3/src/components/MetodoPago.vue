@@ -101,7 +101,6 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           this.msgRegister = data.msg;
           if (data.status == true) {
             this.bien = true;

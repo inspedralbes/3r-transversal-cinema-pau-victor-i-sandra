@@ -30,10 +30,8 @@ export default {
   props: ["peliInfo"],
   methods: {
     anadirPeli: function () {
-      console.log("anadir");
       let pinia = this.sessioStore.get;
       pinia.peliInfo = this.peliInfo;
-      console.log(pinia);
       this.sessioStore.set(pinia);
       this.animacion = true;
       setTimeout(this.cambiarAnimacion, 2000);

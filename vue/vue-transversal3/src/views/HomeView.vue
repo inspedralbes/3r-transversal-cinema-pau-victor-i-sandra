@@ -27,7 +27,6 @@ export default {
       .then((response) => response.json())
       .then((data) => {
         this.basePeliculas = data.sesiones;
-        console.log(this.basePeliculas);
         this.sessioStore.setComprador();
         //alert(this.sessioStore.getAdmin);
       }).catch( () => {

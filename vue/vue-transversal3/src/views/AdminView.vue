@@ -23,11 +23,7 @@ export default {
       .then((response) => response.json())
       .then((data) => {
         this.basePeliculas = data.sesiones;
-        console.log("este es");
-        console.log(this.basePeliculas);
-        // this.sessioStore.set({'sesiones': this.basePeliculas});
         this.sessioStore.setAdmin();
-        //alert(this.sessioStore.getAdmin);
       });
   },
 
@@ -45,7 +41,6 @@ export default {
         "diaEspectador",
         document.getElementById("espectador").value
       );
-      console.log(this.peli);
       nuevaSesion.append("idPeli", this.peli.peliInfo.imdbID);
       nuevaSesion.append("nombrePeli", this.peli.peliInfo.Title);
       nuevaSesion.append("imgPeli", this.peli.peliInfo.Poster);
