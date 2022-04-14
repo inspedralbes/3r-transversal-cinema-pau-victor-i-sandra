@@ -72,17 +72,4 @@ export default {
     height: auto;
   }
 }
-
-.resumen {
-  width: 80%;
-}
-
-/* .poster_resumen {
-  width: 230px;
-  height: auto;
-}
-
-.resumen {
-  width: 80%;
-} */
 </style>

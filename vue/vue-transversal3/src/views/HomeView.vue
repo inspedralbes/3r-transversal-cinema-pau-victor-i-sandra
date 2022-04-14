@@ -1,7 +1,8 @@
 <script>
 import ProximasPelis from "@/components/ProximasPelis.vue";
 import CardPeliDia from "@/components/CardPeliDia.vue";
-//import BD from "../../../../back/End Points/home.json";
+import SpinnerCargando from '@/components/SpinnerCargando.vue';
+
 import { sessioStore } from "../stores/sessioStore";
 import { mapStores } from "pinia";
 import router from "@/router";
@@ -13,12 +14,14 @@ export default {
   data() {
     return {
       basePeliculas: null,
+      cargando: 1
     };
   },
 
   components: {
     CardPeliDia,
     ProximasPelis,
+    SpinnerCargando
   },
 
   beforeCreate() {
@@ -28,8 +31,12 @@ export default {
       .then((data) => {
         this.basePeliculas = data.sesiones;
         this.sessioStore.setComprador();
+        setTimeout(() => {
+          this.cargando = 0;
+        }, 1000);
         //alert(this.sessioStore.getAdmin);
-      }).catch( () => {
+      }).catch(() => {
+        this.cargando = 0;
         router.push({ name: "error" });
       }
       );
@@ -38,7 +45,7 @@ export default {
 </script>
 <template>
   <main>
-    <div v-if="this.basePeliculas != null">
+    <div v-if="this.basePeliculas != null && !this.cargando">
       <CardPeliDia :infoPelicula="basePeliculas[0]" />
 
       <div class="prox_sesiones">
@@ -48,5 +55,25 @@ export default {
         <ProximasPelis :peliculasInfo="basePeliculas.splice(1, 6)" />
       </div>
     </div>
+
+    <div class="cargando d-flex align-items-center justify-content-center" v-if="!this.cargando">
+      <div>
+        <h1>Cargando contenido...</h1>
+      </div>
+      <br>
+      <div>
+        <div class="spinner-border ms-auto" role="status" style="width: 7rem; height: 7rem;" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <SpinnerCargando v-if="this.cargando" />
+
   </main>
 </template>
+
+<style>
+.cargando {
+  flex-direction: column;
+  min-height: 86vh;
+}
+</style>

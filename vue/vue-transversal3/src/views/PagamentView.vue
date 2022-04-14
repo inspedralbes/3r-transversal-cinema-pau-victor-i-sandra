@@ -29,11 +29,11 @@ export default {
           <h1>Compra tus entradas</h1>
         </div>
 
-        <div class="col-12 col-md-5">
+        <div class="col-12 col-md-5 gy-4">
           <ResumenCompra />
         </div>
 
-        <div class="col-12 col-md-7">
+        <div class="col-12 col-md-7 gy-4">
           <MetodoPago />
         </div>
       </div>
