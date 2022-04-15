@@ -13,30 +13,26 @@ export default {
 </script>
 
 <template>
-  <section class="container">
-    <div class="row gy-5">
-      <div
-        :key="index"
-        v-for="(peliActual, index) in this.peliculasInfo"
-        class="col col-lg-4"
-      >
-        <CardPeliGeneral :peliInfo="peliActual">
-          <RouterLink
-            class="btn btn-primary"
-            :to="'/seleccionarButacas/' + peliActual.idSesion"
-            >Comprar Entrades</RouterLink
-          >
-          <RouterView />
-        </CardPeliGeneral>
+  <section>
+    <br />
+    <h1 class="titulo_css text-center">Próximas sesiones</h1>
+    <br />
+    <div class="container">
+      <div class="row gy-5">
+        <div :key="index" v-for="(peliActual, index) in this.peliculasInfo" class="col col-lg-4">
+          <CardPeliGeneral :peliInfo="peliActual">
+            <RouterLink class="btn btn-primary" :to="'/seleccionarButacas/' + peliActual.idSesion">Comprar Entrades
+            </RouterLink>
+            <RouterView />
+          </CardPeliGeneral>
+        </div>
       </div>
     </div>
   </section>
+
 </template>
 
 <style>
-.prox_sesiones {
-  margin: 60px;
-}
 
 .card {
   margin: auto;

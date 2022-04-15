@@ -39,4 +39,12 @@ export default {
 </template>
 
 <style>
+@media only screen and (max-width: 350px)  {
+  .card{
+    width: 16rem !important
+  }
+}
+
+
+
 </style>

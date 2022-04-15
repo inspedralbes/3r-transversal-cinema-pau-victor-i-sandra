@@ -43,27 +43,12 @@ export default {
   },
 };
 </script>
+
 <template>
   <main>
     <div v-if="this.basePeliculas != null && !this.cargando">
       <CardPeliDia :infoPelicula="basePeliculas[0]" />
-
-      <div class="prox_sesiones">
-        <br />
-        <h1 class="titulo_css">Próximas sesiones</h1>
-        <br />
-        <ProximasPelis :peliculasInfo="basePeliculas.splice(1, 6)" />
-      </div>
-    </div>
-
-    <div class="cargando d-flex align-items-center justify-content-center" v-if="!this.cargando">
-      <div>
-        <h1>Cargando contenido...</h1>
-      </div>
-      <br>
-      <div>
-        <div class="spinner-border ms-auto" role="status" style="width: 7rem; height: 7rem;" aria-hidden="true"></div>
-      </div>
+      <ProximasPelis :peliculasInfo="basePeliculas.splice(1, 6)" />
     </div>
 
     <SpinnerCargando v-if="this.cargando" />

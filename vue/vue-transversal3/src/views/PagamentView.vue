@@ -25,7 +25,7 @@ export default {
     </button>
     <div class="container">
       <div class="row gx-5">
-        <div class="col-12 text-center titulo-pagament gy-4">
+        <div class="col-12 text-center gy-4">
           <h1>Compra tus entradas</h1>
         </div>
 
@@ -42,7 +42,5 @@ export default {
 </template>
 
 <style>
-.titulo-pagament {
-  margin-bottom: 20px;
-}
+
 </style>
