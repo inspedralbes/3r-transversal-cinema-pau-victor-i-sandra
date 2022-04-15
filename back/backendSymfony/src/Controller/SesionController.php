@@ -131,7 +131,7 @@ class SesionController extends AbstractController
                     return new JsonResponse(['status' => false, 'msg' => 'Este correo ya esta asociado a una cuenta... prueba con otro!'], Response::HTTP_OK);
                 }
             } else {
-                return new JsonResponse(['status' => false, 'msg' => $check], Response::HTTP_OK);
+                return new JsonResponse(['status' => false, 'chk' => true, 'msg' => $check], Response::HTTP_OK);
             }
         }
     }
@@ -165,7 +165,7 @@ class SesionController extends AbstractController
                     }
                 }
             } else {
-                return new JsonResponse(['status' => false, 'msg' => $check], Response::HTTP_OK);
+                return new JsonResponse(['status' => false, 'chk' => true, 'msg' => $check], Response::HTTP_OK);
             }
         } else {
             // ERROR
