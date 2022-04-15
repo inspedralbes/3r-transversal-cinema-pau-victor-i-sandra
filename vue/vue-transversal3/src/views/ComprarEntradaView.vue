@@ -3,6 +3,8 @@ import CardPeliGeneral from "@/components/CardPeliGeneral.vue";
 import SeleccionarButaques from "@/components/SeleccionarButaques.vue";
 import { sessioStore } from "../stores/sessioStore";
 import { mapStores } from "pinia";
+import SpinnerCargando from '@/components/SpinnerCargando.vue';
+
 export default {
   computed: {
     ...mapStores(sessioStore),
@@ -12,21 +14,24 @@ export default {
     return {
       peliSeleccionada: null,
       enadmin: 0,
+      cargando: 1
     };
   },
 
   components: {
     CardPeliGeneral,
-    SeleccionarButaques,
+    SeleccionarButaques, 
+    SpinnerCargando
   },
 
   beforeCreate() {
     fetch(
       "http://192.168.1.140:8000/sesionEspecifica?idSesion=" +
-        window.location.href.split("/", 5)[4]
+      window.location.href.split("/", 5)[4]
     )
       .then((response) => response.json())
       .then((data) => {
+        this.cargando = 0;
         this.peliSeleccionada = data.sesiones[0]; // Porque solo se pasa una sesion
         this.peliSeleccionada.enadmin = 0;
 
@@ -44,34 +49,30 @@ export default {
 
 <template>
   <main>
-    <button
-      class="btn btn-secondary volver"
-      label="Volver"
-      @click="retroceder()"
-    >
-      <i class="bi bi-arrow-left"></i> Atrás
-    </button>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-          <h1>Sesión {{ $route.params.idSesion }}</h1>
-        </div>
+    <div v-if="!this.cargando">
+      <button class="btn btn-secondary volver" label="Volver" @click="retroceder()">
+        <i class="bi bi-arrow-left"></i> Atrás
+      </button>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1>Sesión {{ $route.params.idSesion }}</h1>
+          </div>
 
-        <div class="col-12 col-md-5 cardInfo align-self-center">
-          <CardPeliGeneral
-            v-if="this.peliSeleccionada != null"
-            :peliInfo="this.peliSeleccionada"
-          />
-        </div>
+          <div class="col-12 col-md-5 cardInfo align-self-center">
+            <CardPeliGeneral v-if="this.peliSeleccionada != null" :peliInfo="this.peliSeleccionada" />
+          </div>
 
-        <div class="col-12 col-md-7 butacasInfo">
-          <SeleccionarButaques
-            v-if="this.peliSeleccionada != null"
-            :butacasOcupadas="this.peliSeleccionada.butacasOcupadas"
-          />
+          <div class="col-12 col-md-7 butacasInfo">
+            <SeleccionarButaques v-if="this.peliSeleccionada != null"
+              :butacasOcupadas="this.peliSeleccionada.butacasOcupadas" />
+          </div>
         </div>
       </div>
     </div>
+
+    <SpinnerCargando v-if="this.cargando" />
+
   </main>
 </template>
 
@@ -93,10 +94,6 @@ export default {
   top: 10px;
   left: 10px;
   margin: 0 0 25px 0;
-}
-
-h1 {
-  font-variant: small-caps;
 }
 
 @media only screen and (min-width: 768px) {

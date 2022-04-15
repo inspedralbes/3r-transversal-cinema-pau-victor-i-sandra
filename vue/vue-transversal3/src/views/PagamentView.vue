@@ -25,15 +25,15 @@ export default {
     </button>
     <div class="container">
       <div class="row gx-5">
-        <div class="col-12 text-center titulo-pagament">
+        <div class="col-12 text-center gy-4">
           <h1>Compra tus entradas</h1>
         </div>
 
-        <div class="col-12 col-md-5">
+        <div class="col-12 col-md-5 gy-4">
           <ResumenCompra />
         </div>
 
-        <div class="col-12 col-md-7">
+        <div class="col-12 col-md-7 gy-4">
           <MetodoPago />
         </div>
       </div>
@@ -42,7 +42,5 @@ export default {
 </template>
 
 <style>
-.titulo-pagament {
-  margin-bottom: 20px;
-}
+
 </style>

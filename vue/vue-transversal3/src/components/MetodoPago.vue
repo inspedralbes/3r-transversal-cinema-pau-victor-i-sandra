@@ -13,11 +13,17 @@ export default {
       bien: false,
       msgLogin: null,
       msgRegister: null,
+      comprovando: false
     };
   },
 
   mounted() {
     this.datosPinia = this.sessioStore.get;
+
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
   },
 
   methods: {
@@ -84,6 +90,7 @@ export default {
     },
 
     cuentaNuevaCompra() {
+      this.comprovando = true;
       let crearCuenta = new FormData();
       crearCuenta.append("nombre", document.getElementById("nombre2").value);
       crearCuenta.append(
@@ -101,7 +108,20 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          this.msgRegister = data.msg;
+          this.comprovando = false;
+
+          if (typeof data.chk !== 'undefined') {
+            this.msgRegister = "Errores de comprovacion de datos: <ul>"
+            data.msg.forEach((c) => {
+              this.msgRegister += "<li>" + c + "</li>";
+            })
+
+            this.msgRegister += "</ul>"
+
+          } else {
+            this.msgRegister = data.msg;
+          }
+
           if (data.status == true) {
             this.bien = true;
             this.datosPinia = this.sessioStore.get;
@@ -112,6 +132,8 @@ export default {
     },
 
     iniciarSesionCompra() {
+      this.comprovando = true;
+
       let iniciarSesion = new FormData();
       iniciarSesion.append("email", document.getElementById("email1").value);
       iniciarSesion.append(
@@ -124,7 +146,19 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          this.msgLogin = data.msg;
+          this.comprovando = false;
+
+          if (typeof data.chk !== 'undefined') {
+            this.msgLogin = "Errores de comprovacion de datos: <ul>"
+            data.msg.forEach((c) => {
+              this.msgLogin += "<li>" + c + "</li>";
+            })
+
+            this.msgLogin += "</ul>"
+
+          } else {
+            this.msgLogin = data.msg;
+          }
           if (data.status == true) {
             this.datosPinia = this.sessioStore.get;
             this.datosPinia.idUsuario = data.idUsuario;
@@ -138,144 +172,153 @@ export default {
 </script>
 
 <template>
-  <div class="justify-content-center align-items-center margin15">
+  <div class="justify-content-center align-items-center">
     <!-- FORMULARIO INICIAR SESIÓN -->
     <div id="iniciar_sesion " :class="{ ocultar: !mostrarIniciarSesion }">
-      <div class="col-md-10 text-center">
-        <h2>Inicia sesión</h2>
-      </div>
 
-      <div class="row g-3 margin15">
+
+      <div class="row g-3">
+        <div class="col-md-12 text-center">
+          <h2>Inicia sesión</h2>
+        </div>
         <div class="col-md-12" v-if="this.msgLogin != null">
-          <div class="alert alert-primary" role="alert">
-            {{ this.msgLogin }}
+          <div class="alert alert-primary" role="alert" v-html="this.msgLogin">
           </div>
         </div>
-        <div class="col-md-10">
-          <label for="email" class="form-label">Email</label>
+        <div class="col-md-7">
+          <label for="email" class="form-label">Email <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+              data-bs-trigger="hover focus" data-bs-content="El correo tiene que contener el símbolo '@'"><i
+                class="bi bi-info-circle"></i></span></label>
           <input type="email" class="form-control" id="email1" />
         </div>
         <div class="col-md-5">
-          <label for="inputPassword4" class="form-label">Contraseña</label>
+          <label for="inputPassword4" class="form-label">Contraseña <span class="d-inline-block" tabindex="0"
+              data-bs-toggle="popover" data-bs-trigger="hover focus"
+              data-bs-content="La contraseña tiene que contener: una letra minúscula, una letra mayúscula, un número y uno de los siguientes símbolos: '@$!%*?&'"><i
+                class="bi bi-info-circle"></i></span></label>
           <input type="password" class="form-control" id="password1" />
         </div>
 
-        <div class="col-md-10 text-center">
-          <button
-            type="button"
-            class="btn btn-primary margin10"
-            @click="iniciarSesionCompra"
-            :class="{ ocultar: bien }"
-          >
+        <div class="col-md-12 text-center gy-4">
+          <button type="button" class="btn btn-primary" @click="iniciarSesionCompra" :class="{ ocultar: bien }">
             Iniciar Sesion
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+              v-if="this.comprovando"></span>
+
           </button>
-          <RouterLink
-            class="btn btn-primary margin10"
-            @click.native="this.comprarEntradas"
-            :class="{ ocultar: !bien }"
-            to="/realitzatpagament"
-            >Comprar</RouterLink
-          >
+          <RouterLink class="btn btn-primary margin10" @click.native="this.comprarEntradas" :class="{ ocultar: !bien }"
+            to="/realitzatpagament">Comprar</RouterLink>
           <RouterView />
-          <br />
-          <br />
+        </div>
+
+        <div class="col-12">
           <hr />
+        </div>
+
+        <div class="col-md-12 text-center">
+          <h4>¿No tienes usuario?</h4>
+          <p>
+            <a href="#" @click="crearCuenta" class="link_crear_cuenta">
+              Crea tu cuenta
+              <br />y compra ahora
+            </a>
+          </p>
         </div>
       </div>
 
-      <div class="col-md-10 text-center margin20">
-        <h4>¿No tienes usuario?</h4>
-        <br />
-        <a href="#" @click="crearCuenta" class="link_crear_cuenta">
-          Crea tu cuenta
-          <br />y compra ahora
-        </a>
-      </div>
+
     </div>
 
     <!-- FORMULARIO CREAR USUARIO-->
     <div id="crear_cuenta" :class="{ ocultar: mostrarIniciarSesion }">
-      <div class="col-md-10 text-center">
-        <h2>Crear cuenta</h2>
-      </div>
+      <div class="row g-3">
+        <div class="col-md-12 text-center">
+          <h2>Crear cuenta</h2>
+        </div>
 
-      <div class="row g-3 margin15">
         <div class="col-md-12" v-if="this.msgRegister != null">
-          <div class="alert alert-primary" role="alert">
-            {{ this.msgRegister }}
+          <div class="alert alert-primary" role="alert" v-html="this.msgRegister">
+
           </div>
         </div>
-        <div class="col-md-5">
-          <label for="titular" class="form-label text-left">Nombre</label>
+
+        <div class="col-md-6">
+          <label for="titular" class="form-label text-left">Nombre <span class="d-inline-block" tabindex="0"
+              data-bs-toggle="popover" data-bs-trigger="hover focus"
+              data-bs-content="El nombre solo puede contener letras, nada de números ni símbolos"><i
+                class="bi bi-info-circle"></i></span></label>
           <input type="text" class="form-control" id="nombre2" />
         </div>
-        <div class="col-md-5">
-          <label for="titular" class="form-label">Apellido</label>
+
+        <div class="col-md-6">
+          <label for="titular" class="form-label">Apellido <span class="d-inline-block" tabindex="0"
+              data-bs-toggle="popover" data-bs-trigger="hover focus"
+              data-bs-content="El apellido solo puede contener letras, nada de números ni símbolos"><i
+                class="bi bi-info-circle"></i></span></label>
           <input type="text" class="form-control" id="apellido2" />
         </div>
-        <div class="col-md-10">
-          <label for="titular" class="form-label">Email</label>
+
+        <div class="col-md-7">
+          <label for="titular" class="form-label">Email <span class="d-inline-block" tabindex="0"
+              data-bs-toggle="popover" data-bs-trigger="hover focus"
+              data-bs-content="El correo tiene que contener el símbolo '@'"><i
+                class="bi bi-info-circle"></i></span></label>
           <input type="email" class="form-control" id="email2" />
         </div>
+
         <div class="col-md-5">
-          <label for="inputPassword4" class="form-label">Contraseña</label>
+          <label for="inputPassword4" class="form-label">Contraseña <span class="d-inline-block" tabindex="0"
+              data-bs-toggle="popover" data-bs-trigger="hover focus"
+              data-bs-content="La contraseña tiene que contener: una letra minúscula, una letra mayúscula, un número y uno de los siguientes símbolos: '@$!%*?&'"><i
+                class="bi bi-info-circle"></i></span></label>
           <input type="text" class="form-control" id="password2" />
         </div>
 
-        <div class="col-md-10 text-center">
-          <button
-            type="button"
-            class="btn btn-primary margin10"
-            @click="cuentaNuevaCompra"
-            :class="{ ocultar: bien }"
-          >
+        <div class="col-md-12 text-center gy-4">
+          <button type="button" class="btn btn-primary" @click="cuentaNuevaCompra" :class="{ ocultar: bien }">
             Crear Cuenta
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+              v-if="this.comprovando"></span>
           </button>
-          <RouterLink
-            class="btn btn-primary margin10"
-            @click.native="this.comprarEntradas"
-            :class="{ ocultar: !bien }"
-            to="/realitzatpagament"
-            >Comprar</RouterLink
-          >
+          <RouterLink class="btn btn-primary" @click.native="this.comprarEntradas" :class="{ ocultar: !bien }"
+            to="/realitzatpagament">Comprar</RouterLink>
           <RouterView />
+        </div>
 
-          <br />
-          <br />
+        <div class="col-12">
           <hr />
         </div>
-      </div>
 
-      <div class="col-md-10 text-center margin20">
-        <h4>¿Ya eres usuario?</h4>
-        <br />
-        <a href="#" @click="iniciarSesion" class="link_iniciar_sesion">
-          Inicia sesión
-          <br />y compra ahora
-        </a>
+        <div class="col-md-12 text-center">
+          <h4>¿Ya eres usuario?</h4>
+          <p>
+            <a href="#" @click="iniciarSesion" class="link_iniciar_sesion">
+              Inicia sesión
+              <br />y compra ahora
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style>
-.margin10 {
-  margin: 10px;
-}
-
-.margin15 {
-  margin: 15px;
-}
-
-.margin15 {
-  margin: 20px;
-}
-
 .iniciar_sesion {
   display: none;
 }
 
 .ocultar {
   display: none;
+}
+
+.alert ul {
+  margin: 0
+}
+
+.alert-primary {
+  background-color: #fdca315b;
+  border-color: #FDCB31;
+  color: black
 }
 </style>

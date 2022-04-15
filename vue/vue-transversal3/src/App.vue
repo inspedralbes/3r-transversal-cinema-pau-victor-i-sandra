@@ -1,11 +1,13 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import router from "@/router";
+import Header from '@/components/Header.vue';
 
 export default {
   components: {
     RouterLink,
     RouterView,
+    Header
   },
 
   data() {
@@ -66,124 +68,7 @@ export default {
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light header">
-        <div class="container-fluid header">
-          <RouterLink class="navbar-brand" to="/">
-            <img class="logo" src="./assets/logo.png" alt="logo del Pedralbes Cinema" />
-          </RouterLink>
-          <div class="btn-group" role="group">
-            <!-- Trigger consultar entradas -->
-            <a class="nav-link link" aria-current="page" data-bs-toggle="modal"
-              data-bs-target="#entradasModal">Consultar entradas</a>
-
-            <!-- Trigger modal admin -->
-            <a type="button" class="nav-link link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Admin</a>
-
-            <!-- MODAL CONSULTAR ENTRADAS -->
-            <div class="modal fade" id="entradasModal" data-bs-backdrop="static" tabindex="-1"
-              aria-labelledby="entradasModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="entradasModalLabel">
-                      Consulta tus entradas
-                    </h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body align-self-center grande">
-                    <!-- From usuario -->
-                    <div id="form_usr" :class="{ ocultar: !mostrarFormUsr }">
-                      <div class="col">
-                        <div class="col">
-                          <label for="email" class="form-label text-left">Email</label>
-                          <input type="email" class="form-control" id="emailConsultar" />
-                        </div>
-
-                        <div class="col">
-                          <label for="contrasena" class="form-label">Contraseña</label>
-                          <input type="password" class="form-control" id="contrasenaConsultar" />
-                        </div>
-                        <br />
-                        <div class="col text-center">
-                          <button type="button" @click="consultarEntradas" class="btn btn-primary">
-                            Aceptar
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Fin Form usuario -->
-
-                  <!-- Entradas  -->
-                  <div id="entradas" :class="{ ocultar: mostrarFormUsr }">
-                    <p>Poner grid con las entradas</p>
-                  </div>
-
-                  <!-- Fin entradas  -->
-
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      Cerrar
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- FIN MODAL CONSULTAR ENTRADAS -->
-
-            <!-- MODAL ADMIN -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
-              aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="adminModalLabel">
-                      Identificate como admin
-                    </h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="modal-body align-self-center">
-                      <div id="form_admin">
-                        <div class="col">
-                          <div class="col">
-                            <label for="email" class="form-label text-left">Email</label>
-                            <input type="text" class="form-control" id="emailAdmin" />
-                          </div>
-
-                          <div class="col">
-                            <label for="contrasenaAdmin" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="contrasenaAdmin" />
-                          </div>
-
-                          <br />
-
-                          <div class="col text-center">
-                            <button type="button" @click="comprobarSesion" class="btn btn-primary">
-                              Aceptar
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      Close
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- FIN MODAL ADMIN -->
-          </div>
-        </div>
-      </nav>
-    </div>
-  </header>
-  <RouterView />
+  <Header />
 </template>
 
 <style>
@@ -233,5 +118,40 @@ body {
 
 .ocultar {
   display: none;
+}
+
+.btn-primary {
+  background-color: #4dcdff;
+  border-color: #4dcdff;
+  color: black
+}
+
+.btn-primary:hover {
+  background-color: rgb(253, 203, 49);
+  border-color: #fdcb31;
+  color: black
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 .25rem rgba(253, 202, 49, 50%) !important;
+  background-color: rgb(253, 203, 49);
+  border-color: #fdcb31;
+  color: black
+}
+
+.btn-primary:active {
+  box-shadow: 0 0 0 .25rem rgba(253, 202, 49, 50%);
+  background-color: rgb(253, 203, 49);
+  border-color: #fdcb31;
+  color: black
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-variant: small-caps;
 }
 </style>
