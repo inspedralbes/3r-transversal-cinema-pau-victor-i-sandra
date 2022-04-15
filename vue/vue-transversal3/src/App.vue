@@ -260,4 +260,13 @@ body {
   border-color: #fdcb31;
   color: black
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-variant: small-caps;
+}
 </style>

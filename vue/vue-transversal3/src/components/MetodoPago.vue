@@ -111,10 +111,8 @@ export default {
           this.comprovando = false;
 
           if (typeof data.chk !== 'undefined') {
-            console.log('a')
             this.msgRegister = "Errores de comprovacion de datos: <ul>"
             data.msg.forEach((c) => {
-              console.log(c)
               this.msgRegister += "<li>" + c + "</li>";
             })
 
@@ -151,10 +149,8 @@ export default {
           this.comprovando = false;
 
           if (typeof data.chk !== 'undefined') {
-            console.log('a')
             this.msgLogin = "Errores de comprovacion de datos: <ul>"
             data.msg.forEach((c) => {
-              console.log(c)
               this.msgLogin += "<li>" + c + "</li>";
             })
 

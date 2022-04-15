@@ -96,10 +96,6 @@ export default {
   margin: 0 0 25px 0;
 }
 
-h1 {
-  font-variant: small-caps;
-}
-
 @media only screen and (min-width: 768px) {
   .cardInfo {
     margin: 30px 0 0 0;

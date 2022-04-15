@@ -43,7 +43,7 @@ export default {
 <template>
   <main>
     <div v-if="!this.cargando">
-      <button class="btn btn-outline-secondary home" label="Home" @click="goHome()">
+      <button class="btn btn-secondary home" label="Home" @click="goHome()">
         <i class="bi bi-house"></i> Inicio
       </button>
       <div class="container" v-if="this.entradasData != null">
