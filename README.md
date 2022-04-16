@@ -8,5 +8,5 @@ Esquema mínim de carpetes pels projectes transversals
  * Projecte: "Pedralbes Cinema"
  * Descripció: creació d'una aplicacio web que et permet comprar entrades pel cinema.
  * URL de producció: 
- * Estat: fase inicial -> ja tenim el backlog i hem començat a completar tasques!
+ * Estat: fase final -> casi acabat
  * Backlog: https://freedcamp.com/view/3181588/tasks
