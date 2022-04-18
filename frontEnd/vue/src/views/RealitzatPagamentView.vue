@@ -23,7 +23,7 @@ export default {
     this.piniaData = this.sessioStore.get;
 
     fetch(
-      `http://localhost:8000/entradasUsuario?idUsuario=${this.piniaData.idUsuario}&idSesion=${this.piniaData.idSesion}`
+      `http://192.168.1.140:8000/entradasUsuario?idUsuario=${this.piniaData.idUsuario}&idSesion=${this.piniaData.idSesion}`
     )
       .then((response) => response.json())
       .then((data) => {

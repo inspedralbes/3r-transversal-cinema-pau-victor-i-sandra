@@ -141,7 +141,7 @@ export default {
         "password",
         document.getElementById("contrasenaConsultar").value
       );
-      fetch("http://localhost:8000/loginConsultar", {
+      ("http://localhost:8000/loginConsultar", {
         method: "POST",
         body: ConsultarLogin,
       })
@@ -158,7 +158,7 @@ export default {
         "password",
         document.getElementById("contrasenaAdmin").value
       );
-      fetch("http://localhost:8000/loginAdmin", {
+      fetch("http://192.168.1.140:8000/loginAdmin", {
         method: "POST",
         body: adminLogin,
       })
