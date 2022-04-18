@@ -51,7 +51,38 @@
 
                   <!-- Entradas  -->
                   <div id="entradas" :class="{ ocultar: mostrarFormUsr }">
-                    <p>Poner grid con las entradas</p>
+                    <div class="card text-center">
+                      <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="true" href="#">Active</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="card-body" v-if="this.datosEntrada != 0">
+                        <h5 class="card-title">{{this.datosEntrada.sesion[0].nombre_peli}}</h5>
+                        <img :src="this.datosEntrada.sesion[0].img_peli" class="img-fluid rounded-start poster_peli" alt="..." />
+                        <br>
+                        <p class="card-text">{{this.datosEntrada.sesion[0].fecha}}</p>
+                        <p class="card-text">{{this.datosEntrada.sesion[0].hora}}</p>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Nº Entrada</th>
+                              <th scope="col">Butaca</th>
+                              <th scope="col">Precio</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr :key="index" v-for="(entradas,index) in this.datosEntrada.entradas">
+                              <th scope="row">{{index+1}}</th>
+                              <td>{{entradas.butaca}}</td>
+                              <td>{{entradas.precio}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
 
                   <!-- Fin entradas  -->
@@ -120,6 +151,7 @@
 
 <script>
 import { RouterLink } from "vue-router";
+import router from "@/router";
 
 export default {
   components: {
@@ -129,6 +161,7 @@ export default {
   data() {
     return {
       mostrarFormUsr: true,
+      datosEntrada: 0,
     };
   },
 
@@ -147,7 +180,9 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          alert(data.msg);
+          //alert(data.msg);
+          console.log(data);
+          this.datosEntrada=data.msg;
     })
     },
 
