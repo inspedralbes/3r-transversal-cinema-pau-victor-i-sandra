@@ -14,16 +14,16 @@
 
 3r Projecte Transversal \
 ├───backEnd \
-│   ├───backendSymfony_dev
-│   ├───backendSymfony_prod
-│   ├───End Points
-│   └───SQL
-├───frontEnd
-│   ├───vue
-│   └───web
-│       ├───css
-│       ├───img
-│       ├───js
-│       └───_plantillas-html-b-w
-└───seguiment
+│   ├───backendSymfony_dev \
+│   ├───backendSymfony_prod \
+│   ├───End Points \
+│   └───SQL \
+├───frontEnd \
+│   ├───vue \
+│   └───web \
+│       ├───css \
+│       ├───img \
+│       ├───js \
+│       └───_plantillas-html-b-w \
+└───seguiment \
 
