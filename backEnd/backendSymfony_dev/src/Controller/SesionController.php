@@ -199,7 +199,7 @@ class SesionController extends AbstractController
     }
 
 
-    #[Route('/loginConsultar', name: 'post_login_admin', methods: ['POST'])]
+    #[Route('/loginConsultar', name: 'post_login_consultar', methods: ['POST'])]
     public function loginConsultar(Request $request, EntradaRepository $entradaRepository, UsuarioRepository $usuarioRepository): JsonResponse
     {
         $dataPOSTUsuario = $request->request->all();
