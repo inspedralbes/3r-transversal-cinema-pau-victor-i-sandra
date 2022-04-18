@@ -12,6 +12,7 @@
 
 ## Esquema mínim de carpetes pels projectes transversals
 
+```bash
 #!/bin/bash
 
 #File: tree-md
@@ -21,5 +22,5 @@ tree=$(tree -tf --noreport -I '*~' --charset ascii $1 |
 
 printf "# Project tree\n\n${tree}"
 
-
+```
 
