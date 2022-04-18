@@ -12,15 +12,18 @@
 
 ## Esquema mínim de carpetes pels projectes transversals
 
-```bash
-#!/bin/bash
-
-#File: tree-md
-
-tree=$(tree -tf --noreport -I '*~' --charset ascii $1 |
-       sed -e 's/| \+/  /g' -e 's/[|`]-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](\2):g')
-
-printf "# Project tree\n\n${tree}"
-
-```
+3r Projecte Transversal
+├───backEnd
+│   ├───backendSymfony_dev
+│   ├───backendSymfony_prod
+│   ├───End Points
+│   └───SQL
+├───frontEnd
+│   ├───vue
+│   └───web
+│       ├───css
+│       ├───img
+│       ├───js
+│       └───_plantillas-html-b-w
+└───seguiment
 
