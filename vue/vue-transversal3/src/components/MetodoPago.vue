@@ -38,7 +38,7 @@ export default {
 
       entradas.append("butacasReservadas", JSON.stringify(butacasReservadas));
 
-      fetch("http://192.168.1.140:8000/entradas", {
+      fetch("http://localhost:8000/entradas", {
         method: "POST",
         body: entradas,
       })
@@ -102,7 +102,7 @@ export default {
         "password",
         document.getElementById("password2").value
       );
-      fetch("http://192.168.1.140:8000/registrar", {
+      fetch("http://localhost:8000/registrar", {
         method: "POST",
         body: crearCuenta,
       })
@@ -140,7 +140,7 @@ export default {
         "password",
         document.getElementById("password1").value
       );
-      fetch("http://192.168.1.140:8000/loginComprarEntradas", {
+      fetch("http://localhost:8000/loginComprarEntradas", {
         method: "POST",
         body: iniciarSesion,
       })
