@@ -12,8 +12,8 @@
 
 ## Esquema mínim de carpetes pels projectes transversals
 
-3r Projecte Transversal
-├───backEnd
+3r Projecte Transversal... 
+...├───backEnd
 │   ├───backendSymfony_dev
 │   ├───backendSymfony_prod
 │   ├───End Points
