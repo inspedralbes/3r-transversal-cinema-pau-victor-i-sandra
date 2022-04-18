@@ -1,0 +1,26 @@
+{# ./templates/default/mypdf.html.twig #}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Tus entradas</title>
+	</head>
+	<body>
+		<h4>Sesion: {{ sesion }}</h4>
+		<h4>Usuario: {{ usuario }}</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Butaca - Precio</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for b in butaca %}
+					<tr>
+						<td>{{ b }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>
