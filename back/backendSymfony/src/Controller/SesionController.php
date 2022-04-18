@@ -184,14 +184,57 @@ class SesionController extends AbstractController
         if (!empty($email) || !empty($password)) {
             $check = $this->comprovarData(2, $email, $password);
             if (empty($check)) {
+                $resultado = $usuarioRepository->getUsuario('ausias@ausias.com');
+                if ($resultado[0]->getEmail() == $email && password_verify($password, $resultado[0]->getPassword())) {
+                    return new JsonResponse(['status' => true, 'msg' => '¡Hola administrador!'], Response::HTTP_OK);
+                } else {
+                    return new JsonResponse(['status' => false, 'msg' => 'Error! Correo o contraseña incorrectos'], Response::HTTP_OK);
+                }
+            } else {
+                return new JsonResponse(['status' => false, 'msg' => $check], Response::HTTP_OK);
+            }
+        } else {
+            return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_OK);
+        }
+    }
+
+
+    #[Route('/loginConsultar', name: 'post_login_admin', methods: ['POST'])]
+    public function loginConsultar(Request $request, EntradaRepository $entradaRepository, UsuarioRepository $usuarioRepository): JsonResponse
+    {
+        $dataPOSTUsuario = $request->request->all();
+        foreach ($dataPOSTUsuario as $usuario => $data) {
+            $$usuario = htmlspecialchars(trim($data));
+        }
+
+        if (!empty($email) || !empty($password)) {
+            $check = $this->comprovarData(2, $email, $password);
+            if (empty($check)) {
                 $resultado = $usuarioRepository->getUsuario($email);
                 if (empty($resultado)) {
-                    return new JsonResponse(['status' => false, 'msg' => 'Error! Correo o contraseña incorrectos'], Response::HTTP_OK);
+                    return new JsonResponse(['status' => false, 'msg' => 'Error! Este correo no esta registrado'], Response::HTTP_OK);
                 } else {
-                    if ($resultado[0]->getEmail() == $email && password_verify($password, $resultado[0]->getPassword())) {
-                        return new JsonResponse(['status' => true, 'msg' => '¡Hola administrador!'], Response::HTTP_OK);
+                    $entradas = $entradaRepository->buscarEntradas($resultado[0]->getId());
+                    if (empty($entradas)) {
+                        return new JsonResponse(['status' => true, 'msg' => 'Nunca has comprado una entrada'], Response::HTTP_OK);
                     } else {
-                        return new JsonResponse(['status' => false, 'msg' => 'Error! Correo o contraseña incorrectos'], Response::HTTP_OK);
+                        $r = array('entradas' => [], 'sesion' => []);
+                        foreach ($entradas as $entrada) {
+                            array_push($r['entradas'], [
+                                'butaca' => $entrada['butaca'],
+                                'precio' => $entrada['precio'],
+                            ]);
+                        }
+
+                        array_push($r['sesion'], [
+                            'fecha' => $entrada['fecha'],
+                            'hora' => $entrada['hora'],
+                            'nombre_peli' => $entrada['nombre_peli'],
+                            'ano_peli' => $entrada['ano_peli'],
+                            'img_peli' => $entrada['img_peli']
+                        ]);
+
+                        return new JsonResponse(['status' => true, 'msg' => $r], Response::HTTP_OK);
                     }
                 }
             } else {
@@ -201,6 +244,12 @@ class SesionController extends AbstractController
             return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_OK);
         }
     }
+
+
+
+
+
+
 
     public function comprovarData($loginORsign, $email, $password, $nombre = "", $apellidos = "")
     {
