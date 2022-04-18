@@ -104,7 +104,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      Close
+                      Cerrar
                     </button>
                   </div>
                 </div>
@@ -115,17 +115,15 @@
         </div>
       </nav>
     </div>
-    <RouterView />
   </header>
 </template>
 
 <script>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink } from "vue-router";
 
 export default {
   components: {
     RouterLink,
-    RouterView,
   },
 
   data() {
@@ -137,6 +135,20 @@ export default {
   methods: {
     consultarEntradas: function () {
       this.mostrarFormUsr = false;
+      let ConsultarLogin = new FormData();
+      ConsultarLogin.append("email", document.getElementById("emailConsultar").value);
+      ConsultarLogin.append(
+        "password",
+        document.getElementById("contrasenaConsultar").value
+      );
+      fetch("http://localhost:8000/loginConsultar", {
+        method: "POST",
+        body: ConsultarLogin,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.msg);
+    })
     },
 
     comprobarSesion() {
@@ -146,7 +158,7 @@ export default {
         "password",
         document.getElementById("contrasenaAdmin").value
       );
-      fetch("http://192.168.1.140:8000/loginAdmin", {
+      fetch("http://localhost:8000/loginAdmin", {
         method: "POST",
         body: adminLogin,
       })

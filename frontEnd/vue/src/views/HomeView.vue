@@ -26,20 +26,20 @@ export default {
 
   beforeCreate() {
     // fetch("http://192.168.210.161:8000/sesiones")
-    fetch("http://192.168.1.140:8000/sesiones")
+    fetch("http://localhost:8000/sesiones")
       .then((response) => response.json())
       .then((data) => {
         this.basePeliculas = data.sesiones;
         this.sessioStore.setComprador();
         setTimeout(() => {
           this.cargando = 0;
-        }, 1000);
+        }, 2000);
         //alert(this.sessioStore.getAdmin);
-      }).catch(() => {
+      })
+      .catch(() => {
         this.cargando = 0;
         router.push({ name: "error" });
-      }
-      );
+      });
   },
 };
 </script>
