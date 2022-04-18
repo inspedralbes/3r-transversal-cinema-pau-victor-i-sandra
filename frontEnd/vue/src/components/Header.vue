@@ -59,7 +59,7 @@
                           </li>
                         </ul>
                       </div>
-                      <div class="card-body">
+                      <div class="card-body" v-if="this.datosEntrada != 0">
                         <h5 class="card-title">{{this.datosEntrada.sesion[0].nombre_peli}}</h5>
                         <img :src="this.datosEntrada.sesion[0].img_peli" class="img-fluid rounded-start poster_peli" alt="..." />
                         <br>
@@ -161,7 +161,7 @@ export default {
   data() {
     return {
       mostrarFormUsr: true,
-      datosEntrada:null,
+      datosEntrada: 0,
     };
   },
 
