@@ -115,17 +115,15 @@
         </div>
       </nav>
     </div>
-    <RouterView />
   </header>
 </template>
 
 <script>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink } from "vue-router";
 
 export default {
   components: {
     RouterLink,
-    RouterView,
   },
 
   data() {

@@ -33,13 +33,13 @@ export default {
         this.sessioStore.setComprador();
         setTimeout(() => {
           this.cargando = 0;
-        }, 1000);
+        }, 2000);
         //alert(this.sessioStore.getAdmin);
-      }).catch(() => {
+      })
+      .catch(() => {
         this.cargando = 0;
         router.push({ name: "error" });
-      }
-      );
+      });
   },
 };
 </script>

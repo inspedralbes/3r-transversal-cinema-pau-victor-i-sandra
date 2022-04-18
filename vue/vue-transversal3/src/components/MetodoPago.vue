@@ -13,7 +13,11 @@ export default {
       bien: false,
       msgLogin: null,
       msgRegister: null,
-      comprovando: false
+      comprovando: false,
+      popoverNombre: "El nombre solo puede contener letras (+1), nada de números ni símbolos",
+      popoverApellidos: "Los apellidos solo pueden contener letras (+1), nada de números ni símbolos",
+      popoverEmail: "El correo tiene que contener el símbolo '@'",
+      popoverPassword: "La contraseña tiene que contener: una letra minúscula, una letra mayúscula, un número y uno de los siguientes símbolos: '@$!%*?&'",
     };
   },
 
@@ -187,14 +191,13 @@ export default {
         </div>
         <div class="col-md-7">
           <label for="email" class="form-label">Email <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-              data-bs-trigger="hover focus" data-bs-content="El correo tiene que contener el símbolo '@'"><i
+              data-bs-trigger="hover focus" :data-bs-content="this.popoverEmail"><i
                 class="bi bi-info-circle"></i></span></label>
           <input type="email" class="form-control" id="email1" />
         </div>
         <div class="col-md-5">
           <label for="inputPassword4" class="form-label">Contraseña <span class="d-inline-block" tabindex="0"
-              data-bs-toggle="popover" data-bs-trigger="hover focus"
-              data-bs-content="La contraseña tiene que contener: una letra minúscula, una letra mayúscula, un número y uno de los siguientes símbolos: '@$!%*?&'"><i
+              data-bs-toggle="popover" data-bs-trigger="hover focus" :data-bs-content="this.popoverPassword"><i
                 class="bi bi-info-circle"></i></span></label>
           <input type="password" class="form-control" id="password1" />
         </div>
@@ -244,32 +247,28 @@ export default {
 
         <div class="col-md-6">
           <label for="titular" class="form-label text-left">Nombre <span class="d-inline-block" tabindex="0"
-              data-bs-toggle="popover" data-bs-trigger="hover focus"
-              data-bs-content="El nombre solo puede contener letras, nada de números ni símbolos"><i
+              data-bs-toggle="popover" data-bs-trigger="hover focus" :data-bs-content="this.popoverNombre"><i
                 class="bi bi-info-circle"></i></span></label>
           <input type="text" class="form-control" id="nombre2" />
         </div>
 
         <div class="col-md-6">
-          <label for="titular" class="form-label">Apellido <span class="d-inline-block" tabindex="0"
-              data-bs-toggle="popover" data-bs-trigger="hover focus"
-              data-bs-content="El apellido solo puede contener letras, nada de números ni símbolos"><i
+          <label for="titular" class="form-label">Apellidos <span class="d-inline-block" tabindex="0"
+              data-bs-toggle="popover" data-bs-trigger="hover focus" :data-bs-content="this.popoverApellidos"><i
                 class="bi bi-info-circle"></i></span></label>
           <input type="text" class="form-control" id="apellido2" />
         </div>
 
         <div class="col-md-7">
           <label for="titular" class="form-label">Email <span class="d-inline-block" tabindex="0"
-              data-bs-toggle="popover" data-bs-trigger="hover focus"
-              data-bs-content="El correo tiene que contener el símbolo '@'"><i
+              data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="this.popoverEmail"><i
                 class="bi bi-info-circle"></i></span></label>
           <input type="email" class="form-control" id="email2" />
         </div>
 
         <div class="col-md-5">
           <label for="inputPassword4" class="form-label">Contraseña <span class="d-inline-block" tabindex="0"
-              data-bs-toggle="popover" data-bs-trigger="hover focus"
-              data-bs-content="La contraseña tiene que contener: una letra minúscula, una letra mayúscula, un número y uno de los siguientes símbolos: '@$!%*?&'"><i
+              data-bs-toggle="popover" data-bs-trigger="hover focus" :data-bs-content="this.popoverPassword"><i
                 class="bi bi-info-circle"></i></span></label>
           <input type="text" class="form-control" id="password2" />
         </div>
