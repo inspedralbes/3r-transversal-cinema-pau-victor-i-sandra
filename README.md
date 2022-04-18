@@ -25,5 +25,5 @@
 │       ├───img \
 │       ├───js \
 │       └───_plantillas-html-b-w \
-└───seguiment \
+└───seguiment 
 
