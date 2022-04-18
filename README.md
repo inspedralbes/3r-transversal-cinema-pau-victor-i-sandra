@@ -6,6 +6,7 @@
  * Projecte: "Pedralbes Cinema"
  * Descripció: creació d'una aplicacio web que et permet comprar entrades per un cinema.
  * URL de producció: http://cinema1.alumnes.inspedralbes.cat/
+  * URL Backend de producció: http://cinema1back.alumnes.inspedralbes.cat/
  * Estat: fase final -> casi acabat
  * Backlog: https://freedcamp.com/view/3181588/tasks
 
