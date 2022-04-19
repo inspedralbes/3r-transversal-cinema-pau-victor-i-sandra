@@ -1,9 +1,21 @@
 <script>
 import { sessioStore } from "../stores/sessioStore";
 import { mapStores } from "pinia";
+import EmailForm from "@/components/EmailForm.vue";
+import PasswordForm from "@/components/PasswordForm.vue";
+import NombreForm from "@/components/NombreForm.vue";
+import ApellidosForm from "@/components/ApellidosForm.vue";
+
 export default {
   computed: {
     ...mapStores(sessioStore),
+  },
+
+  components: {
+    EmailForm,
+    ApellidosForm,
+    PasswordForm,
+    NombreForm
   },
 
   data() {
@@ -14,13 +26,6 @@ export default {
       msgLogin: null,
       msgRegister: null,
       comprovando: false,
-      popoverNombre:
-        "El nombre solo puede contener letras (+1), nada de números ni símbolos",
-      popoverApellidos:
-        "Los apellidos solo pueden contener letras (+1), nada de números ni símbolos",
-      popoverEmail: "El correo tiene que contener el símbolo '@'",
-      popoverPassword:
-        "La contraseña tiene que contener: una letra minúscula, una letra mayúscula, un número y uno de los siguientes símbolos: '@$!%*?&'",
     };
   },
 
@@ -148,7 +153,7 @@ export default {
       this.comprovando = true;
 
       let iniciarSesion = new FormData();
-      iniciarSesion.append("email", document.getElementById("email1").value);
+      iniciarSesion.append("email", document.getElementById("emailLogin").value);
       iniciarSesion.append(
         "password",
         document.getElementById("password1").value
@@ -205,31 +210,11 @@ export default {
         </div>
 
         <div class="col-md-7">
-          <label for="email" class="form-label"
-            >Email
-            <span
-              class="d-inline-block"
-              tabindex="0"
-              data-bs-toggle="popover"
-              data-bs-trigger="hover focus"
-              :data-bs-content="this.popoverEmail"
-              ><i class="bi bi-info-circle"></i></span
-          ></label>
-          <input type="email" class="form-control" id="email1" />
+          <EmailForm :id="'emailLogin'"/>
         </div>
-        
+
         <div class="col-md-5">
-          <label for="inputPassword4" class="form-label"
-            >Contraseña
-            <span
-              class="d-inline-block"
-              tabindex="0"
-              data-bs-toggle="popover"
-              data-bs-trigger="hover focus"
-              :data-bs-content="this.popoverPassword"
-              ><i class="bi bi-info-circle"></i></span
-          ></label>
-          <input type="password" class="form-control" id="password1" />
+          <PasswordForm :id="'password1'"/>
         </div>
 
         <div class="col-md-12 text-center gy-4">
@@ -289,59 +274,19 @@ export default {
         </div>
 
         <div class="col-md-6">
-          <label for="titular" class="form-label text-left"
-            >Nombre
-            <span
-              class="d-inline-block"
-              tabindex="0"
-              data-bs-toggle="popover"
-              data-bs-trigger="hover focus"
-              :data-bs-content="this.popoverNombre"
-              ><i class="bi bi-info-circle"></i></span
-          ></label>
-          <input type="text" class="form-control" id="nombre2" />
+          <NombreForm :id="'nombre2'"/>
         </div>
 
         <div class="col-md-6">
-          <label for="titular" class="form-label"
-            >Apellidos
-            <span
-              class="d-inline-block"
-              tabindex="0"
-              data-bs-toggle="popover"
-              data-bs-trigger="hover focus"
-              :data-bs-content="this.popoverApellidos"
-              ><i class="bi bi-info-circle"></i></span
-          ></label>
-          <input type="text" class="form-control" id="apellido2" />
+          <ApellidosForm :id="'apellido2'"/>
         </div>
 
         <div class="col-md-7">
-          <label for="titular" class="form-label"
-            >Email
-            <span
-              class="d-inline-block"
-              tabindex="0"
-              data-bs-toggle="popover"
-              data-bs-trigger="hover focus"
-              data-bs-content="this.popoverEmail"
-              ><i class="bi bi-info-circle"></i></span
-          ></label>
-          <input type="email" class="form-control" id="email2" />
+          <EmailForm :id="'email2'"/>
         </div>
 
         <div class="col-md-5">
-          <label for="inputPassword4" class="form-label"
-            >Contraseña
-            <span
-              class="d-inline-block"
-              tabindex="0"
-              data-bs-toggle="popover"
-              data-bs-trigger="hover focus"
-              :data-bs-content="this.popoverPassword"
-              ><i class="bi bi-info-circle"></i></span
-          ></label>
-          <input type="password" class="form-control" id="password2" />
+          <PasswordForm :id="'password2'"/>
         </div>
 
         <div class="col-md-12 text-center gy-4">
