@@ -1,10 +1,10 @@
 <script>
 import ResumenCompra from "@/components/ResumenCompra.vue";
-import MetodoPago from "@/components/MetodoPago.vue";
+import FormularioPago from "@/components/FormularioPago.vue";
 export default {
   components: {
     ResumenCompra,
-    MetodoPago,
+    FormularioPago,
   },
   methods: {
     retroceder() {
@@ -34,7 +34,7 @@ export default {
         </div>
 
         <div class="col-12 col-md-7 gy-4">
-          <MetodoPago />
+          <FormularioPago />
         </div>
       </div>
     </div>
