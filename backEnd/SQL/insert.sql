@@ -14,9 +14,8 @@ INSERT INTO `sesion` (`id`, `fecha`, `hora`, `vip`, `dia_espectador`, `butacas_o
 INSERT INTO `usuario` (`id`, `nombre`, `password`, `apellidos`, `email`) VALUES
 (1, 'Admin', '---', 'admin', 'admin@admin.com'),
 (2, 'Tom', '$2y$10$U8kkZLsduLAO/G6HAEl6ied4Gx6lFoAJdkiBD0nnZnxT0P7WOTkdq', 'Tom', 'tom@gmail.com'),
-(3, 'Victor', '$2y$10$wzVvuVH7y1.ZfcCcvdLhw.cJJsYjWhtCZCvpXc0qvkjIe9J6DdGfK', 'Moreno', 'a20vicmormor@inspedralbes.cat'),
-
+(3, 'Victor', '$2y$10$wzVvuVH7y1.ZfcCcvdLhw.cJJsYjWhtCZCvpXc0qvkjIe9J6DdGfK', 'Moreno', 'a20vicmormor@inspedralbes.cat');
 
 INSERT INTO `entrada` (`id`, `usuario_id`, `sesion_id`, `butaca`, `precio`) VALUES
 (1, 2, 1, 'b12', 8),
-(2, 3, 2, 'b45', 6),
+(2, 3, 2, 'b45', 6);
