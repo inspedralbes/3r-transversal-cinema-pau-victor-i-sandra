@@ -191,9 +191,11 @@ export default {
     <!-- FORMULARIO INICIAR SESIÓN -->
     <div id="iniciar_sesion " :class="{ ocultar: !mostrarIniciarSesion }">
       <div class="row g-3">
+
         <div class="col-md-12 text-center">
           <h2>Inicia sesión</h2>
         </div>
+
         <div class="col-md-12" v-if="this.msgLogin != null">
           <div
             class="alert alert-primary"
@@ -201,6 +203,7 @@ export default {
             v-html="this.msgLogin"
           ></div>
         </div>
+
         <div class="col-md-7">
           <label for="email" class="form-label"
             >Email
@@ -214,6 +217,7 @@ export default {
           ></label>
           <input type="email" class="form-control" id="email1" />
         </div>
+        
         <div class="col-md-5">
           <label for="inputPassword4" class="form-label"
             >Contraseña
