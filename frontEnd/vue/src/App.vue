@@ -1,18 +1,11 @@
 <script>
 import { RouterView } from "vue-router";
-import router from "@/router";
 import Header from "@/components/HeaderGeneral.vue";
 
 export default {
   components: {
     RouterView,
     Header,
-  },
-
-  data() {
-    return {
-      mostrarFormUsr: true,
-    };
   },
 
   beforeCreate() {
@@ -30,48 +23,6 @@ export default {
     });
   },
 
-  methods: {
-    consultarEntradas: function () {
-      this.mostrarFormUsr = false;
-    },
-
-    comprobarSesion() {
-      let adminLogin = new FormData();
-      adminLogin.append("email", document.getElementById("emailAdmin").value);
-      adminLogin.append(
-        "password",
-        document.getElementById("contrasenaAdmin").value
-      );
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginAdmin", {
-        method: "POST",
-        body: adminLogin,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          alert(data.msg);
-          if (data.status == true) {
-            document.getElementById("staticBackdrop").dispatchEvent(
-              new KeyboardEvent("keydown", {
-                altKey: false,
-                bubbles: true,
-                code: "Escape",
-                ctrlKey: false,
-                isComposing: false,
-                key: "Escape",
-                location: 0,
-                metaKey: false,
-                repeat: false,
-                shiftKey: false,
-                which: 27,
-                charCode: 0,
-                keyCode: 27,
-              })
-            );
-            router.push({ name: "admin" });
-          }
-        });
-    },
-  },
 };
 </script>
 

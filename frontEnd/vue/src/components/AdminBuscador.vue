@@ -2,38 +2,19 @@
   <div>
     <div class="input-group d-flex justify-content-center">
       <div class="form-outline">
-        <input
-          type="search"
-          id="search"
-          class="form-control"
-          size="50"
-          placeholder="Cercar pel·lícula"
-          v-model="search"
-        />
+        <input type="search" id="search" class="form-control" size="50" placeholder="Cercar pel·lícula"
+          v-model="search" />
       </div>
 
       <a class="btn" @click="buscarPeli" id="btn_search">
         <i class="bi bi-search"></i>
       </a>
-
-      <a class="btn" @click="ocultarPelis" id="btn_ocultar">
-        <i class="bi bi-caret-down-square"></i>
-      </a>
     </div>
-    <div
-      id="mostrarAdminPelis"
-      :class="{ ocultar: !mostrarbusqueda }"
-      class="row"
-    >
-      <div
-        class="col-md-3"
-        :key="index"
-        v-for="(peliAnadir, index) in arrayPeliculas"
-      >
-        <ResultadoBusqueda
-          v-if="typeof this.arrayPeliculas === 'object'"
-          :peliInfo="peliAnadir"
-        />
+    <div class="container">
+      <div id="mostrarAdminPelis" :class="{ ocultar: !mostrarbusqueda }" class="row">
+        <div class="col-12 col-md-6 col-lg-3 gy-3" :key="index" v-for="(peliAnadir, index) in arrayPeliculas">
+          <ResultadoBusqueda @seleccionada="this.ocultarPelis()" @habilitarGuardar="this.$emit('habilitarGuardar')" v-if="typeof this.arrayPeliculas === 'object'" :peliInfo="peliAnadir" />
+        </div>
       </div>
     </div>
   </div>
@@ -42,6 +23,8 @@
 <script>
 import ResultadoBusqueda from "@/components/ResultadoBusqueda.vue";
 export default {
+  emits:['habilitarGuardar'],
+
   data() {
     return {
       search: "",
@@ -49,6 +32,7 @@ export default {
       mostrarbusqueda: true,
     };
   },
+
   methods: {
     buscarPeli() {
       fetch("https://www.omdbapi.com/?apikey=5149518a&s=" + this.search)
