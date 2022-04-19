@@ -121,15 +121,9 @@ body {
 }
 
 .btn-primary {
-<<<<<<< HEAD
-  background-color: #4dcdff;
-  border-color: #4dcdff;
-  color: black;
-=======
   background-color: #14b0ef;
   border-color: #14b0ef;
   color: black
->>>>>>> 3f8860a01c54486f3c84152524dfca9d56dc0dd3
 }
 
 .btn-primary:hover {

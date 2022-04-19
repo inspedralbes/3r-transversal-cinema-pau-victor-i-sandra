@@ -133,7 +133,7 @@ export default {
         <h3 class="text-center">Selecciona las butacas</h3>
       </div>
 
-      <div class="container">
+      <div class="container text-center">
         <img src="../../img/pantalla.png" class="pantalla" />
         <div class="mallaButacas">
           <div :key="index" v-for="(butaca, index) in 120">
