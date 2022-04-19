@@ -19,6 +19,7 @@ export default {
   },
 
   beforeMount() {
+    // Contador sesión del dia
     setInterval(() => {
       let ahora = moment();
       let horaPeli = moment(this.infoPelicula.hora, "HH:mm:ss");
@@ -31,7 +32,7 @@ export default {
           ).format("HH:mm:ss") +
           "h!"
           : ahora > horaPeli && finPeli > ahora
-            ? "En directo"
+            ? "En directo!"
             : "Ya proyectada";
       this.disabled = ahora > finPeli ? 1 : 0; //Si la peli ya se ha visto, no se pueden comprar entradas...
     }, 1000);
@@ -45,7 +46,7 @@ export default {
     )
       .then((response) => response.json())
       .then((data) => {
-        this.masInfoPeli = data;
+        this.masInfoPeli = data; // sinopsis de la pelicula
 
         fetch(
           `https://api-free.deepl.com/v2/translate?auth_key=73c517ac-93c5-6ebf-27e2-3e49b82f8c4f:fx&text=${this.masInfoPeli.Plot}&target_lang=ES`,
