@@ -15,10 +15,10 @@ export default {
       infoPeli: 0,
 
       /* Imagenes tipo butacas */
-      img_disponible: "../../src/assets/Butacas/butaca_disponible.png",
-      img_ocupada: "../../src/assets/Butacas/butaca_ocupada.png",
-      img_seleccionada: "../../src/assets/Butacas/butaca_seleccionada.png",
-      img_vip: "../../src/assets/Butacas/butaca_vip.png",
+      img_disponible: "@/assets/butaca_disponible.png",
+      img_ocupada: "@/assets/butaca_ocupada.png",
+      img_seleccionada: "@/assets/butaca_seleccionada.png",
+      img_vip: "@/assets/butaca_vip.png",
     };
   },
 
@@ -129,7 +129,7 @@ export default {
       </div>
 
       <div class="container" align="center">
-        <img src="../../src/assets/Butacas/pantalla.png" class="pantalla" />
+        <img src="@/assets/pantalla.png" class="pantalla" />
         <div class="mallaButacas">
           <div :key="index" v-for="(butaca, index) in 120">
             <!-- Butaca ocupada img -->
