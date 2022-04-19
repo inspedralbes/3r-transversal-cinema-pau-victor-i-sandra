@@ -65,7 +65,7 @@ export default {
       <h1 class="text-center titulo" @click="mostrarConsultarSesion">
         Consultar sesiones
       </h1>
-      <br/>
+      <br />
       <div
         id="consultar_entradas"
         :class="{ ocultar: mostrarConsultarSesion }"

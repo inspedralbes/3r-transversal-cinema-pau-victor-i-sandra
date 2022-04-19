@@ -19,9 +19,16 @@ export default {
     <br />
     <div class="container">
       <div class="row gy-5">
-        <div :key="index" v-for="(peliActual, index) in this.peliculasInfo" class="col col-lg-4">
+        <div
+          :key="index"
+          v-for="(peliActual, index) in this.peliculasInfo"
+          class="col col-lg-4"
+        >
           <CardPeliGeneral :peliInfo="peliActual">
-            <RouterLink class="btn btn-primary" :to="'/seleccionarButacas/' + peliActual.idSesion">Comprar Entrades
+            <RouterLink
+              class="btn btn-primary"
+              :to="'/seleccionarButacas/' + peliActual.idSesion"
+              >Comprar Entrades
             </RouterLink>
             <RouterView />
           </CardPeliGeneral>
@@ -29,11 +36,9 @@ export default {
       </div>
     </div>
   </section>
-
 </template>
 
 <style>
-
 .card {
   margin: auto;
 }

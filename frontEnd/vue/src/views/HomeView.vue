@@ -1,7 +1,7 @@
 <script>
 import ProximasPelis from "@/components/ProximasPelis.vue";
 import CardPeliDia from "@/components/CardPeliDia.vue";
-import SpinnerCargando from '@/components/SpinnerCargando.vue';
+import SpinnerCargando from "@/components/SpinnerCargando.vue";
 
 import { sessioStore } from "../stores/sessioStore";
 import { mapStores } from "pinia";
@@ -14,14 +14,14 @@ export default {
   data() {
     return {
       basePeliculas: null,
-      cargando: 1
+      cargando: 1,
     };
   },
 
   components: {
     CardPeliDia,
     ProximasPelis,
-    SpinnerCargando
+    SpinnerCargando,
   },
 
   beforeCreate() {
@@ -51,7 +51,6 @@ export default {
     </div>
 
     <SpinnerCargando v-if="this.cargando" />
-
   </main>
 </template>
 

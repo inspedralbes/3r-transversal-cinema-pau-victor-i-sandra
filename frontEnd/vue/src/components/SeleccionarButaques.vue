@@ -15,10 +15,10 @@ export default {
       infoPeli: 0,
 
       /* Imagenes tipo butacas */
-      img_disponible: "@/assets/butaca_disponible.png",
-      img_ocupada: "@/assets/butaca_ocupada.png",
-      img_seleccionada: "@/assets/butaca_seleccionada.png",
-      img_vip: "@/assets/butaca_vip.png",
+      img_disponible: "../../img/butaca_disponible.png",
+      img_ocupada: "../../img/butaca_ocupada.png",
+      img_seleccionada: "../../img/img/butaca_seleccionada.png",
+      img_vip: "../../img/butaca_vip.png",
     };
   },
 
@@ -61,14 +61,14 @@ export default {
         ) {
           if (this.seleccionadas.length < 10) {
             this.seleccionadas.push(numButaca);
-            event.target.src = this.img_seleccionada;
+            event.target.src = "../../img/img/butaca_seleccionada.png";
             this.stringButacas;
           } else {
             alert("No puedes seleccionar más de 10 butacas");
           }
         } else if (this.seleccionadas.includes(numButaca)) {
           /* Deseleccionar butacas */
-          event.target.src = this.img_disponible;
+          event.target.src = "../../img/butaca_disponible.png";
           this.seleccionadas = this.seleccionadas.filter((butaca) => {
             return butaca != numButaca;
           });
@@ -129,13 +129,13 @@ export default {
       </div>
 
       <div class="container" align="center">
-        <img src="@/assets/pantalla.png" class="pantalla" />
+        <img src="../../img/pantalla.png" class="pantalla" />
         <div class="mallaButacas">
           <div :key="index" v-for="(butaca, index) in 120">
             <!-- Butaca ocupada img -->
             <img
               v-if="estaocupada('b' + butaca)"
-              :src="this.img_ocupada"
+              :src="'../../img/butaca_ocupada.png'"
               @click="SeleccionarButaca('b' + butaca, $events)"
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
@@ -144,10 +144,8 @@ export default {
             <img
               v-if="estalibre('b' + butaca)"
               :src="
-                this.infoPeli.vip && butaca >= '51' && butaca <= '60'
-                  ? this.img_vip
-                  : this.img_disponible
-              "
+                ((this.infoPeli.vip && butaca >= '51' && butaca <= '60')
+                  ? '../../img/butaca_vip.png' : '../../img/butaca_disponible.png')"
               @click="SeleccionarButaca('b' + butaca, $event)"
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
@@ -155,7 +153,7 @@ export default {
             <!-- Butaca selecconada img -->
             <img
               v-if="estaseleccionada('b' + butaca)"
-              :src="this.img_seleccionada"
+              :src="'../../img/butaca_seleccionada.png'"
               @click="SeleccionarButaca('b' + butaca, $event)"
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
