@@ -1,3 +1,102 @@
+<script>
+import { RouterLink } from "vue-router";
+import router from "@/router";
+
+export default {
+  components: {
+    RouterLink,
+  },
+
+  data() {
+    return {
+      mostrarFormUsr: true,
+      datosEntrada: 0,
+      error: 0,
+      msgErrorConsultar: ""
+    };
+  },
+
+  methods: {
+    consultarEntradas: function () {
+      console.log("aaa");
+
+      let ConsultarLogin = new FormData();
+      ConsultarLogin.append(
+        "email",
+        document.getElementById("emailConsultar").value
+      );
+      ConsultarLogin.append(
+        "password",
+        document.getElementById("contrasenaConsultar").value
+      );
+
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginConsultar", {
+        method: "POST",
+        body: ConsultarLogin,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (data.status == true) {
+            this.datosEntrada = data.msg;
+            this.mostrarFormUsr = false;
+          }else{
+            this.error = 1;
+            this.msgErrorConsultar = data.msg
+          }
+        });
+    },
+
+    comprobarSesion() {
+      let adminLogin = new FormData();
+      adminLogin.append("email", document.getElementById("emailAdmin").value);
+      adminLogin.append(
+        "password",
+        document.getElementById("contrasenaAdmin").value
+      );
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginAdmin", {
+        method: "POST",
+        body: adminLogin,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.msg);
+          // simular un cierre del modal porque nos daba error
+          if (data.status == true) {
+            document.getElementById("staticBackdrop").dispatchEvent(
+              new KeyboardEvent("keydown", {
+                altKey: false,
+                bubbles: true,
+                code: "Escape",
+                ctrlKey: false,
+                isComposing: false,
+                key: "Escape",
+                location: 0,
+                metaKey: false,
+                repeat: false,
+                shiftKey: false,
+                which: 27,
+                charCode: 0,
+                keyCode: 27,
+              })
+            );
+            this.reiniciarModales()
+            router.push({ name: "admin" });
+          }
+        });
+    },
+    
+  reiniciarModales: function(){
+    this.mostrarFormUsr = true;
+    document.querySelectorAll('input').forEach((e) => {
+      e.value = "";
+    })
+  }
+  },
+
+};
+</script>
+
 <template>
   <header>
     <div class="wrapper">
@@ -41,22 +140,31 @@
               <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title" id="entradasModalLabel">
-                      Consulta tus entradas
-                    </h4>
+                    <h4 class="modal-title" id="entradasModalLabel">Consulta tus entradas</h4>
                     <button
                       type="button"
                       class="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
+                      @click="this.reiniciarModales()"
                     ></button>
                   </div>
                   <div class="modal-body align-self-center grande">
+<!-- Mensajes de error -->
+          <div
+            class="alert alert-primary"
+            role="alert"
+            v-html="this.msgErrorConsultar"
+            v-if="this.error"
+          ></div>
+
+
+
                     <!-- From usuario -->
                     <div id="form_usr" :class="{ ocultar: !mostrarFormUsr }">
                       <div class="col">
                         <div class="col">
-                          <label for="email" class="form-label text-left"
+                          <label for="emailConsultar" class="form-label text-left"
                             >Email</label
                           >
                           <input
@@ -67,9 +175,8 @@
                         </div>
 
                         <div class="col">
-                          <label for="contrasena" class="form-label"
-                            >Contraseña</label
-                          >
+                          <label for="contrasenaConsultar" class="form-label"
+                            >Contraseña</label>
                           <input
                             type="password"
                             class="form-control"
@@ -94,18 +201,6 @@
                   <!-- Entradas  -->
                   <div id="entradas" :class="{ ocultar: mostrarFormUsr }">
                     <div class="card text-center">
-                      <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
-                          <li class="nav-item">
-                            <a
-                              class="nav-link active"
-                              aria-current="true"
-                              href="#"
-                              >Active</a
-                            >
-                          </li>
-                        </ul>
-                      </div>
                       <div class="card-body" v-if="this.datosEntrada != 0">
                         <h5 class="card-title">
                           {{ this.datosEntrada.sesion[0].nombre_peli }}
@@ -153,6 +248,7 @@
                       type="button"
                       class="btn btn-secondary"
                       data-bs-dismiss="modal"
+                      @click="this.reiniciarModales()"
                     >
                       Cerrar
                     </button>
@@ -183,6 +279,7 @@
                       class="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
+                      @click="this.reiniciarModales()"
                     ></button>
                   </div>
                   <div class="modal-body">
@@ -231,6 +328,7 @@
                       type="button"
                       class="btn btn-secondary"
                       data-bs-dismiss="modal"
+                      @click="this.reiniciarModales()" 
                     >
                       Cerrar
                     </button>
@@ -245,92 +343,6 @@
     </div>
   </header>
 </template>
-
-<script>
-import { RouterLink } from "vue-router";
-import router from "@/router";
-
-export default {
-  components: {
-    RouterLink,
-  },
-
-  data() {
-    return {
-      mostrarFormUsr: true,
-      datosEntrada: 0,
-    };
-  },
-
-  methods: {
-    consultarEntradas: function () {
-      console.log("aaa");
-
-      let ConsultarLogin = new FormData();
-      ConsultarLogin.append(
-        "email",
-        document.getElementById("emailConsultar").value
-      );
-      ConsultarLogin.append(
-        "password",
-        document.getElementById("contrasenaConsultar").value
-      );
-
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginConsultar", {
-        method: "POST",
-        body: ConsultarLogin,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          alert(data.msg);
-          console.log(data);
-          if (data.status == true) {
-            this.datosEntrada = data.msg;
-            this.mostrarFormUsr = false;
-          }
-        });
-    },
-
-    comprobarSesion() {
-      let adminLogin = new FormData();
-      adminLogin.append("email", document.getElementById("emailAdmin").value);
-      adminLogin.append(
-        "password",
-        document.getElementById("contrasenaAdmin").value
-      );
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginAdmin", {
-        method: "POST",
-        body: adminLogin,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          alert(data.msg);
-          // simular un cierre del modal porque nos daba error
-          if (data.status == true) {
-            document.getElementById("staticBackdrop").dispatchEvent(
-              new KeyboardEvent("keydown", {
-                altKey: false,
-                bubbles: true,
-                code: "Escape",
-                ctrlKey: false,
-                isComposing: false,
-                key: "Escape",
-                location: 0,
-                metaKey: false,
-                repeat: false,
-                shiftKey: false,
-                which: 27,
-                charCode: 0,
-                keyCode: 27,
-              })
-            );
-            router.push({ name: "admin" });
-          }
-        });
-    },
-  },
-};
-</script>
 
 <style scoped>
 .ocultar {
