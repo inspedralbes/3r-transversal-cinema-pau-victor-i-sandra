@@ -134,7 +134,7 @@ export default {
       </div>
 
       <div class="container" align="center">
-        <img src="../../src/assets/Butacas/pantalla.png" class="pantalla" />
+        <img src="@/assets/pantalla.png" class="pantalla" />
         <div class="mallaButacas">
           <div :key="index" v-for="(butaca, index) in 120">
             <!-- Butaca ocupada img -->
