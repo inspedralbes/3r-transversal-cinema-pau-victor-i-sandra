@@ -163,6 +163,13 @@ export default {
                     <!-- From usuario -->
                     <div id="form_usr" :class="{ ocultar: !mostrarFormUsr }">
                       <div class="col">
+                        <div
+                          :class="{ ocultar: this.msgConsultar == null }"
+                          class="alert alert-primary"
+                          role="alert"
+                        >
+                          {{ this.msgConsultar }}
+                        </div>
                         <div class="col">
                           <label for="emailConsultar" class="form-label text-left"
                             >Email</label
@@ -344,6 +351,95 @@ export default {
   </header>
 </template>
 
+<<<<<<< Updated upstream
+=======
+<script>
+import { RouterLink } from "vue-router";
+import router from "@/router";
+
+export default {
+  components: {
+    RouterLink,
+  },
+
+  data() {
+    return {
+      mostrarFormUsr: true,
+      datosEntrada: 0,
+      msgConsultar: null,
+    };
+  },
+
+  methods: {
+    consultarEntradas: function () {
+      let ConsultarLogin = new FormData();
+      ConsultarLogin.append(
+        "email",
+        document.getElementById("emailConsultar").value
+      );
+      ConsultarLogin.append(
+        "password",
+        document.getElementById("contrasenaConsultar").value
+      );
+
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginConsultar", {
+        method: "POST",
+        body: ConsultarLogin,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          //alert(data.msg);
+          console.log(data);
+          this.msgConsultar = data.msg;
+          if (data.status == true) {
+            this.datosEntrada = data.msg;
+            this.mostrarFormUsr = false;
+          }
+        });
+    },
+
+    comprobarSesion() {
+      let adminLogin = new FormData();
+      adminLogin.append("email", document.getElementById("emailAdmin").value);
+      adminLogin.append(
+        "password",
+        document.getElementById("contrasenaAdmin").value
+      );
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginAdmin", {
+        method: "POST",
+        body: adminLogin,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.msg);
+          // simular un cierre del modal porque nos daba error
+          if (data.status == true) {
+            document.getElementById("staticBackdrop").dispatchEvent(
+              new KeyboardEvent("keydown", {
+                altKey: false,
+                bubbles: true,
+                code: "Escape",
+                ctrlKey: false,
+                isComposing: false,
+                key: "Escape",
+                location: 0,
+                metaKey: false,
+                repeat: false,
+                shiftKey: false,
+                which: 27,
+                charCode: 0,
+                keyCode: 27,
+              })
+            );
+            router.push({ name: "admin" });
+          }
+        });
+    },
+  },
+};
+</script>
+
+>>>>>>> Stashed changes
 <style scoped>
 .ocultar {
   display: none;
