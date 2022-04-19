@@ -86,7 +86,7 @@ export default {
                         aria-expanded="false"
                         aria-controls="flush-collapseOne"
                       >
-                        Entrada #{{ index }}
+                        Entrada #{{ index+1 }}
                       </button>
                     </h2>
                     <div

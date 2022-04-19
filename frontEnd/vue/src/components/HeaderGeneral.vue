@@ -275,28 +275,27 @@ export default {
                     ></button>
                   </div>
                   <div class="modal-body">
-                    <div class="modal-body align-self-center">
-                      <div id="form_admin">
-                        <div class="col">
-                          <div
+                      <div id="form_admin" class="container">
+                        <div class="row">
+                        <div class="col-12">
+                           <div
                             :class="{ ocultar: this.msgAdmin == null }"
                             class="alert alert-primary"
                             role="alert"
                           >
                             {{ this.msgAdmin }}
                           </div>
+                          </div>
 
-                          <div class="col">
+                          <div class="col-12 gy-2">
                             <EmailForm :id="'emailAdmin'"/>
                           </div>
 
-                          <div class="col">
+                          <div class="col-12 gy-2">
                             <PasswordForm :id="'contrasenaAdmin'" />
                           </div>
 
-                          <br />
-
-                          <div class="col text-center">
+                          <div class="col-12 gy-3 text-center">
                             <button
                               type="button"
                               @click="comprobarSesion"
@@ -306,7 +305,6 @@ export default {
                             </button>
                           </div>
                         </div>
-                      </div>
                     </div>
                   </div>
                   <div class="modal-footer">
