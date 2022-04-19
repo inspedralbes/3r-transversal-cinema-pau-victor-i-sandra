@@ -221,10 +221,6 @@ export default {
   margin: 10px 0 15px 0;
 }
 
-.container {
-  width: 90%;
-}
-
 .mallaButacas div {
   display: flex;
   justify-content: center;

@@ -1,3 +1,105 @@
+<script>
+import { RouterLink } from "vue-router";
+import router from "@/router";
+import EmailForm from "@/components/EmailForm.vue";
+import PasswordForm from "@/components/PasswordForm.vue";
+
+export default {
+  components: {
+    RouterLink,
+    EmailForm,
+    PasswordForm
+  },
+
+  data() {
+    return {
+      mostrarFormUsr: true,
+      datosEntrada: 0,
+      msgConsultar: null,
+      msgAdmin: null,
+    };
+  },
+
+  methods: {
+    consultarEntradas: function () {
+      let ConsultarLogin = new FormData();
+      ConsultarLogin.append(
+        "email",
+        document.getElementById("emailConsultar").value
+      );
+      ConsultarLogin.append(
+        "password",
+        document.getElementById("contrasenaConsultar").value
+      );
+
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginConsultar", {
+        method: "POST",
+        body: ConsultarLogin,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          //alert(data.msg);
+          console.log(data);
+          if (data.status == true) {
+            this.datosEntrada = data.msg;
+            this.mostrarFormUsr = false;
+          } else {
+            this.msgConsultar = data.msg;
+          }
+        });
+    },
+
+    comprobarSesion() {
+      this.msgAdmin = null;
+      let adminLogin = new FormData();
+      adminLogin.append("email", document.getElementById("emailAdmin").value);
+      adminLogin.append(
+        "password",
+        document.getElementById("contrasenaAdmin").value
+      );
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginAdmin", {
+        method: "POST",
+        body: adminLogin,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          //alert(data.msg);
+          // simular un cierre del modal porque nos daba error
+          if (data.status == true) {
+            document.getElementById("staticBackdrop").dispatchEvent(
+              new KeyboardEvent("keydown", {
+                altKey: false,
+                bubbles: true,
+                code: "Escape",
+                ctrlKey: false,
+                isComposing: false,
+                key: "Escape",
+                location: 0,
+                metaKey: false,
+                repeat: false,
+                shiftKey: false,
+                which: 27,
+                charCode: 0,
+                keyCode: 27,
+              })
+            );
+            router.push({ name: "admin" });
+          } else {
+            this.msgAdmin = data.msg;
+          }
+        });
+    },
+    reiniciarModales: function () {
+      this.mostrarFormUsr = true;
+      this.msgConsultar = null;
+      document.querySelectorAll("input").forEach((e) => {
+        e.value = "";
+      });
+    },
+  },
+};
+</script>
+
 <template>
   <header>
     <div class="wrapper">
@@ -52,60 +154,39 @@
                       @click="this.reiniciarModales()"
                     ></button>
                   </div>
-                  <div class="modal-body align-self-center grande">
-                    <!-- Mensajes de error -->
-                    <div
-                      class="alert alert-primary"
-                      role="alert"
-                      v-html="this.msgErrorConsultar"
-                      v-if="this.error"
-                    ></div>
-
-                    <!-- From usuario -->
-                    <div id="form_usr" :class="{ ocultar: !mostrarFormUsr }">
-                      <div class="col">
+                  <div class="modal-body">
+<div class="container">
+                      <!-- From usuario -->
+                    <div id="form_usr" class="row" :class="{ ocultar: !mostrarFormUsr }">
+                      <!-- Mensajes de error -->
+                      <div class="col-12">
                         <div
-                          :class="{ ocultar: this.msgConsultar == null }"
-                          class="alert alert-primary"
-                          role="alert"
-                        >
-                          {{ this.msgConsultar }}
+                        :class="{ ocultar: this.msgConsultar == null }"
+                        class="alert alert-primary"
+                        role="alert"
+                      >
+                        <span>{{ this.msgConsultar }}</span>
+                      </div>
                         </div>
-                        <div class="col">
-                          <label
-                            for="emailConsultar"
-                            class="form-label text-left"
-                            >Email</label
-                          >
-                          <input
-                            type="email"
-                            class="form-control"
-                            id="emailConsultar"
-                          />
-                        </div>
+                      <div class="col-12 gy-2">
+                        <EmailForm :id="'emailConsultar'"/>
+                      </div>
 
-                        <div class="col">
-                          <label for="contrasenaConsultar" class="form-label"
-                            >Contraseña</label
-                          >
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="contrasenaConsultar"
-                          />
-                        </div>
-                        <br />
-                        <div class="col text-center">
-                          <button
-                            type="button"
-                            @click="this.consultarEntradas"
-                            class="btn btn-primary"
-                          >
-                            Aceptar
-                          </button>
-                        </div>
+                      <div class="col-12 gy-2">
+                        <PasswordForm :id="'contrasenaConsultar'" />
+                      </div>
+
+                      <div class="col-12 gy-3 text-center">
+                        <button
+                          type="button"
+                          @click="this.consultarEntradas"
+                          class="btn btn-primary"
+                        >
+                          Aceptar
+                        </button>
                       </div>
                     </div>
+  </div>
                   </div>
                   <!-- Fin Form usuario -->
 
@@ -204,26 +285,13 @@
                           >
                             {{ this.msgAdmin }}
                           </div>
+
                           <div class="col">
-                            <label for="email" class="form-label text-left"
-                              >Email</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="emailAdmin"
-                            />
+                            <EmailForm :id="'emailAdmin'"/>
                           </div>
 
                           <div class="col">
-                            <label for="contrasenaAdmin" class="form-label"
-                              >Contraseña</label
-                            >
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="contrasenaAdmin"
-                            />
+                            <PasswordForm :id="'contrasenaAdmin'" />
                           </div>
 
                           <br />
@@ -261,103 +329,6 @@
     </div>
   </header>
 </template>
-
-<script>
-import { RouterLink } from "vue-router";
-import router from "@/router";
-
-export default {
-  components: {
-    RouterLink,
-  },
-
-  data() {
-    return {
-      mostrarFormUsr: true,
-      datosEntrada: 0,
-      msgConsultar: null,
-      msgAdmin: null,
-    };
-  },
-
-  methods: {
-    consultarEntradas: function () {
-      let ConsultarLogin = new FormData();
-      ConsultarLogin.append(
-        "email",
-        document.getElementById("emailConsultar").value
-      );
-      ConsultarLogin.append(
-        "password",
-        document.getElementById("contrasenaConsultar").value
-      );
-
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginConsultar", {
-        method: "POST",
-        body: ConsultarLogin,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          //alert(data.msg);
-          console.log(data);
-          if (data.status == true) {
-            this.datosEntrada = data.msg;
-            this.mostrarFormUsr = false;
-          } else {
-            this.msgConsultar = data.msg;
-          }
-        });
-    },
-
-    comprobarSesion() {
-      this.msgAdmin = null;
-      let adminLogin = new FormData();
-      adminLogin.append("email", document.getElementById("emailAdmin").value);
-      adminLogin.append(
-        "password",
-        document.getElementById("contrasenaAdmin").value
-      );
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginAdmin", {
-        method: "POST",
-        body: adminLogin,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          //alert(data.msg);
-          // simular un cierre del modal porque nos daba error
-          if (data.status == true) {
-            document.getElementById("staticBackdrop").dispatchEvent(
-              new KeyboardEvent("keydown", {
-                altKey: false,
-                bubbles: true,
-                code: "Escape",
-                ctrlKey: false,
-                isComposing: false,
-                key: "Escape",
-                location: 0,
-                metaKey: false,
-                repeat: false,
-                shiftKey: false,
-                which: 27,
-                charCode: 0,
-                keyCode: 27,
-              })
-            );
-            router.push({ name: "admin" });
-          } else {
-            this.msgAdmin = data.msg;
-          }
-        });
-    },
-    reiniciarModales: function () {
-      this.mostrarFormUsr = true;
-      document.querySelectorAll("input").forEach((e) => {
-        e.value = "";
-      });
-    },
-  },
-};
-</script>
 
 <style scoped>
 .ocultar {
