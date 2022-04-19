@@ -6,7 +6,7 @@
           <RouterLink class="navbar-brand" to="/">
             <img
               class="logo"
-              src="../../img/logo.png"
+              src="@/../public/img/logo.png"
               alt="logo del Pedralbes Cinema"
             />
           </RouterLink>
