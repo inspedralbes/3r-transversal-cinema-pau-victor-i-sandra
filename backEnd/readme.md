@@ -6,4 +6,4 @@ Aquí podràs trobar:
  -  _/EndPoints_ => Contractes pactats entre el front + back
  -  _/backendSymfony-prod_ => Fitxer .env.local per pujar el projecte de symfony al servidor.
  -  _/backendSymfony-dev_ => Symfony per l'entorn de desenvolupament.
- -  Manual d'instal·lació => Per saber com configurar l'entorn de producció + desenvolupament.
+ -  *Manual d'instal·lació* => Per saber com configurar l'entorn de producció + desenvolupament.
