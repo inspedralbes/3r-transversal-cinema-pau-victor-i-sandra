@@ -3,7 +3,7 @@ import CardPeliGeneral from "@/components/CardPeliGeneral.vue";
 import SeleccionarButaques from "@/components/SeleccionarButaques.vue";
 import { sessioStore } from "../stores/sessioStore";
 import { mapStores } from "pinia";
-import SpinnerCargando from '@/components/SpinnerCargando.vue';
+import SpinnerCargando from "@/components/SpinnerCargando.vue";
 
 export default {
   computed: {
@@ -14,20 +14,20 @@ export default {
     return {
       peliSeleccionada: null,
       enadmin: 0,
-      cargando: 1
+      cargando: 1,
     };
   },
 
   components: {
     CardPeliGeneral,
-    SeleccionarButaques, 
-    SpinnerCargando
+    SeleccionarButaques,
+    SpinnerCargando,
   },
 
   beforeCreate() {
     fetch(
       "http://cinema1back.alumnes.inspedralbes.cat/sesionEspecifica?idSesion=" +
-      window.location.href.split("/", 5)[4]
+        window.location.href.split("/", 5)[4]
     )
       .then((response) => response.json())
       .then((data) => {
@@ -50,7 +50,11 @@ export default {
 <template>
   <main>
     <div v-if="!this.cargando">
-      <button class="btn btn-secondary volver" label="Volver" @click="retroceder()">
+      <button
+        class="btn btn-secondary volver"
+        label="Volver"
+        @click="retroceder()"
+      >
         <i class="bi bi-arrow-left"></i> Atrás
       </button>
       <div class="container">
@@ -60,19 +64,23 @@ export default {
           </div>
 
           <div class="col-12 col-md-5 cardInfo align-self-center">
-            <CardPeliGeneral v-if="this.peliSeleccionada != null" :peliInfo="this.peliSeleccionada" />
+            <CardPeliGeneral
+              v-if="this.peliSeleccionada != null"
+              :peliInfo="this.peliSeleccionada"
+            />
           </div>
 
           <div class="col-12 col-md-7 butacasInfo">
-            <SeleccionarButaques v-if="this.peliSeleccionada != null"
-              :butacasOcupadas="this.peliSeleccionada.butacasOcupadas" />
+            <SeleccionarButaques
+              v-if="this.peliSeleccionada != null"
+              :butacasOcupadas="this.peliSeleccionada.butacasOcupadas"
+            />
           </div>
         </div>
       </div>
     </div>
 
     <SpinnerCargando v-if="this.cargando" />
-
   </main>
 </template>
 

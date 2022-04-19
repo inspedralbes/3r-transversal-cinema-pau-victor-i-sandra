@@ -1,7 +1,7 @@
 <script>
 import { sessioStore } from "../stores/sessioStore";
 import { mapStores } from "pinia";
-import SpinnerCargando from '@/components/SpinnerCargando.vue';
+import SpinnerCargando from "@/components/SpinnerCargando.vue";
 export default {
   computed: {
     ...mapStores(sessioStore),
@@ -11,12 +11,12 @@ export default {
     return {
       piniaData: 0,
       entradasData: null,
-      cargando: 1
+      cargando: 1,
     };
   },
 
   components: {
-    SpinnerCargando
+    SpinnerCargando,
   },
 
   created() {
@@ -68,21 +68,41 @@ export default {
 
               <div class="col-12">
                 <h2>Tus entradas</h2>
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                  <div class="accordion-item" v-for="(entrada, index) in this.entradasData.entradas" :key="index">
+                <div
+                  class="accordion accordion-flush"
+                  id="accordionFlushExample"
+                >
+                  <div
+                    class="accordion-item"
+                    v-for="(entrada, index) in this.entradasData.entradas"
+                    :key="index"
+                  >
                     <h2 class="accordion-header" id="flush-headingOne">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        :data-bs-target="'#flush-collapse' + index" aria-expanded="false"
-                        aria-controls="flush-collapseOne">
+                      <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        :data-bs-target="'#flush-collapse' + index"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseOne"
+                      >
                         Entrada #{{ index }}
                       </button>
                     </h2>
-                    <div :id="'flush-collapse' + index" class="accordion-collapse collapse"
-                      aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div
+                      :id="'flush-collapse' + index"
+                      class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingOne"
+                      data-bs-parent="#accordionFlushExample"
+                    >
                       <div class="accordion-body">
                         <div class="row align-items-center">
                           <div class="col-4">
-                            <img :src="this.piniaData.peli.imgPeli" alt class="img-fluid" />
+                            <img
+                              :src="this.piniaData.peli.imgPeli"
+                              alt
+                              class="img-fluid"
+                            />
                           </div>
                           <div class="col-8">
                             <p>

@@ -14,20 +14,25 @@ export default {
       msgLogin: null,
       msgRegister: null,
       comprovando: false,
-      popoverNombre: "El nombre solo puede contener letras (+1), nada de números ni símbolos",
-      popoverApellidos: "Los apellidos solo pueden contener letras (+1), nada de números ni símbolos",
+      popoverNombre:
+        "El nombre solo puede contener letras (+1), nada de números ni símbolos",
+      popoverApellidos:
+        "Los apellidos solo pueden contener letras (+1), nada de números ni símbolos",
       popoverEmail: "El correo tiene que contener el símbolo '@'",
-      popoverPassword: "La contraseña tiene que contener: una letra minúscula, una letra mayúscula, un número y uno de los siguientes símbolos: '@$!%*?&'",
+      popoverPassword:
+        "La contraseña tiene que contener: una letra minúscula, una letra mayúscula, un número y uno de los siguientes símbolos: '@$!%*?&'",
     };
   },
 
   mounted() {
     this.datosPinia = this.sessioStore.get;
 
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-      return new bootstrap.Popover(popoverTriggerEl)
-    })
+    var popoverTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="popover"]')
+    );
+    popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl);
+    });
   },
 
   methods: {
@@ -119,14 +124,13 @@ export default {
         .then((data) => {
           this.comprovando = false;
 
-          if (typeof data.chk !== 'undefined') {
-            this.msgRegister = "Errores de comprovacion de datos: <ul>"
+          if (typeof data.chk !== "undefined") {
+            this.msgRegister = "Errores de comprovacion de datos: <ul>";
             data.msg.forEach((c) => {
               this.msgRegister += "<li>" + c + "</li>";
-            })
+            });
 
-            this.msgRegister += "</ul>"
-
+            this.msgRegister += "</ul>";
           } else {
             this.msgRegister = data.msg;
           }
@@ -149,22 +153,24 @@ export default {
         "password",
         document.getElementById("password1").value
       );
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginComprarEntradas", {
-        method: "POST",
-        body: iniciarSesion,
-      })
+      fetch(
+        "http://cinema1back.alumnes.inspedralbes.cat/loginComprarEntradas",
+        {
+          method: "POST",
+          body: iniciarSesion,
+        }
+      )
         .then((response) => response.json())
         .then((data) => {
           this.comprovando = false;
 
-          if (typeof data.chk !== 'undefined') {
-            this.msgLogin = "Errores de comprovacion de datos: <ul>"
+          if (typeof data.chk !== "undefined") {
+            this.msgLogin = "Errores de comprovacion de datos: <ul>";
             data.msg.forEach((c) => {
               this.msgLogin += "<li>" + c + "</li>";
-            })
+            });
 
-            this.msgLogin += "</ul>"
-
+            this.msgLogin += "</ul>";
           } else {
             this.msgLogin = data.msg;
           }
@@ -184,37 +190,66 @@ export default {
   <div class="justify-content-center align-items-center">
     <!-- FORMULARIO INICIAR SESIÓN -->
     <div id="iniciar_sesion " :class="{ ocultar: !mostrarIniciarSesion }">
-
       <div class="row g-3">
         <div class="col-md-12 text-center">
           <h2>Inicia sesión</h2>
         </div>
         <div class="col-md-12" v-if="this.msgLogin != null">
-          <div class="alert alert-primary" role="alert" v-html="this.msgLogin">
-          </div>
+          <div
+            class="alert alert-primary"
+            role="alert"
+            v-html="this.msgLogin"
+          ></div>
         </div>
         <div class="col-md-7">
-          <label for="email" class="form-label">Email <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-              data-bs-trigger="hover focus" :data-bs-content="this.popoverEmail"><i
-                class="bi bi-info-circle"></i></span></label>
+          <label for="email" class="form-label"
+            >Email
+            <span
+              class="d-inline-block"
+              tabindex="0"
+              data-bs-toggle="popover"
+              data-bs-trigger="hover focus"
+              :data-bs-content="this.popoverEmail"
+              ><i class="bi bi-info-circle"></i></span
+          ></label>
           <input type="email" class="form-control" id="email1" />
         </div>
         <div class="col-md-5">
-          <label for="inputPassword4" class="form-label">Contraseña <span class="d-inline-block" tabindex="0"
-              data-bs-toggle="popover" data-bs-trigger="hover focus" :data-bs-content="this.popoverPassword"><i
-                class="bi bi-info-circle"></i></span></label>
+          <label for="inputPassword4" class="form-label"
+            >Contraseña
+            <span
+              class="d-inline-block"
+              tabindex="0"
+              data-bs-toggle="popover"
+              data-bs-trigger="hover focus"
+              :data-bs-content="this.popoverPassword"
+              ><i class="bi bi-info-circle"></i></span
+          ></label>
           <input type="password" class="form-control" id="password1" />
         </div>
 
         <div class="col-md-12 text-center gy-4">
-          <button type="button" class="btn btn-primary" @click="iniciarSesionCompra" :class="{ ocultar: bien }">
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="iniciarSesionCompra"
+            :class="{ ocultar: bien }"
+          >
             Iniciar Sesion
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
-              v-if="this.comprovando"></span>
-
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+              v-if="this.comprovando"
+            ></span>
           </button>
-          <RouterLink class="btn btn-primary margin10" @click.native="this.comprarEntradas" :class="{ ocultar: !bien }"
-            to="/realitzatpagament">Comprar</RouterLink>
+          <RouterLink
+            class="btn btn-primary margin10"
+            @click.native="this.comprarEntradas"
+            :class="{ ocultar: !bien }"
+            to="/realitzatpagament"
+            >Comprar</RouterLink
+          >
           <RouterView />
         </div>
 
@@ -232,8 +267,6 @@ export default {
           </p>
         </div>
       </div>
-
-
     </div>
 
     <!-- FORMULARIO CREAR USUARIO-->
@@ -244,47 +277,91 @@ export default {
         </div>
 
         <div class="col-md-12" v-if="this.msgRegister != null">
-          <div class="alert alert-primary" role="alert" v-html="this.msgRegister">
-
-          </div>
+          <div
+            class="alert alert-primary"
+            role="alert"
+            v-html="this.msgRegister"
+          ></div>
         </div>
 
         <div class="col-md-6">
-          <label for="titular" class="form-label text-left">Nombre <span class="d-inline-block" tabindex="0"
-              data-bs-toggle="popover" data-bs-trigger="hover focus" :data-bs-content="this.popoverNombre"><i
-                class="bi bi-info-circle"></i></span></label>
+          <label for="titular" class="form-label text-left"
+            >Nombre
+            <span
+              class="d-inline-block"
+              tabindex="0"
+              data-bs-toggle="popover"
+              data-bs-trigger="hover focus"
+              :data-bs-content="this.popoverNombre"
+              ><i class="bi bi-info-circle"></i></span
+          ></label>
           <input type="text" class="form-control" id="nombre2" />
         </div>
 
         <div class="col-md-6">
-          <label for="titular" class="form-label">Apellidos <span class="d-inline-block" tabindex="0"
-              data-bs-toggle="popover" data-bs-trigger="hover focus" :data-bs-content="this.popoverApellidos"><i
-                class="bi bi-info-circle"></i></span></label>
+          <label for="titular" class="form-label"
+            >Apellidos
+            <span
+              class="d-inline-block"
+              tabindex="0"
+              data-bs-toggle="popover"
+              data-bs-trigger="hover focus"
+              :data-bs-content="this.popoverApellidos"
+              ><i class="bi bi-info-circle"></i></span
+          ></label>
           <input type="text" class="form-control" id="apellido2" />
         </div>
 
         <div class="col-md-7">
-          <label for="titular" class="form-label">Email <span class="d-inline-block" tabindex="0"
-              data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="this.popoverEmail"><i
-                class="bi bi-info-circle"></i></span></label>
+          <label for="titular" class="form-label"
+            >Email
+            <span
+              class="d-inline-block"
+              tabindex="0"
+              data-bs-toggle="popover"
+              data-bs-trigger="hover focus"
+              data-bs-content="this.popoverEmail"
+              ><i class="bi bi-info-circle"></i></span
+          ></label>
           <input type="email" class="form-control" id="email2" />
         </div>
 
         <div class="col-md-5">
-          <label for="inputPassword4" class="form-label">Contraseña <span class="d-inline-block" tabindex="0"
-              data-bs-toggle="popover" data-bs-trigger="hover focus" :data-bs-content="this.popoverPassword"><i
-                class="bi bi-info-circle"></i></span></label>
+          <label for="inputPassword4" class="form-label"
+            >Contraseña
+            <span
+              class="d-inline-block"
+              tabindex="0"
+              data-bs-toggle="popover"
+              data-bs-trigger="hover focus"
+              :data-bs-content="this.popoverPassword"
+              ><i class="bi bi-info-circle"></i></span
+          ></label>
           <input type="text" class="form-control" id="password2" />
         </div>
 
         <div class="col-md-12 text-center gy-4">
-          <button type="button" class="btn btn-primary" @click="cuentaNuevaCompra" :class="{ ocultar: bien }">
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="cuentaNuevaCompra"
+            :class="{ ocultar: bien }"
+          >
             Crear Cuenta
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
-              v-if="this.comprovando"></span>
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+              v-if="this.comprovando"
+            ></span>
           </button>
-          <RouterLink class="btn btn-primary" @click.native="this.comprarEntradas" :class="{ ocultar: !bien }"
-            to="/realitzatpagament">Comprar</RouterLink>
+          <RouterLink
+            class="btn btn-primary"
+            @click.native="this.comprarEntradas"
+            :class="{ ocultar: !bien }"
+            to="/realitzatpagament"
+            >Comprar</RouterLink
+          >
           <RouterView />
         </div>
 
@@ -316,12 +393,12 @@ export default {
 }
 
 .alert ul {
-  margin: 0
+  margin: 0;
 }
 
 .alert-primary {
   background-color: #fdca315b;
-  border-color: #FDCB31;
-  color: black
+  border-color: #fdcb31;
+  color: black;
 }
 </style>

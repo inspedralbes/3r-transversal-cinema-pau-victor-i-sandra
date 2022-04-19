@@ -1,13 +1,12 @@
 <script>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
 import router from "@/router";
-import Header from '@/components/Header.vue';
+import Header from "@/components/HeaderGeneral.vue";
 
 export default {
   components: {
-    RouterLink,
     RouterView,
-    Header
+    Header,
   },
 
   data() {
@@ -130,21 +129,21 @@ body {
 .btn-primary:hover {
   background-color: rgb(253, 203, 49);
   border-color: #fdcb31;
-  color: black
+  color: black;
 }
 
 .btn-primary:focus {
-  box-shadow: 0 0 0 .25rem rgba(253, 202, 49, 50%) !important;
+  box-shadow: 0 0 0 0.25rem rgba(253, 202, 49, 50%) !important;
   background-color: rgb(253, 203, 49);
   border-color: #fdcb31;
-  color: black
+  color: black;
 }
 
 .btn-primary:active {
-  box-shadow: 0 0 0 .25rem rgba(253, 202, 49, 50%);
+  box-shadow: 0 0 0 0.25rem rgba(253, 202, 49, 50%);
   background-color: rgb(253, 203, 49);
   border-color: #fdcb31;
-  color: black
+  color: black;
 }
 
 h1,
