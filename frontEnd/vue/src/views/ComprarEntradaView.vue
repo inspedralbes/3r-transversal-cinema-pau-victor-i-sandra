@@ -26,7 +26,7 @@ export default {
 
   beforeCreate() {
     fetch(
-      "http://192.168.1.140:8000/sesionEspecifica?idSesion=" +
+      "http://cinema1back.alumnes.inspedralbes.cat/sesionEspecifica?idSesion=" +
       window.location.href.split("/", 5)[4]
     )
       .then((response) => response.json())

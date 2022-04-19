@@ -34,7 +34,7 @@ export default {
         "password",
         document.getElementById("contrasenaAdmin").value
       );
-      fetch("http://192.168.1.140:8000/loginAdmin", {
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginAdmin", {
         method: "POST",
         body: adminLogin,
       })

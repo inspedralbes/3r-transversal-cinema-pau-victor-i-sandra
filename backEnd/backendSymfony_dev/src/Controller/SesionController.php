@@ -82,10 +82,10 @@ class SesionController extends AbstractController
 
         $entradas = array_merge($entradas, [
             'pdf' => "http://cinema1back.alumnes.inspedralbes.cat/EntradasPDF/Entradas_" . $dades[0]->getUsuario()->__toString() . ".pdf",
-            'qr' => "http://cinema1back.alumnes.inspedralbes.cat/QR/Entradas_" . $dades[0]->getUsuario()->__toString() . ".jpg"
+            'qr' => "http://cinema1back.alumnes.inspedralbes.cat/QR/Entradas_" . $dades[0]->getUsuario()->__toString() . ".png"
         ]);
         foreach ($dades as $entrada) {
-            $usuario = $entrada->getUsuario()->__toString();
+            $usuario = $entrada->getUsuario()->getEmail();
             $sesion = $entrada->getSesion()->__toString();
             array_push($butacas, $entrada->getButaca() . " - " . $entrada->getPrecio() . "€");
             array_push($entradas['entradas'], [
@@ -325,7 +325,7 @@ class SesionController extends AbstractController
         $this->qr("http://cinema1back.alumnes.inspedralbes.cat/EntradasPDF/Entradas_$usuario.pdf", $usuario);
     }
 
-    public function qr($PDFpath = "", $user)
+    public function qr($PDFpath, $user)
     {
         $result = Builder::create()
             ->writer(new PngWriter())

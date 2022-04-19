@@ -1,6 +1,6 @@
 INSERT INTO `sesion` (`id`, `fecha`, `hora`, `vip`, `dia_espectador`, `butacas_ocupadas`, `id_peli`, `nombre_peli`, `ano_peli`, `img_peli`) VALUES
-(1, '2022-04-19', '20:00:00', 1, 1, 'b12,', 'tt0317219', 'Cars', '2006', 'https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg'),
-(2, '2022-04-20', '18:00:00', 0, 1, 'b45,', 'tt0348150', 'Superman Returns', '2006', 'https://m.media-amazon.com/images/M/MV5BNzY2ZDQ2MTctYzlhOC00MWJhLTgxMmItMDgzNDQwMDdhOWI2XkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg'),
+(1, '2022-04-19', '20:00:00', 1, 1, 'b12', 'tt0317219', 'Cars', '2006', 'https://m.media-amazon.com/images/M/MV5BMTg5NzY0MzA2MV5BMl5BanBnXkFtZTYwNDc3NTc2._V1_SX300.jpg'),
+(2, '2022-04-20', '18:00:00', 0, 1, 'b45', 'tt0348150', 'Superman Returns', '2006', 'https://m.media-amazon.com/images/M/MV5BNzY2ZDQ2MTctYzlhOC00MWJhLTgxMmItMDgzNDQwMDdhOWI2XkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg'),
 (3, '2022-04-21', '16:00:00', 1, 0, NULL, 'tt1464335', 'Uncharted', '2006', 'https://m.media-amazon.com/images/M/MV5BMWEwNjhkYzYtNjgzYy00YTY2LThjYWYtYzViMGJkZTI4Y2MyXkEyXkFqcGdeQXVyNTM0OTY1OQ@@._V1_SX300.jpg'),
 (4, '2022-04-22', '18:00:00', 0, 0, NULL, 'tt13097626', 'U.S.B.', '2006', 'https://m.media-amazon.com/images/M/MV5BNjc1ZTBiYmYtYmQyZS00ODM0LWFjYzUtNTkzMjQ1MzM3MjI0XkEyXkFqcGdeQXVyMTAzMDcwNDg1._V1_SX300.jpg'),
 (5, '2022-04-23', '20:00:00', 1, 0, NULL, 'tt5978586', 'Spiderman in Cannes', '2006', 'https://m.media-amazon.com/images/M/MV5BZDlmMGQwYmItNTNmOS00OTNkLTkxNTYtNDM3ZWVlMWUyZDIzXkEyXkFqcGdeQXVyMTA5Mzk5Mw@@._V1_SX300.jpg'),

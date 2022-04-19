@@ -23,7 +23,7 @@ export default {
     this.piniaData = this.sessioStore.get;
 
     fetch(
-      `http://192.168.1.140:8000/entradasUsuario?idUsuario=${this.piniaData.idUsuario}&idSesion=${this.piniaData.idSesion}`
+      `http://cinema1back.alumnes.inspedralbes.cat/entradasUsuario?idUsuario=${this.piniaData.idUsuario}&idSesion=${this.piniaData.idSesion}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -63,7 +63,7 @@ export default {
                 </p>
               </div>
               <div class="col-12 col-md-4 qr">
-                <img src="http://cinema1back.alumnes.inspedralbes.cat/QR/Entradas_aaaa.png" class="img-fluid" alt />
+                <img :src="this.entradasData.qr" class="img-fluid" alt />
               </div>
 
               <div class="col-12">

@@ -37,7 +37,7 @@ class Usuario
 
     public function __toString()
     {
-        return $this->email;
+        return $this->id.$this->nombre;
     }
 
     public function getId(): ?int
