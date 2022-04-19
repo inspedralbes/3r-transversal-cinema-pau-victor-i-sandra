@@ -1,102 +1,3 @@
-<script>
-import { RouterLink } from "vue-router";
-import router from "@/router";
-
-export default {
-  components: {
-    RouterLink,
-  },
-
-  data() {
-    return {
-      mostrarFormUsr: true,
-      datosEntrada: 0,
-      error: 0,
-      msgErrorConsultar: ""
-    };
-  },
-
-  methods: {
-    consultarEntradas: function () {
-      console.log("aaa");
-
-      let ConsultarLogin = new FormData();
-      ConsultarLogin.append(
-        "email",
-        document.getElementById("emailConsultar").value
-      );
-      ConsultarLogin.append(
-        "password",
-        document.getElementById("contrasenaConsultar").value
-      );
-
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginConsultar", {
-        method: "POST",
-        body: ConsultarLogin,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          if (data.status == true) {
-            this.datosEntrada = data.msg;
-            this.mostrarFormUsr = false;
-          }else{
-            this.error = 1;
-            this.msgErrorConsultar = data.msg
-          }
-        });
-    },
-
-    comprobarSesion() {
-      let adminLogin = new FormData();
-      adminLogin.append("email", document.getElementById("emailAdmin").value);
-      adminLogin.append(
-        "password",
-        document.getElementById("contrasenaAdmin").value
-      );
-      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginAdmin", {
-        method: "POST",
-        body: adminLogin,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          alert(data.msg);
-          // simular un cierre del modal porque nos daba error
-          if (data.status == true) {
-            document.getElementById("staticBackdrop").dispatchEvent(
-              new KeyboardEvent("keydown", {
-                altKey: false,
-                bubbles: true,
-                code: "Escape",
-                ctrlKey: false,
-                isComposing: false,
-                key: "Escape",
-                location: 0,
-                metaKey: false,
-                repeat: false,
-                shiftKey: false,
-                which: 27,
-                charCode: 0,
-                keyCode: 27,
-              })
-            );
-            this.reiniciarModales()
-            router.push({ name: "admin" });
-          }
-        });
-    },
-    
-  reiniciarModales: function(){
-    this.mostrarFormUsr = true;
-    document.querySelectorAll('input').forEach((e) => {
-      e.value = "";
-    })
-  }
-  },
-
-};
-</script>
-
 <template>
   <header>
     <div class="wrapper">
@@ -140,7 +41,9 @@ export default {
               <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title" id="entradasModalLabel">Consulta tus entradas</h4>
+                    <h4 class="modal-title" id="entradasModalLabel">
+                      Consulta tus entradas
+                    </h4>
                     <button
                       type="button"
                       class="btn-close"
@@ -150,15 +53,13 @@ export default {
                     ></button>
                   </div>
                   <div class="modal-body align-self-center grande">
-<!-- Mensajes de error -->
-          <div
-            class="alert alert-primary"
-            role="alert"
-            v-html="this.msgErrorConsultar"
-            v-if="this.error"
-          ></div>
-
-
+                    <!-- Mensajes de error -->
+                    <div
+                      class="alert alert-primary"
+                      role="alert"
+                      v-html="this.msgErrorConsultar"
+                      v-if="this.error"
+                    ></div>
 
                     <!-- From usuario -->
                     <div id="form_usr" :class="{ ocultar: !mostrarFormUsr }">
@@ -171,7 +72,9 @@ export default {
                           {{ this.msgConsultar }}
                         </div>
                         <div class="col">
-                          <label for="emailConsultar" class="form-label text-left"
+                          <label
+                            for="emailConsultar"
+                            class="form-label text-left"
                             >Email</label
                           >
                           <input
@@ -183,7 +86,8 @@ export default {
 
                         <div class="col">
                           <label for="contrasenaConsultar" class="form-label"
-                            >Contraseña</label>
+                            >Contraseña</label
+                          >
                           <input
                             type="password"
                             class="form-control"
@@ -293,6 +197,13 @@ export default {
                     <div class="modal-body align-self-center">
                       <div id="form_admin">
                         <div class="col">
+                          <div
+                            :class="{ ocultar: this.msgAdmin == null }"
+                            class="alert alert-primary"
+                            role="alert"
+                          >
+                            {{ this.msgAdmin }}
+                          </div>
                           <div class="col">
                             <label for="email" class="form-label text-left"
                               >Email</label
@@ -335,7 +246,7 @@ export default {
                       type="button"
                       class="btn btn-secondary"
                       data-bs-dismiss="modal"
-                      @click="this.reiniciarModales()" 
+                      @click="this.reiniciarModales()"
                     >
                       Cerrar
                     </button>
@@ -351,8 +262,6 @@ export default {
   </header>
 </template>
 
-<<<<<<< Updated upstream
-=======
 <script>
 import { RouterLink } from "vue-router";
 import router from "@/router";
@@ -367,6 +276,7 @@ export default {
       mostrarFormUsr: true,
       datosEntrada: 0,
       msgConsultar: null,
+      msgAdmin: null,
     };
   },
 
@@ -390,15 +300,17 @@ export default {
         .then((data) => {
           //alert(data.msg);
           console.log(data);
-          this.msgConsultar = data.msg;
           if (data.status == true) {
             this.datosEntrada = data.msg;
             this.mostrarFormUsr = false;
+          } else {
+            this.msgConsultar = data.msg;
           }
         });
     },
 
     comprobarSesion() {
+      this.msgAdmin = null;
       let adminLogin = new FormData();
       adminLogin.append("email", document.getElementById("emailAdmin").value);
       adminLogin.append(
@@ -411,7 +323,7 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          alert(data.msg);
+          //alert(data.msg);
           // simular un cierre del modal porque nos daba error
           if (data.status == true) {
             document.getElementById("staticBackdrop").dispatchEvent(
@@ -432,14 +344,21 @@ export default {
               })
             );
             router.push({ name: "admin" });
+          } else {
+            this.msgAdmin = data.msg;
           }
         });
+    },
+    reiniciarModales: function () {
+      this.mostrarFormUsr = true;
+      document.querySelectorAll("input").forEach((e) => {
+        e.value = "";
+      });
     },
   },
 };
 </script>
 
->>>>>>> Stashed changes
 <style scoped>
 .ocultar {
   display: none;

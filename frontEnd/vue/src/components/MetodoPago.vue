@@ -191,7 +191,6 @@ export default {
     <!-- FORMULARIO INICIAR SESIÓN -->
     <div id="iniciar_sesion " :class="{ ocultar: !mostrarIniciarSesion }">
       <div class="row g-3">
-
         <div class="col-md-12 text-center">
           <h2>Inicia sesión</h2>
         </div>
@@ -217,7 +216,7 @@ export default {
           ></label>
           <input type="email" class="form-control" id="email1" />
         </div>
-        
+
         <div class="col-md-5">
           <label for="inputPassword4" class="form-label"
             >Contraseña
