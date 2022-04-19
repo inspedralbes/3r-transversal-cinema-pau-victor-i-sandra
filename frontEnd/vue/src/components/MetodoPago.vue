@@ -84,7 +84,7 @@ export default {
           } else {
             precio += 6;
           }
-        } 
+        }
         // Dia espectador
         else {
           precio += 6;
@@ -337,7 +337,7 @@ export default {
               :data-bs-content="this.popoverPassword"
               ><i class="bi bi-info-circle"></i></span
           ></label>
-          <input type="text" class="form-control" id="password2" />
+          <input type="password" class="form-control" id="password2" />
         </div>
 
         <div class="col-md-12 text-center gy-4">

@@ -5,9 +5,9 @@ export default {
   computed: {
     ...mapStores(sessioStore),
   },
-    
+
   props: ["butacasOcupadas"],
-  
+
   data() {
     return {
       ocupadas: [],
@@ -17,7 +17,6 @@ export default {
       /* Imagenes tipo butacas */
     };
   },
-
 
   created() {
     this.infoPeli = this.sessioStore.get;
@@ -108,8 +107,7 @@ export default {
             } else {
               precio += 6;
             }
-            
-          } 
+          }
           // Dia espectador
           else {
             precio += 6;
@@ -120,17 +118,17 @@ export default {
       this.precioButacas = precio;
     },
 
-    vip: function(butaca){
-      if(!this.infoPeli.vip){
+    vip: function (butaca) {
+      if (!this.infoPeli.vip) {
         return false;
-      }else{
-        if(butaca >= '51' && butaca <= '60'){
+      } else {
+        if (butaca >= "51" && butaca <= "60") {
           return true;
-        }else{
+        } else {
           return false;
         }
       }
-    }
+    },
   },
 };
 </script>
@@ -139,7 +137,9 @@ export default {
   <div>
     <section class="seleccionarButacas">
       <div class="tituloSeleccionarButacas">
-        <h3 class="text-center">Selecciona las butacas</h3>
+        <h3 v-if="this.sessioStore.getAdmin == 0" class="text-center">
+          Selecciona las butacas
+        </h3>
       </div>
 
       <div class="container text-center">
@@ -163,7 +163,7 @@ export default {
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
             />
-            
+
             <!-- Butaca disponible VIP -->
             <img
               v-if="estalibre('b' + butaca) && vip(butaca)"

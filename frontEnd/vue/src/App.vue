@@ -123,7 +123,7 @@ body {
 .btn-primary {
   background-color: #14b0ef;
   border-color: #14b0ef;
-  color: black
+  color: black;
 }
 
 .btn-primary:hover {

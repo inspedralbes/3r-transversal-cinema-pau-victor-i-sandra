@@ -80,7 +80,7 @@
                         <div class="col text-center">
                           <button
                             type="button"
-                            @click="consultarEntradas"
+                            @click="this.consultarEntradas"
                             class="btn btn-primary"
                           >
                             Aceptar
@@ -264,7 +264,8 @@ export default {
 
   methods: {
     consultarEntradas: function () {
-      this.mostrarFormUsr = false;
+      console.log("aaa");
+
       let ConsultarLogin = new FormData();
       ConsultarLogin.append(
         "email",
@@ -274,17 +275,18 @@ export default {
         "password",
         document.getElementById("contrasenaConsultar").value
       );
-      ("http://cinema1back.alumnes.inspedralbes.cat/loginConsultar",
-      {
+
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginConsultar", {
         method: "POST",
         body: ConsultarLogin,
       })
         .then((response) => response.json())
         .then((data) => {
-          //alert(data.msg);
+          alert(data.msg);
           console.log(data);
           if (data.status == true) {
             this.datosEntrada = data.msg;
+            this.mostrarFormUsr = false;
           }
         });
     },
