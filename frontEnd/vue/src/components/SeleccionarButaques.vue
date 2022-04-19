@@ -15,10 +15,6 @@ export default {
       precioButacas: 0,
       infoPeli: 0,
       /* Imagenes tipo butacas */
-      img_disponible: "@/../public/img/butaca_disponible.png",
-      img_ocupada: "@/../public/img/butaca_ocupada.png",
-      img_seleccionada: "@/../public/img/img/butaca_seleccionada.png",
-      img_vip: "@/../public/img/butaca_vip.png",
     };
   },
 
@@ -123,6 +119,18 @@ export default {
 
       this.precioButacas = precio;
     },
+
+    vip: function(butaca){
+      if(!this.infoPeli.vip){
+        return false;
+      }else{
+        if(butaca >= '51' && butaca <= '60'){
+          return true;
+        }else{
+          return false;
+        }
+      }
+    }
   },
 };
 </script>
@@ -141,19 +149,30 @@ export default {
             <!-- Butaca ocupada img -->
             <img
               v-if="estaocupada('b' + butaca)"
-              :src="this.img_ocupada"
+              src="@/../public/img/butaca_ocupada.png"
               @click="SeleccionarButaca('b' + butaca, $events)"
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
             />
+
             <!-- Butaca disponible img -->
             <img
-              v-if="estalibre('b' + butaca)"
-              src="this.infoPeli.vip && butaca >= '51' && butaca <= '60' ? '@/../public/img/butaca_vip.png' : '@/../public/img/butaca_disponible.png'"
+              v-if="estalibre('b' + butaca) && !vip(butaca)"
+              src="@/../public/img/butaca_disponible.png"
               @click="SeleccionarButaca('b' + butaca, $event)"
               :id="'b' + (index + 1)"
               class="img-fluid butaca"
             />
+            
+            <!-- Butaca disponible VIP -->
+            <img
+              v-if="estalibre('b' + butaca) && vip(butaca)"
+              src="@/../public/img/butaca_vip.png"
+              @click="SeleccionarButaca('b' + butaca, $event)"
+              :id="'b' + (index + 1)"
+              class="img-fluid butaca"
+            />
+
             <!-- Butaca selecconada img -->
             <img
               v-if="estaseleccionada('b' + butaca)"
