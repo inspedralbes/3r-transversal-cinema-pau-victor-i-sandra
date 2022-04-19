@@ -18,6 +18,7 @@ export default {
     ProximasPelis,
   },
 
+  // datos sobre las sesiones
   beforeCreate() {
     fetch("http://cinema1back.alumnes.inspedralbes.cat/sesiones")
       .then((response) => response.json())
@@ -57,13 +58,14 @@ export default {
   },
 };
 </script>
+
 <template>
   <main>
     <div class="container1">
       <h1 class="text-center titulo" @click="mostrarConsultarSesion">
         Consultar sesiones
       </h1>
-      <br />
+      <br/>
       <div
         id="consultar_entradas"
         :class="{ ocultar: mostrarConsultarSesion }"
