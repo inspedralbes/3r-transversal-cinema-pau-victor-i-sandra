@@ -14,7 +14,7 @@ export default {
       precioButacas: 0,
       infoPeli: 0,
 
-      /* Imagenes tipo butacas */
+      /* Imagenes butacas */
       img_disponible: "../../src/assets/Butacas/butaca_disponible.png",
       img_ocupada: "../../src/assets/Butacas/butaca_ocupada.png",
       img_seleccionada: "../../src/assets/Butacas/butaca_seleccionada.png",
@@ -53,8 +53,8 @@ export default {
           alert("¡¡No puedes escoger una butaca ocupada!!");
         }
 
-        // Seleccionar butaca y añadirla al array "seleccionadas"
-        // seleccionadas y modifica su imagen (seimpre que no hayan 10 butacas seleccionadas aún)
+        // Añade las butacas seleccionadas al array "seleccionadas"
+        // y modifica su imagen (siempre que no hayan 10 butacas seleccionadas)
         else if (
           !this.ocupadas.includes(numButaca) &&
           !this.seleccionadas.includes(numButaca)
@@ -91,6 +91,7 @@ export default {
       array.forEach((butaca) => {
         butaca = butaca.split("b")[1];
         if (piniaData.diaEspectador) {
+          // VIP && dia espectador
           if (piniaData.vip) {
             if (butaca >= "51" && butaca <= "60") {
               // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
@@ -102,6 +103,7 @@ export default {
             precio += 4;
           }
         } else {
+          // VIP
           if (piniaData.vip) {
             if (butaca >= "51" && butaca <= "60") {
               // b51 - b60 => butacas entre las que se encuntran las VIP (ambos incluidos)
@@ -109,7 +111,10 @@ export default {
             } else {
               precio += 6;
             }
-          } else {
+            
+          } 
+          // Dia espectador
+          else {
             precio += 6;
           }
         }

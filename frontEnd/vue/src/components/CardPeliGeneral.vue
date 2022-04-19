@@ -44,7 +44,4 @@ export default {
     width: 16rem !important
   }
 }
-
-
-
 </style>

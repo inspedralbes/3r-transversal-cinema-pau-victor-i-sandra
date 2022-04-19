@@ -303,6 +303,7 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           alert(data.msg);
+          // simular un cierre del modal porque nos daba error
           if (data.status == true) {
             document.getElementById("staticBackdrop").dispatchEvent(
               new KeyboardEvent("keydown", {

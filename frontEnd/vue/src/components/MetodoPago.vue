@@ -59,6 +59,7 @@ export default {
       butaca = butaca.split("b")[1];
 
       if (this.datosPinia.diaEspectador) {
+        // VIP & dia espectador
         if (this.datosPinia.vip) {
           if (butaca >= "51" && butaca <= "60") {
             // b51 - b60 => butacas entre las que se encuntran las VIP (ambas incluidas)
@@ -70,6 +71,7 @@ export default {
           precio += 4;
         }
       } else {
+        // VIP
         if (this.datosPinia.vip) {
           if (butaca >= "51" && butaca <= "60") {
             // b51 - b60 => butacas entre las que se encuntran las VIP (ambas incluidas)
@@ -77,7 +79,9 @@ export default {
           } else {
             precio += 6;
           }
-        } else {
+        } 
+        // Dia espectador
+        else {
           precio += 6;
         }
       }
@@ -93,6 +97,7 @@ export default {
       this.mostrarIniciarSesion = false;
     },
 
+    // Registro usuario
     cuentaNuevaCompra() {
       this.comprovando = true;
       let crearCuenta = new FormData();
@@ -179,7 +184,6 @@ export default {
   <div class="justify-content-center align-items-center">
     <!-- FORMULARIO INICIAR SESIÓN -->
     <div id="iniciar_sesion " :class="{ ocultar: !mostrarIniciarSesion }">
-
 
       <div class="row g-3">
         <div class="col-md-12 text-center">

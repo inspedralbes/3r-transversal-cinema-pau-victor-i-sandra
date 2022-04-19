@@ -15,6 +15,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { sessioStore } from "../stores/sessioStore";
 import { mapStores } from "pinia";
@@ -42,6 +43,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .added {
   animation-name: add;
@@ -51,6 +53,7 @@ export default {
   transition: all 1s ease-in-out;
   background-color: brown;
 }
+
 @keyframes add {
   0%,
   100% {
