@@ -12,6 +12,7 @@
  * Wireframe: https://www.figma.com/file/W9E0hZuyAWegQ6nhK23K0X/Projecte-Tranversal-3---CINEMA?node-id=0%3A1
  * Diagrama de casos d'usos: https://drive.google.com/file/d/1fY5jdgw1GqmFLFmXVX7QmPU9hTT3IKu5/view?usp=sharing
  * Diagrama entitat-relació: https://drive.google.com/file/d/1P2Owu26L752FKSQu3Ueug0Eg_xzqvyy4/view?usp=sharing
+ * Documentació API: https://app.swaggerhub.com/apis/AVictorMoreno/transversal3/0.1
 
 
 ## Esquema mínim de carpetes pels projectes transversals
