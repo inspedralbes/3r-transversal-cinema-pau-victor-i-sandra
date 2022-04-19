@@ -87,7 +87,7 @@ export default {
 }
 
 .nav-link {
-  color: #13afed;
+  color: #14b0ef;
   font-weight: 550;
   font-size: 16px;
 }
@@ -122,8 +122,8 @@ body {
 }
 
 .btn-primary {
-  background-color: #4dcdff;
-  border-color: #4dcdff;
+  background-color: #14b0ef;
+  border-color: #14b0ef;
   color: black
 }
 
