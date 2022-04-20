@@ -16,7 +16,8 @@ export default {
       mostrarAnadir: 0,
       animacion: 0,
       white: 1,
-      guardarSesion: 0
+      guardarSesion: 0,
+      msgError: 0
     };
   },
 
@@ -62,7 +63,21 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          alert(data.msg);
+          if (data.status) {
+            let n = 3;
+            this.msgError = data.msg + ' Refrescando en ' + n;
+            let idInterval = setInterval(() => {
+              n--;
+              this.msgError += (', ' + n);
+            }, 1000);
+            setTimeout(() => {
+              this.msgError += '.';
+              clearInterval(idInterval);
+              window.location.reload();
+            }, 2500);
+          } else {
+            this.msgError = data.msg
+          }
         });
     },
 
@@ -157,8 +172,18 @@ export default {
           <div class="d-flex justify-content-center">
             <AdminBuscador @habilitarGuardar="this.guardarSesion = 1" />
           </div>
+
+
           <div class="d-flex justify-content-center">
-            <a class="btn btn-dark" :class="{'isDisabled': !this.guardarSesion}" @click="GuardarSesion" id="btn_guardar">Guardar Sesión</a>
+            <div class="alert alert-primary" role="alert" v-if="this.msgError">
+              {{ this.msgError }}
+            </div>
+          </div>
+
+
+          <div class="d-flex justify-content-center">
+            <a class="btn btn-dark" :class="{ 'isDisabled': !this.guardarSesion }" @click="GuardarSesion"
+              id="btn_guardar">Guardar Sesión</a>
           </div>
         </div>
       </div>
@@ -267,7 +292,7 @@ i {
   }
 }
 
-.admin .hoverable:hover{
+.admin .hoverable:hover {
   color: #14b0ef
 }
 </style>

@@ -27,37 +27,32 @@ export default {
       this.tiempo =
         horaPeli > ahora
           ? "Faltan " +
-            moment(
-              horaPeli.subtract(1, "h").valueOf() - ahora.valueOf()
-            ).format("HH:mm:ss") +
-            "h!"
+          moment(
+            horaPeli.subtract(1, "h").valueOf() - ahora.valueOf()
+          ).format("HH:mm:ss") +
+          "h!"
           : ahora > horaPeli && finPeli > ahora
-          ? "En directo!"
-          : "Ya proyectada";
+            ? "En directo!"
+            : "Ya proyectada";
       this.disabled = ahora > finPeli ? 1 : 0; //Si la peli ya se ha visto, no se pueden comprar entradas...
     }, 1000);
     this.contarButacasOcupadas();
   },
 
   beforeCreate() {
-    fetch(
-      "https://www.omdbapi.com/?apikey=5149518a&i=" +
-        this.infoPelicula.peli.idPeli
-    )
+    fetch("https://www.omdbapi.com/?apikey=5149518a&i=" + this.infoPelicula.peli.idPeli)
       .then((response) => response.json())
       .then((data) => {
-        this.masInfoPeli = data; // sinopsis de la pelicula
-
-        fetch(
-          `https://api-free.deepl.com/v2/translate?auth_key=73c517ac-93c5-6ebf-27e2-3e49b82f8c4f:fx&text=${this.masInfoPeli.Plot}&target_lang=ES`,
-          {
+        this.masInfoPeli = data;
+        if (data.Response === 'True') {
+          fetch(`https://api-free.deepl.com/v2/translate?auth_key=73c517ac-93c5-6ebf-27e2-3e49b82f8c4f:fx&text=${this.masInfoPeli.Plot}&target_lang=ES`, {
             method: "POST",
-          }
-        )
-          .then((response) => response.json())
-          .then((traduccion) => {
-            this.masInfoPeli.Plot = traduccion.translations[0].text;
-          });
+          }).then((response) => response.json())
+            .then((traduccion) => { this.masInfoPeli.Plot = traduccion.translations[0].text; });
+        } else {
+          this.masInfoPeli.Plot = 'No disponible en estos instantes...';
+          this.masInfoPeli.Runtime = 'No disponible en estos instantes...'
+        }
       });
   },
 
@@ -86,11 +81,7 @@ export default {
         </div>
         <div class="row g-0">
           <div class="col-md-4">
-            <img
-              :src="this.infoPelicula.peli.imgPeli"
-              class="img-fluid rounded-start poster_peli"
-              alt="..."
-            />
+            <img :src="this.infoPelicula.peli.imgPeli" class="img-fluid rounded-start poster_peli" alt="..." />
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -98,10 +89,7 @@ export default {
                 {{ this.infoPelicula.peli.nombrePeli }}
               </h3>
               <br />
-              <div
-                v-if="typeof this.masInfoPeli === 'object'"
-                class="card-text"
-              >
+              <div v-if="typeof this.masInfoPeli === 'object'" class="card-text">
                 <p>
                   <span class="bold">Sinopsis:</span>
                   {{ this.masInfoPeli.Plot }}
@@ -117,12 +105,8 @@ export default {
               </div>
 
               <div class="text-center">
-                <RouterLink
-                  class="btn btn-primary"
-                  :class="[this.disabled ? 'isDisabled' : '']"
-                  :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
-                  >Comprar entradas</RouterLink
-                >
+                <RouterLink class="btn btn-primary" :class="[this.disabled ? 'isDisabled' : '']"
+                  :to="'/seleccionarButacas/' + this.infoPelicula.idSesion">Comprar entradas</RouterLink>
                 <RouterView />
               </div>
             </div>
@@ -136,11 +120,7 @@ export default {
         <div class="tiempoRestante">
           <span>{{ this.tiempo }}</span>
         </div>
-        <img
-          class="card-img-top"
-          :src="this.infoPelicula.peli.imgPeli"
-          salt="Card image cap"
-        />
+        <img class="card-img-top" :src="this.infoPelicula.peli.imgPeli" salt="Card image cap" />
         <div class="card-body">
           <div class="row">
             <div class="col-9">
@@ -149,53 +129,31 @@ export default {
               </h4>
             </div>
             <div class="col-3">
-              <button
-                class="btn btn-outline-danger"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
+              <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="bi bi-info-circle"></i>
               </button>
             </div>
           </div>
           <div class="row">
             <div class="col">
-              <RouterLink
-                class="btn btn-primary"
-                :class="[this.disabled ? 'isDisabled' : '']"
-                :to="'/seleccionarButacas/' + this.infoPelicula.idSesion"
-                >Comprar entradas</RouterLink
-              >
+              <RouterLink class="btn btn-primary" :class="[this.disabled ? 'isDisabled' : '']"
+                :to="'/seleccionarButacas/' + this.infoPelicula.idSesion">Comprar entradas</RouterLink>
               <RouterView />
             </div>
           </div>
         </div>
       </div>
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h3 class="modal-title">
                 {{ this.infoPelicula.peli.nombrePeli }}
               </h3>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="card-body">
-              <div
-                v-if="typeof this.masInfoPeli === 'object'"
-                class="card-text"
-              >
+              <div v-if="typeof this.masInfoPeli === 'object'" class="card-text">
                 <p>
                   <span class="bold">Sinopsis:</span>
                   {{ this.masInfoPeli.Plot }}

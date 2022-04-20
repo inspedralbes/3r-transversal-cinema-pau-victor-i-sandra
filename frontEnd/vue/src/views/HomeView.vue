@@ -33,7 +33,6 @@ export default {
         setTimeout(() => {
           this.cargando = 0;
         }, 2000);
-        //alert(this.sessioStore.getAdmin);
       })
       .catch(() => {
         this.cargando = 0;

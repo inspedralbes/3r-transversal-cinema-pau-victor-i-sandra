@@ -58,9 +58,13 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
-          this.datosPinia.estadoCompra = data.status;
-          this.datosPinia.msg = data.msg;
-          this.sessioStore.set(this.datosPinia);
+          if (data.status) {
+            this.datosPinia.estadoCompra = data.status;
+            this.datosPinia.msg = data.msg;
+            this.sessioStore.set(this.datosPinia);
+          } else {
+            alert(data.msg);
+          }
         });
     },
 
@@ -129,22 +133,21 @@ export default {
         .then((data) => {
           this.comprovando = false;
 
-          if (typeof data.chk !== "undefined") {
-            this.msgRegister = "Errores de comprovacion de datos: <ul>";
-            data.msg.forEach((c) => {
-              this.msgRegister += "<li>" + c + "</li>";
-            });
-
-            this.msgRegister += "</ul>";
-          } else {
-            this.msgRegister = data.msg;
-          }
-
           if (data.status == true) {
             this.bien = true;
             this.datosPinia = this.sessioStore.get;
             this.datosPinia.idUsuario = data.idUsuario;
             this.sessioStore.set(this.datosPinia);
+          } else {
+            if (typeof data.chk !== "undefined") {
+              this.msgRegister = "Errores de comprovacion de datos: <ul>";
+              data.msg.forEach((c) => {
+                this.msgRegister += "<li>" + c + "</li>";
+              });
+              this.msgRegister += "</ul>  <br> Para más informacion, revisa las condiciones de cada campo";
+            } else {
+              this.msgRegister = data.msg;
+            }
           }
         });
     },
@@ -158,32 +161,29 @@ export default {
         "password",
         document.getElementById("password1").value
       );
-      fetch(
-        "http://cinema1back.alumnes.inspedralbes.cat/loginComprarEntradas",
-        {
-          method: "POST",
-          body: iniciarSesion,
-        }
-      )
-        .then((response) => response.json())
+      fetch("http://cinema1back.alumnes.inspedralbes.cat/loginComprarEntradas", {
+        method: "POST",
+        body: iniciarSesion,
+      }).then((response) => response.json())
         .then((data) => {
           this.comprovando = false;
 
-          if (typeof data.chk !== "undefined") {
-            this.msgLogin = "Errores de comprovacion de datos: <ul>";
-            data.msg.forEach((c) => {
-              this.msgLogin += "<li>" + c + "</li>";
-            });
-
-            this.msgLogin += "</ul>";
-          } else {
-            this.msgLogin = data.msg;
-          }
           if (data.status == true) {
             this.datosPinia = this.sessioStore.get;
             this.datosPinia.idUsuario = data.idUsuario;
             this.sessioStore.set(this.datosPinia);
             this.bien = true;
+          } else {
+            if (typeof data.chk !== "undefined") {
+              this.msgLogin = "Errores de comprovacion de datos: <ul>";
+              data.msg.forEach((c) => {
+                this.msgLogin += "<li>" + c + "</li>";
+              });
+
+              this.msgLogin += "</ul> <br> Para más informacion, revisa las condiciones de cada campo";
+            } else {
+              this.msgLogin = data.msg;
+            }
           }
         });
     },
@@ -201,43 +201,25 @@ export default {
         </div>
 
         <div class="col-md-12" v-if="this.msgLogin != null">
-          <div
-            class="alert alert-primary"
-            role="alert"
-            v-html="this.msgLogin"
-          ></div>
+          <div class="alert alert-primary" role="alert" v-html="this.msgLogin"></div>
         </div>
 
         <div class="col-md-7">
-          <EmailForm :id="'emailLogin'"/>
+          <EmailForm :id="'emailLogin'" />
         </div>
 
         <div class="col-md-5">
-          <PasswordForm :id="'password1'"/>
+          <PasswordForm :id="'password1'" />
         </div>
 
         <div class="col-md-12 text-center gy-4">
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="iniciarSesionCompra"
-            :class="{ ocultar: bien }"
-          >
+          <button type="button" class="btn btn-primary" @click="iniciarSesionCompra" :class="{ ocultar: bien }">
             Iniciar Sesion
-            <span
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-              v-if="this.comprovando"
-            ></span>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+              v-if="this.comprovando"></span>
           </button>
-          <RouterLink
-            class="btn btn-primary margin10"
-            @click.native="this.comprarEntradas"
-            :class="{ ocultar: !bien }"
-            to="/realitzatpagament"
-            >Comprar</RouterLink
-          >
+          <RouterLink class="btn btn-primary margin10" @click.native="this.comprarEntradas" :class="{ ocultar: !bien }"
+            to="/realitzatpagament">Comprar</RouterLink>
           <RouterView />
         </div>
 
@@ -265,51 +247,33 @@ export default {
         </div>
 
         <div class="col-md-12" v-if="this.msgRegister != null">
-          <div
-            class="alert alert-primary"
-            role="alert"
-            v-html="this.msgRegister"
-          ></div>
+          <div class="alert alert-primary" role="alert" v-html="this.msgRegister"></div>
         </div>
 
         <div class="col-md-6">
-          <NombreForm :id="'nombre2'"/>
+          <NombreForm :id="'nombre2'" />
         </div>
 
         <div class="col-md-6">
-          <ApellidosForm :id="'apellido2'"/>
+          <ApellidosForm :id="'apellido2'" />
         </div>
 
         <div class="col-md-7">
-          <EmailForm :id="'email2'"/>
+          <EmailForm :id="'email2'" />
         </div>
 
         <div class="col-md-5">
-          <PasswordForm :id="'password2'"/>
+          <PasswordForm :id="'password2'" />
         </div>
 
         <div class="col-md-12 text-center gy-4">
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="cuentaNuevaCompra"
-            :class="{ ocultar: bien }"
-          >
+          <button type="button" class="btn btn-primary" @click="cuentaNuevaCompra" :class="{ ocultar: bien }">
             Crear Cuenta
-            <span
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-              v-if="this.comprovando"
-            ></span>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+              v-if="this.comprovando"></span>
           </button>
-          <RouterLink
-            class="btn btn-primary"
-            @click.native="this.comprarEntradas"
-            :class="{ ocultar: !bien }"
-            to="/realitzatpagament"
-            >Comprar</RouterLink
-          >
+          <RouterLink class="btn btn-primary" @click.native="this.comprarEntradas" :class="{ ocultar: !bien }"
+            to="/realitzatpagament">Comprar</RouterLink>
           <RouterView />
         </div>
 
