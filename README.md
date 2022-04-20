@@ -14,8 +14,8 @@
  * Diagrama entitat-relació: https://drive.google.com/file/d/1P2Owu26L752FKSQu3Ueug0Eg_xzqvyy4/view?usp=sharing
  * Documentació API: https://app.swaggerhub.com/apis/AVictorMoreno/transversal3/0.1
 
-## Datos necesarios para el funcionamiento de la pagina web 
-* Usuari administrador => ausias@ausias.com / ausias
+## Dades necesaries pel funcionamient de la pàgina web 
+* Usuari administrador => **ausias@ausias.com** / *ausias*
 
 ## Esquema mínim de carpetes pels projectes transversals
 
