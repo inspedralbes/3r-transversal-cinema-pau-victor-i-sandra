@@ -1,18 +1,15 @@
 <script>
-
 export default {
-  props: ['id'],
+  props: ["id"],
   data() {
     return {
       popoverNombre:
         "El nombre solo puede contener letras (>1), nada de números ni símbolos",
     };
   },
-
-}
+};
 </script>
-          
-    
+
 <template>
   <label :for="this.id" class="form-label text-left"
     >Nombre
@@ -24,6 +21,5 @@ export default {
       :data-bs-content="this.popoverNombre"
       ><i class="bi bi-info-circle"></i></span
   ></label>
-  <input type="text" class="form-control" :id="this.id" />  
+  <input type="text" class="form-control" :id="this.id" />
 </template>
-

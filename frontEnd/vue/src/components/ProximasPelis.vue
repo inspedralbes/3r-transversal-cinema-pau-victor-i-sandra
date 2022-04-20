@@ -20,13 +20,22 @@ export default {
 <template>
   <section>
     <br />
-    <h1 class="titulo_css text-center" v-if="!this.sessioStore.getAdmin">Próximas sesiones</h1>
+    <h1 class="titulo_css text-center" v-if="!this.sessioStore.getAdmin">
+      Próximas sesiones
+    </h1>
     <br />
     <div class="container">
       <div class="row gy-5">
-        <div :key="index" v-for="(peliActual, index) in this.peliculasInfo" class="col col-lg-4">
+        <div
+          :key="index"
+          v-for="(peliActual, index) in this.peliculasInfo"
+          class="col col-lg-4"
+        >
           <CardPeliGeneral :peliInfo="peliActual">
-            <RouterLink class="btn btn-primary" :to="'/seleccionarButacas/' + peliActual.idSesion">Comprar Entrades
+            <RouterLink
+              class="btn btn-primary"
+              :to="'/seleccionarButacas/' + peliActual.idSesion"
+              >Comprar Entrades
             </RouterLink>
             <RouterView />
           </CardPeliGeneral>

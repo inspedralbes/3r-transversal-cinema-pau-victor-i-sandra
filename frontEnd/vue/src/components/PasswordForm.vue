@@ -1,14 +1,13 @@
 <script>
 export default {
-  props: ['id'],
+  props: ["id"],
   data() {
     return {
       popoverPassword:
         "La contraseña tiene que contener: una letra minúscula, una letra mayúscula, un número y uno de los siguientes símbolos: '@$!%*?&'",
     };
   },
-
-}
+};
 </script>
 
 <template>

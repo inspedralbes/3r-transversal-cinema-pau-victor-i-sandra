@@ -9,27 +9,27 @@ export default {
   data() {
     return {
       animacion: false,
-      boton: 'Añadir'
+      boton: "Añadir",
     };
   },
 
   props: ["peliInfo"],
-  emits: ['seleccionada', 'habilitarGuardar'],
+  emits: ["seleccionada", "habilitarGuardar"],
 
   methods: {
     anadirPeli: function () {
       this.cambiarAnimacion();
-      this.$emit('habilitarGuardar');
+      this.$emit("habilitarGuardar");
       let pinia = this.sessioStore.get;
       pinia.peliInfo = this.peliInfo;
       this.sessioStore.set(pinia);
       this.animacion = true;
       setTimeout(() => {
-        this.boton = 'Añadida ✓';
+        this.boton = "Añadida ✓";
       }, 1000);
       setTimeout(() => {
-        this.$emit('seleccionada');
-        this.boton = 'Añadir';
+        this.$emit("seleccionada");
+        this.boton = "Añadir";
       }, 3000);
     },
     cambiarAnimacion() {
@@ -44,8 +44,13 @@ export default {
     <img class="card-img-top" :src="peliInfo.Poster" alt="Card image cap" />
     <div class="card-body">
       <h5 class="card-title">{{ peliInfo.Title }}</h5>
-      <button type="button" @click="this.anadirPeli" :class="[this.animacion ? 'added' : '']" class="btn btn-primary"
-        id="anadirPeli">
+      <button
+        type="button"
+        @click="this.anadirPeli"
+        :class="[this.animacion ? 'added' : '']"
+        class="btn btn-primary"
+        id="anadirPeli"
+      >
         {{ this.boton }}
       </button>
     </div>
@@ -61,7 +66,6 @@ export default {
 }
 
 @keyframes add {
-
   0%,
   100% {
     transform: scale(100%);

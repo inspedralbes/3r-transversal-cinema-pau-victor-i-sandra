@@ -17,13 +17,13 @@ export default {
       animacion: 0,
       white: 1,
       guardarSesion: 0,
-      msgError: 0
+      msgError: 0,
     };
   },
 
   components: {
     AdminBuscador,
-    ProximasPelis
+    ProximasPelis,
   },
 
   // datos sobre las sesiones
@@ -65,18 +65,18 @@ export default {
         .then((data) => {
           if (data.status) {
             let n = 3;
-            this.msgError = data.msg + ' Refrescando en ' + n;
+            this.msgError = data.msg + " Refrescando en " + n;
             let idInterval = setInterval(() => {
               n--;
-              this.msgError += (', ' + n);
+              this.msgError += ", " + n;
             }, 1000);
             setTimeout(() => {
-              this.msgError += '.';
+              this.msgError += ".";
               clearInterval(idInterval);
               window.location.reload();
             }, 2500);
           } else {
-            this.msgError = data.msg
+            this.msgError = data.msg;
           }
         });
     },
@@ -95,21 +95,26 @@ export default {
         this.mostrarAnadir = this.mostrarAnadir ? 0 : 1;
         this.mostrarConsultar = false;
       }, 800);
-
-    }
+    },
   },
 };
 </script>
 
 <template>
-  <main class="admin" :class="{ 'colorWhite': this.white }">
-    <div class="row" :class="{ 'fadeIn': this.animacion, 'fadeOut': !this.animacion }">
+  <main class="admin" :class="{ colorWhite: this.white }">
+    <div
+      class="row"
+      :class="{ fadeIn: this.animacion, fadeOut: !this.animacion }"
+    >
       <div class="col-12 gy-4">
         <div @click="this.mostrarConsultarSesion">
           <h1 class="text-center hoverable">Consultar sesiones</h1>
         </div>
         <div v-if="this.mostrarConsultar">
-          <div id="consultar_entradas" v-if="typeof this.basePeliculas === 'object'">
+          <div
+            id="consultar_entradas"
+            v-if="typeof this.basePeliculas === 'object'"
+          >
             <ProximasPelis :peliculasInfo="basePeliculas" />
           </div>
         </div>
@@ -121,25 +126,36 @@ export default {
 
       <div class="justify-content-center col-12 gy-2">
         <div @click="this.mostrarAnadirSesion">
-
           <h1 class="text-center hoverable">Crear una sesión</h1>
         </div>
 
         <div class="crear_sesion" v-if="this.mostrarAnadir">
-          <div class="form_sesion input-group row g-4 d-flex justify-content-center">
+          <div
+            class="form_sesion input-group row g-4 d-flex justify-content-center"
+          >
             <div class="col-auto col-form-label">
               <label><i class="bi bi-calendar-event"></i> Fecha: </label>
             </div>
             <div class="col-auto">
-              <input class="form-control picker__inputdatepicker" type="date" id="date" name="trip-start"
-                value="2022-04-01" />
+              <input
+                class="form-control picker__inputdatepicker"
+                type="date"
+                id="date"
+                name="trip-start"
+                value="2022-04-01"
+              />
             </div>
 
             <div class="col-auto col-form-label">
               <label for="hora"><i class="bi bi-clock"></i> Hora: </label>
             </div>
             <div class="col-auto">
-              <select class="form-select" aria-label="selectHora" name="hora" id="hora">
+              <select
+                class="form-select"
+                aria-label="selectHora"
+                name="hora"
+                id="hora"
+              >
                 <option value="16:00:00">16:00h</option>
                 <option value="18:00:00">18:00h</option>
                 <option value="20:00:00">20:00h</option>
@@ -157,7 +173,8 @@ export default {
             </div>
 
             <div class="col-auto col-form-label">
-              <label for="espectador"><i class="bi bi-people"></i> Dia del <br class="screen" />
+              <label for="espectador"
+                ><i class="bi bi-people"></i> Dia del <br class="screen" />
                 espectador:
               </label>
             </div>
@@ -173,17 +190,20 @@ export default {
             <AdminBuscador @habilitarGuardar="this.guardarSesion = 1" />
           </div>
 
-
           <div class="d-flex justify-content-center">
             <div class="alert alert-primary" role="alert" v-if="this.msgError">
               {{ this.msgError }}
             </div>
           </div>
 
-
           <div class="d-flex justify-content-center">
-            <a class="btn btn-dark" :class="{ 'isDisabled': !this.guardarSesion }" @click="GuardarSesion"
-              id="btn_guardar">Guardar Sesión</a>
+            <a
+              class="btn btn-dark"
+              :class="{ isDisabled: !this.guardarSesion }"
+              @click="GuardarSesion"
+              id="btn_guardar"
+              >Guardar Sesión</a
+            >
           </div>
         </div>
       </div>
@@ -197,7 +217,7 @@ export default {
 }
 
 .colorWhite {
-  color: white
+  color: white;
 }
 
 .admin {
@@ -262,7 +282,7 @@ i {
   }
 
   50% {
-    opacity: 0%
+    opacity: 0%;
   }
 
   to {
@@ -275,7 +295,6 @@ i {
   animation-iteration-count: 1;
   animation-direction: alternate;
   animation-duration: 2s;
-
 }
 
 @keyframes fadeOut {
@@ -284,7 +303,7 @@ i {
   }
 
   50% {
-    opacity: 0%
+    opacity: 0%;
   }
 
   to {
@@ -293,6 +312,6 @@ i {
 }
 
 .admin .hoverable:hover {
-  color: #14b0ef
+  color: #14b0ef;
 }
 </style>

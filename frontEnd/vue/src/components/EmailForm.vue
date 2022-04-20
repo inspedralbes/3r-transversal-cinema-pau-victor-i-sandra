@@ -1,6 +1,6 @@
 <script>
 export default {
-  props: ['id'],
+  props: ["id"],
 
   data() {
     return {
@@ -23,4 +23,3 @@ export default {
   ></label>
   <input type="email" class="form-control" :id="this.id" />
 </template>
-

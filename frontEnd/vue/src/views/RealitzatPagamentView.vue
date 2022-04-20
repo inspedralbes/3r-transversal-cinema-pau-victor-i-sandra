@@ -2,6 +2,8 @@
 import { sessioStore } from "../stores/sessioStore";
 import { mapStores } from "pinia";
 import SpinnerCargando from "@/components/SpinnerCargando.vue";
+import router from "@/router";
+
 export default {
   computed: {
     ...mapStores(sessioStore),
@@ -33,8 +35,8 @@ export default {
   },
 
   methods: {
-    goHome: function () {
-      window.location.href = ".";
+    goHome() {
+      router.push({ name: "home" });
     },
   },
 };
@@ -86,7 +88,7 @@ export default {
                         aria-expanded="false"
                         aria-controls="flush-collapseOne"
                       >
-                        Entrada #{{ index+1 }}
+                        Entrada #{{ index + 1 }}
                       </button>
                     </h2>
                     <div
