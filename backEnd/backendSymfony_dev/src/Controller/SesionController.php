@@ -31,9 +31,9 @@ class SesionController extends AbstractController
         $dataSesion = $request->request->all();
 
         if ($sesionRepository->anadirSesion($dataSesion)) {
-            return new JsonResponse(['status' => true, 'msg' => 'Sesion introducida!'], Response::HTTP_ACCEPTED);
+            return new JsonResponse(['status' => true, 'msg' => 'Sesión introducida!'], Response::HTTP_ACCEPTED);
         } else {
-            return new JsonResponse(['status' => false, 'msg' => 'Sesion no introducida! Ya existe una sesion con esta fecha'], Response::HTTP_OK);
+            return new JsonResponse(['status' => false, 'msg' => 'Sesión no introducida! Ya existe una sesión con esta fecha'], Response::HTTP_OK);
         }
     }
 
@@ -155,13 +155,13 @@ class SesionController extends AbstractController
                     if ($resultado[0]->getEmail() == $email && password_verify($password, $resultado[0]->getPassword())) {
                         if (empty($entradaRepository->usuarioTieneEntradas($resultado[0]->getId()))) {
                             // OK
-                            return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'Usuario validado, ahora puedes comprar tus entradas haciendo click al boton de comprar!'], Response::HTTP_ACCEPTED);
+                            return new JsonResponse(['status' => true, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'Usuario validado, ahora puedes comprar tus entradas haciendo click al botón de comprar!'], Response::HTTP_ACCEPTED);
                         } else {
-                            return new JsonResponse(['status' => false, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'No puedes comprar entradas porque ya tienes unas para alguna proxima sesion. Para saber cuales son, accede al apartado consultar entradas'], Response::HTTP_OK);
+                            return new JsonResponse(['status' => false, 'idUsuario' => $resultado[0]->getId(), 'msg' => 'No puedes comprar entradas porqué ya tienes unas para alguna próxima sesión. Para saber cuales son, accede al apartado consultar entradas'], Response::HTTP_OK);
                         }
                     } else {
                         // ERROR
-                        return new JsonResponse(['status' => false, 'msg' => 'Contraseña o correo incorrectos...'], Response::HTTP_OK);
+                        return new JsonResponse(['status' => false, 'msg' => 'Contraseña o correo incorrectos... ¡Vuelve a intentarlo!'], Response::HTTP_OK);
                     }
                 }
             } else {
@@ -188,10 +188,10 @@ class SesionController extends AbstractController
                 if ($resultado[0]->getEmail() == $email && password_verify($password, $resultado[0]->getPassword())) {
                     return new JsonResponse(['status' => true, 'msg' => '¡Hola administrador!'], Response::HTTP_OK);
                 } else {
-                    return new JsonResponse(['status' => false, 'msg' => 'Error! Correo o contraseña incorrectos'], Response::HTTP_OK);
+                    return new JsonResponse(['status' => false, 'msg' => '¡Error! Correo o contraseña incorrectos.'], Response::HTTP_OK);
                 }
             } else {
-                return new JsonResponse(['status' => false, 'msg' => $check], Response::HTTP_OK);
+                return new JsonResponse(['status' => false, 'chk' => true, 'msg' => $check], Response::HTTP_OK);
             }
         } else {
             return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_OK);
@@ -208,48 +208,46 @@ class SesionController extends AbstractController
         }
 
         if (!empty($email) || !empty($password)) {
-            $check = $this->comprovarData(2, $email, $password);
+            $check = $this->comprovarData(1, $email, $password);
             if (empty($check)) {
                 $resultado = $usuarioRepository->getUsuario($email);
                 if (empty($resultado)) {
-                    return new JsonResponse(['status' => false, 'msg' => 'Error! Este correo no esta registrado'], Response::HTTP_OK);
+                    return new JsonResponse(['status' => false, 'msg' => '¡Error! Este correo no esta registrado, por lo tanto, no tiene ninguna entrada comprada'], Response::HTTP_OK);
                 } else {
-                    $entradas = $entradaRepository->buscarEntradas($resultado[0]->getId());
-                    if (empty($entradas)) {
-                        return new JsonResponse(['status' => true, 'msg' => 'Nunca has comprado una entrada'], Response::HTTP_OK);
-                    } else {
-                        $r = array('entradas' => [], 'sesion' => []);
-                        foreach ($entradas as $entrada) {
-                            array_push($r['entradas'], [
-                                'butaca' => $entrada['butaca'],
-                                'precio' => $entrada['precio'],
+                    if (password_verify($password, $resultado[0]->getPassword())) {
+                        $entradas = $entradaRepository->buscarEntradas($resultado[0]->getId());
+                        if (empty($entradas)) {
+                            return new JsonResponse(['status' => false, 'msg' => 'No tienes entradas para las próximas sesiones'], Response::HTTP_OK);
+                        } else {
+                            $r = array('entradas' => [], 'sesion' => []);
+                            foreach ($entradas as $entrada) {
+                                array_push($r['entradas'], [
+                                    'butaca' => $entrada['butaca'],
+                                    'precio' => $entrada['precio'],
+                                ]);
+                            }
+
+                            array_push($r['sesion'], [
+                                'fecha' => $entrada['fecha'],
+                                'hora' => $entrada['hora'],
+                                'nombre_peli' => $entrada['nombre_peli'],
+                                'ano_peli' => $entrada['ano_peli'],
+                                'img_peli' => $entrada['img_peli']
                             ]);
+
+                            return new JsonResponse(['status' => true, 'msg' => $r], Response::HTTP_OK);
                         }
-
-                        array_push($r['sesion'], [
-                            'fecha' => $entrada['fecha'],
-                            'hora' => $entrada['hora'],
-                            'nombre_peli' => $entrada['nombre_peli'],
-                            'ano_peli' => $entrada['ano_peli'],
-                            'img_peli' => $entrada['img_peli']
-                        ]);
-
-                        return new JsonResponse(['status' => true, 'msg' => $r], Response::HTTP_OK);
+                    } else {
+                        return new JsonResponse(['status' => false, 'msg' => '¡Error al comprovar tu contraseña! Vuelve a intenterlo...'], Response::HTTP_OK);
                     }
                 }
             } else {
-                return new JsonResponse(['status' => false, 'msg' => $check], Response::HTTP_OK);
+                return new JsonResponse(['status' => false, 'chk' => true, 'msg' => $check], Response::HTTP_OK);
             }
         } else {
             return new JsonResponse(['status' => false, 'msg' => 'Faltan campos por rellenar!'], Response::HTTP_OK);
         }
     }
-
-
-
-
-
-
 
     public function comprovarData($loginORsign, $email, $password, $nombre = "", $apellidos = "")
     {
