@@ -15,7 +15,7 @@
  * Documentació API: https://app.swaggerhub.com/apis/AVictorMoreno/transversal3/0.1
 
 ## Dades necesaries pel funcionamient de la pàgina web 
-* Usuari administrador => **ausias@ausias.com** / *ausias*
+* Usuari administrador => **ausias@ausias.com** / **ausias**
 
 ## Esquema mínim de carpetes pels projectes transversals
 
